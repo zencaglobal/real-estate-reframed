@@ -1,0 +1,335 @@
+/* ============================================================
+   Housing System Fingerprint — the stable framework
+   Families, reader-facing lenses and the 24 dimensions.
+   Country placements live in data/countries/*.js and never here,
+   so a country can change without rewriting the framework.
+
+   The Fingerprint describes the machine. It does not grade the machine.
+   ============================================================ */
+
+(function (root) {
+  "use strict";
+  const HSF = (root.HSF = root.HSF || {});
+
+  HSF.meta = {
+    product: "Housing System Fingerprint Explorer",
+    framework_version: "Housing System Fingerprint v1.0",
+    explorer_version: "1.0",
+    profile_as_of: "October 2026",
+  };
+
+  /* Five discrete qualitative positions plus NA. The index exists only to
+     place a marker; it is never displayed, summed, averaged or ranked. */
+  HSF.POSITIONS = {
+    L:  { label: "Left",      slot: 0 },
+    ML: { label: "Mid-left",  slot: 1 },
+    M:  { label: "Middle",    slot: 2 },
+    MR: { label: "Mid-right", slot: 3 },
+    R:  { label: "Right",     slot: 4 },
+    NA: { label: "Not enough comparable evidence", slot: null },
+  };
+
+  HSF.CONFIDENCE = {
+    high: {
+      label: "High confidence",
+      means: "Direct, recent, materially comparable official or institutional evidence supports the directional placement.",
+    },
+    medium: {
+      label: "Medium confidence",
+      means: "Direction is well supported, but comparability, recency or measurement differs across countries.",
+    },
+    interpretive: {
+      label: "Interpretive",
+      means: "The dimension is behavioural or institutional, or the placement rests materially on editorial synthesis rather than one measured series.",
+    },
+  };
+
+  /* Six canonical families (Fingerprint v1.0 says "five" but enumerates A–F;
+     the build uses the six enumerated families). */
+  HSF.families = [
+    { id: "A", name: "Demand & demography",
+      question: "How much structural housing demand remains, and where is it concentrating?",
+      intro: "Population is not the same thing as housing demand. Urbanisation, household formation, migration and geographic concentration can keep demand strong in some places even when national population growth slows." },
+    { id: "B", name: "Stock, land & supply",
+      question: "Can the system create enough useful housing in the places people want it?",
+      intro: "National land abundance does not guarantee local housing abundance. Planning, infrastructure, density, geography and the location of existing stock determine how demand becomes quantity versus price." },
+    { id: "C", name: "Household finance & balance sheets",
+      question: "How much purchasing power and risk does finance add to housing?",
+      intro: "Mortgage depth, rate structure, leverage and home-equity access determine how strongly future income and existing housing wealth can be turned into current bids." },
+    { id: "D", name: "Development model & the state",
+      question: "Who finances new housing, who bears delivery risk, and how financially tied is government to property activity?",
+      intro: "Developer funding models, presales, buyer advances and public revenue structures can make a housing slowdown travel through very different balance sheets." },
+    { id: "E", name: "Legal & market architecture",
+      question: "How easy is it to establish ownership, transact, rent, resell and preserve value in the structure?",
+      intro: "Title systems, market transparency, rental institutions, resale depth and building depreciation shape the economic reality of owning a house beyond the price chart." },
+    { id: "F", name: "Expectations & systemic exposure",
+      question: "How much does the system depend on belief in appreciation, and what happens if prices fall?",
+      intro: "Expectations can support demand for long periods, but the consequences of a downturn depend on which households, developers, lenders and public institutions are exposed." },
+  ];
+
+  /* Eight reader-facing lenses: editorial questions over the 24 dimensions.
+     A lens has no position of its own and nothing is averaged into one. */
+  HSF.lenses = [
+    { id: "L1", n: 1, short: "Demand runway",
+      question: "How much structural demand runway remains?",
+      understand: "Whether demographic, urbanisation and household-formation forces are still adding housing demand, and how concentrated that demand is geographically.",
+      dims: ["d01", "d02", "d03", "d04"] },
+    { id: "L2", n: 2, short: "Stock where people want it",
+      question: "Is there enough housing where people actually want it?",
+      understand: "The difference between aggregate stock and useful stock in the locations and segments where demand exists.",
+      dims: ["d05", "d06"] },
+    { id: "L3", n: 3, short: "Capacity to create housing",
+      question: "How easily can the system create more useful housing?",
+      understand: "Whether new demand is more likely to become additional quantity, higher prices, or movement to substitute locations.",
+      dims: ["d07", "d08", "d09", "d10"] },
+    { id: "L4", n: 4, short: "Mortgage finance",
+      question: "How deeply does mortgage finance shape demand?",
+      understand: "How strongly future income is translated into current purchasing power, and where rate and leverage risk sits.",
+      dims: ["d11", "d12", "d13"] },
+    { id: "L5", n: 5, short: "Housing in household wealth",
+      question: "How central is housing to household wealth?",
+      understand: "The difference between owning valuable housing and being able to diversify or use that equity without selling.",
+      dims: ["d14", "d15"] },
+    { id: "L6", n: 6, short: "Development & funding machine",
+      question: "How fragile is the development and funding machine?",
+      understand: "Whether stress can propagate through developers, presales, delivery confidence, land finance or public finances.",
+      dims: ["d16", "d17", "d18"] },
+    { id: "L7", n: 7, short: "Market architecture",
+      question: "How formal and liquid is the market architecture?",
+      understand: "The friction around ownership, resale and renting, and the economic persistence of the structure itself.",
+      dims: ["d19", "d20", "d21", "d22"] },
+    { id: "L8", n: 8, short: "Belief & shock transmission",
+      question: "How much does the system depend on belief — and how would a downturn travel?",
+      understand: "The difference between expectations and mechanics, and which balance sheets or institutions would transmit a price shock.",
+      dims: ["d23", "d24"] },
+  ];
+
+  const CAD = {
+    demo: "Annual, or when major UN, World Bank, census or official population revisions publish",
+    stock: "Annual where national stock or vacancy surveys exist; otherwise on major release",
+    supply: "Annual editorial review; event-driven on major planning or infrastructure reform",
+    finance: "Quarterly or annual evidence refresh; placement review at least annually",
+    wealth: "On new household balance-sheet or survey release",
+    dev: "Quarterly or annual evidence refresh; event-driven during sector stress or regulation change",
+    legal: "Annual editorial review; event-driven on material legal or regulatory reform",
+    building: "Low-frequency review (every 2–3 years) unless conventions or measurement change",
+    culture: "Annual editorial review — always interpretive",
+    systemic: "Annual, plus event-driven during major housing or financial stress",
+  };
+
+  /* evidence_type: statistical | mixed | institutional | behavioural | synthesis */
+  HSF.dimensions = [
+    /* ---------- A. Demand & demography ---------- */
+    { id: "d01", n: 1, family: "A", lens: "L1", name: "Urbanisation stage",
+      left: "Earlier transition", right: "Mature / fully urbanised",
+      short_definition: "How far the country has moved through its transition from rural to urban living.",
+      why_it_matters: "Where a country sits in its move to cities shapes how much structural housing demand may still lie ahead — and how much has already been absorbed into stock and prices.",
+      tradeoff: "An earlier transition offers demand runway but requires vast new infrastructure and housing; a mature transition adds less new demand but works with established networks.",
+      evidence_type: "statistical", update_cadence: CAD.demo,
+      comparability: "National definitions of “urban” differ. Placements use one comparable World Bank/UN series and should be read as relative stage, not exact share." },
+    { id: "d02", n: 2, family: "A", lens: "L1", name: "Population trajectory",
+      left: "Sustained growth", right: "Sustained decline",
+      short_definition: "Whether the national population is growing, stable or shrinking over the coming decades.",
+      why_it_matters: "Long-run household numbers shape the floor under national housing demand — but not where that demand lands.",
+      tradeoff: "Growth adds demand and pressure on affordability; decline eases pressure but can leave stock and infrastructure outliving their users.",
+      evidence_type: "statistical", update_cadence: CAD.demo,
+      comparability: "Projections differ by scenario; placements use the direction of official and UN medium-variant trajectories." },
+    { id: "d03", n: 3, family: "A", lens: "L1", name: "Structural new-housing demand",
+      left: "Strong expansionary tailwind", right: "Structural contraction",
+      short_definition: "The underlying need for additional homes created by household formation, urbanisation and replacement — separate from investment demand.",
+      why_it_matters: "Population is not the same as housing demand. Household formation and migration can keep demand for new homes strong, or weaken it, independently of headline population.",
+      tradeoff: "A strong tailwind supports construction and prices but is easily mistaken for permanent appreciation; contraction lowers pressure but strands capacity built for the old regime.",
+      evidence_type: "synthesis", update_cadence: CAD.demo,
+      comparability: "No harmonised cross-country series exists. Placement synthesises demographic projections, household formation and official or multilateral estimates." },
+    { id: "d04", n: 4, family: "A", lens: "L1", name: "Geographic concentration of demand",
+      left: "Broadly distributed", right: "Highly concentrated",
+      short_definition: "Whether new housing demand is spread across the country or concentrates into a small number of cities and regions.",
+      why_it_matters: "When demand concentrates, location inside the country matters more than the national average — a national headwind can coexist with local scarcity.",
+      tradeoff: "Concentration can sustain value in leading cities while leaving other regions with surplus stock and thinning demand.",
+      evidence_type: "synthesis", update_cadence: CAD.demo,
+      comparability: "No single comparable concentration index is used; placement is a synthesis of migration, city-tier and regional evidence." },
+
+    /* ---------- B. Stock, land & supply ---------- */
+    { id: "d05", n: 5, family: "B", lens: "L2", name: "Housing-stock balance",
+      left: "Shortage / tight stock", right: "Excess / overhang",
+      short_definition: "Whether the national housing stock is tight or in excess relative to households.",
+      why_it_matters: "A country can have too many houses and not enough houses at the same time, because stock is not fungible across places. This dimension reads the aggregate; the next one reads the match.",
+      tradeoff: "Tight stock supports incumbent owners’ prices while raising the entry hurdle for new households; excess stock eases access but weighs on prices and developers.",
+      evidence_type: "mixed", update_cadence: CAD.stock,
+      comparability: "Shortage and vacancy estimates use different definitions across countries, and some national vacancy counts are old. Read the direction, not a count." },
+    { id: "d06", n: 6, family: "B", lens: "L2", name: "Geographic match of stock",
+      left: "Stock broadly where demand is", right: "Large stock-location mismatch",
+      short_definition: "Whether existing housing is located, sized and priced where demand actually is.",
+      why_it_matters: "Distinguishes aggregate stock from useful stock. A vacant home in a declining region does not house a worker in a growing city.",
+      tradeoff: "Mismatch can coexist with shortage: surplus stock in one place does nothing for affordability in another.",
+      evidence_type: "mixed", update_cadence: CAD.stock,
+      comparability: "National averages hide city divergence; placement reads the scale of mismatch, not a single vacancy statistic." },
+    { id: "d07", n: 7, family: "B", lens: "L3", name: "Supply responsiveness",
+      left: "Responsive / elastic", right: "Constrained / inelastic",
+      short_definition: "How readily new housing quantity appears when demand and prices rise.",
+      why_it_matters: "Responsiveness decides whether new demand shows up mainly as more homes or mainly as higher prices.",
+      tradeoff: "Responsive supply can improve affordability and reduce appreciation; constrained supply can support owners’ prices while pricing out new households.",
+      evidence_type: "mixed", update_cadence: CAD.supply,
+      comparability: "Supply-elasticity estimates use different methods and geographies; placement describes structural capacity, not this year’s construction volume." },
+    { id: "d08", n: 8, family: "B", lens: "L3", name: "Useful-land availability",
+      left: "Ample / expandable", right: "Physically constrained",
+      short_definition: "How much land that is legally buildable, connected and close to demand can be brought into housing use.",
+      why_it_matters: "Useful land is not raw land. Vast national land area can coexist with scarcity where people want to live.",
+      tradeoff: "Ample useful land eases expansion but can encourage sprawl and long commutes; physical constraint pushes toward density and redevelopment.",
+      evidence_type: "institutional", update_cadence: CAD.supply,
+      comparability: "Combines physical geography with serviced, legally convertible land; no single comparable measure exists." },
+    { id: "d09", n: 9, family: "B", lens: "L3", name: "Planning / zoning flexibility",
+      left: "Flexible", right: "Restrictive / fragmented",
+      short_definition: "How permissive and predictable the rules are for converting land and adding density.",
+      why_it_matters: "Planning rules shape how easily competing supply, redevelopment and density can respond to demand.",
+      tradeoff: "Flexible rules let quantity respond but give neighbourhoods less control over change; restrictive rules preserve local character and incumbent value while constraining supply.",
+      evidence_type: "institutional", update_cadence: CAD.supply,
+      comparability: "Planning regimes are institutionally different, not points on one measured scale; placement is comparative judgement supported by policy research." },
+    { id: "d10", n: 10, family: "B", lens: "L3", name: "Infrastructure maturity",
+      left: "Catching up / expanding", right: "Mature network",
+      short_definition: "Whether the networks that make habitation possible — transport and connectivity, but also water supply, sewage and wastewater, drainage, power and other basic urban services — are still expanding fast or are largely built out and reliable.",
+      why_it_matters: "Where networks are still expanding, infrastructure can transform previously peripheral locations — with real uncertainty about timing and delivery. It also separates housing stock from serviced housing capacity: more housing units do not automatically mean more fully serviced housing capacity.",
+      tradeoff: "Expanding infrastructure creates new useful locations (and new competing supply) with delivery uncertainty; mature networks offer certainty but fewer transformation stories. Building can also outpace servicing: units can be added faster than the water, wastewater and power systems behind them.",
+      evidence_type: "synthesis", update_cadence: CAD.supply,
+      comparability: "Synthesis of network coverage and build-out stage; not a single index. Water and basic-servicing evidence is not yet assembled on a comparable country-by-country basis, so it informs the explanation of this dimension rather than adding a separately measured component.",
+      /* Explanatory sub-factors: what "infrastructure" covers here. They sit
+         inside this one dimension — no separate axis, position or score. */
+      sub_factors: [
+        { label: "Transport & connectivity", note: "Roads, rail, metro and corridors that decide which locations are reachable." },
+        { label: "Freshwater & municipal water supply", note: "Whether piped supply is reliable and can scale with new households — not just whether a connection exists." },
+        { label: "Groundwater dependence", note: "Where relevant, whether reliance on groundwater is sustainable. Tanker dependence or groundwater stress can signal immature servicing even when the buildings themselves are modern." },
+        { label: "Sewage & wastewater", note: "Collection and treatment capacity that keeps pace with added density." },
+        { label: "Drainage", note: "Stormwater systems that let a dense area stay habitable through heavy rain." },
+        { label: "Power & other basic services", note: "Reliable electricity and the everyday services that make a home fully usable." },
+      ],
+      servicing_note: "Maturity here means the reliability and scalability of the systems supporting habitation, not simply whether infrastructure technically exists. A city can physically add large quantities of housing while basic servicing fails to scale at the same pace.",
+      scale_guard: "This is a national system characterisation. National or city-level infrastructure conditions do not determine the water security or servicing of an individual project; that has to be checked at the property level." },
+
+    /* ---------- C. Household finance & balance sheets ---------- */
+    { id: "d11", n: 11, family: "C", lens: "L4", name: "Mortgage-market depth",
+      left: "Shallow / cash-heavy", right: "Deeply mortgage-financed",
+      short_definition: "How much home purchase is financed by mortgage credit rather than savings and cash.",
+      why_it_matters: "Mortgage depth determines how strongly future income is turned into current purchasing power.",
+      tradeoff: "Deeper mortgage markets widen access and spread housing costs over time, while adding leverage and sensitivity to credit conditions.",
+      evidence_type: "statistical", update_cadence: CAD.finance,
+      comparability: "Mortgage-to-GDP and household-credit series differ in coverage across countries; placement is directional." },
+    { id: "d12", n: 12, family: "C", lens: "L4", name: "Mortgage interest-rate structure",
+      left: "Floating / resetting", right: "Long-term fixed",
+      short_definition: "Whether typical home loans float or reset with market rates, or lock in a long-term fixed rate.",
+      why_it_matters: "It decides where interest-rate risk sits — with households, lenders or capital markets — and how rate changes pass into payments and resale behaviour.",
+      tradeoff: "Long-term fixed rates protect household payments but can create resale lock-in when market rates rise; floating rates pass shocks into household cash flow but avoid lock-in.",
+      evidence_type: "institutional", update_cadence: CAD.finance,
+      comparability: "Clean internationally comparable series on the rate structure of outstanding mortgage stock do not exist for every country. Normal cyclical rate moves do not shift this structural placement." },
+    { id: "d13", n: 13, family: "C", lens: "L4", name: "Household housing leverage",
+      left: "Low", right: "High",
+      short_definition: "How much mortgage debt households carry relative to housing values and incomes.",
+      why_it_matters: "Leverage magnifies gains and losses, and shapes whether a price fall becomes household distress.",
+      tradeoff: "Higher leverage can widen ownership and purchasing power while making household balance sheets more sensitive to price and income shocks.",
+      evidence_type: "statistical", update_cadence: CAD.finance,
+      comparability: "Some cross-country housing-leverage series are not perfectly comparable; aggregate leverage also hides wide variation between recent and long-standing owners." },
+    { id: "d14", n: 14, family: "C", lens: "L5", name: "Home-equity monetisability",
+      left: "Difficult / uncommon", right: "Easy / institutionalised",
+      short_definition: "How easily owners can borrow against or release home equity without selling.",
+      why_it_matters: "Separates owning valuable housing from being able to use that wealth.",
+      tradeoff: "Easy equity access makes housing wealth usable for emergencies, retirement or business, while letting households lever housing wealth more aggressively.",
+      evidence_type: "institutional", update_cadence: CAD.finance,
+      comparability: "Product availability and usage are measured differently across countries; placement reflects how institutionalised the channels are." },
+    { id: "d15", n: 15, family: "C", lens: "L5", name: "Household wealth concentration in housing",
+      left: "Diversified balance sheet", right: "Property-dominated",
+      short_definition: "How much of typical household wealth is held in residential property versus financial assets.",
+      why_it_matters: "Determines how hard a property price shock hits household portfolios and consumption.",
+      tradeoff: "Property-dominated balance sheets give households a tangible asset they live in, while concentrating wealth in one illiquid, location-specific exposure.",
+      evidence_type: "statistical", update_cadence: CAD.wealth,
+      comparability: "Survey asset-share figures and national-account balance sheets are not directly comparable. Contrasts between countries are structural, not precise." },
+
+    /* ---------- D. Development model & the state ---------- */
+    { id: "d16", n: 16, family: "D", lens: "L6", name: "Developer-financing fragility",
+      left: "Completion-insulated / diversified finance", right: "Presale / debt dependent",
+      short_definition: "How dependent new-housing production is on buyer presales and developer debt, rather than diversified, completion-insulated finance.",
+      why_it_matters: "Shows whether stress can travel through developers and unfinished projects. Deliberately combines presale dependence and developer leverage, which would otherwise double-count one vulnerability.",
+      tradeoff: "Presale finance lowers developers’ capital needs and can speed supply, while shifting completion risk to buyers and tying construction to sales confidence.",
+      evidence_type: "mixed", update_cadence: CAD.dev,
+      comparability: "Presale shares and developer-leverage measures are defined differently across countries; placement reads the role presales play in funding construction." },
+    { id: "d17", n: 17, family: "D", lens: "L6", name: "Buyer execution / counterparty risk",
+      left: "Low", right: "High",
+      short_definition: "The risk that a buyer pays for a home that is delivered late, altered, or not at all.",
+      why_it_matters: "Determines whether buying a home is also an exposure to a developer’s balance sheet.",
+      tradeoff: "Buying off-plan can offer lower entry prices and new stock, while exposing buyers to delivery and counterparty risk.",
+      evidence_type: "mixed", update_cadence: CAD.dev,
+      comparability: "Delivery-failure data are rarely published on a comparable basis; placement combines regulatory structure with documented episodes." },
+    { id: "d18", n: 18, family: "D", lens: "L6", name: "Government fiscal dependence on property",
+      left: "Low / indirect", right: "Direct / highly dependent",
+      short_definition: "How directly public revenues depend on property transactions, land sales or property values.",
+      why_it_matters: "Shapes policy incentives and whether a housing slowdown spills into public finances. The channels differ: land-sale revenue, transaction taxes and recurring property taxes are not the same thing.",
+      tradeoff: "Property-linked revenue can fund infrastructure and services, while tying public finances to the property cycle.",
+      evidence_type: "institutional", update_cadence: CAD.dev,
+      comparability: "Revenue channels are structurally different across countries; never read as “governments like high prices” in the same way everywhere." },
+
+    /* ---------- E. Legal & market architecture ---------- */
+    { id: "d19", n: 19, family: "E", lens: "L7", name: "Title certainty & transaction formalisation",
+      left: "Fragmented / buyer-verification heavy", right: "Strong / highly formalised",
+      short_definition: "How reliably ownership is established and transferred through public records.",
+      why_it_matters: "Determines how much legal verification the buyer must do and how much friction surrounds a transaction.",
+      tradeoff: "Strong formalisation reduces legal risk and supports lending and resale, but requires costly institutions and makes transactions more visible, including for tax.",
+      evidence_type: "institutional", update_cadence: CAD.legal,
+      comparability: "Legal systems differ in kind; placement compares how much verification burden falls on the buyer." },
+    { id: "d20", n: 20, family: "E", lens: "L7", name: "Secondary / resale-market depth",
+      left: "Thin / frictional", right: "Deep / transparent",
+      short_definition: "How deep, transparent and liquid the market for existing homes is.",
+      why_it_matters: "Determines how easily a home can be sold, at what friction, and how observable prices are.",
+      tradeoff: "Deep resale markets improve liquidity and price discovery, while making housing easier to trade — and to speculate in.",
+      evidence_type: "mixed", update_cadence: CAD.legal,
+      comparability: "Transaction and listing data differ in coverage; placement combines market depth with price transparency." },
+    { id: "d21", n: 21, family: "E", lens: "L7", name: "Rental-market institutionalisation",
+      left: "Informal / fragmented", right: "Professional / institutional",
+      short_definition: "Whether rental housing is mainly informal and individually owned, or includes professional landlords and enforceable tenancy frameworks.",
+      why_it_matters: "Shapes whether renting is a real alternative to owning, and how usable vacant stock is.",
+      tradeoff: "Institutional rental markets offer professional supply and enforceable tenancies, while concentrating ownership in larger landlords.",
+      evidence_type: "institutional", update_cadence: CAD.legal,
+      comparability: "Rental tenure and landlord-type data are not harmonised across countries." },
+    { id: "d22", n: 22, family: "E", lens: "L7", name: "Building-value persistence",
+      left: "Structure depreciates rapidly", right: "Structure retains value strongly",
+      short_definition: "Whether the structure — as distinct from the land beneath it — tends to retain market value as it ages.",
+      why_it_matters: "Separates land from building. Where structures depreciate quickly, value sits mostly in land and location.",
+      tradeoff: "Rapid structure depreciation encourages rebuilding and new supply while eroding the value of older homes; persistent structure value protects owners but can slow renewal.",
+      evidence_type: "mixed", update_cadence: CAD.building,
+      comparability: "Few harmonised measures exist; evidence mixes valuation conventions, statistical methods and market practice. Treated as structural, not cyclical." },
+
+    /* ---------- F. Expectations & systemic exposure ---------- */
+    { id: "d23", n: 23, family: "F", lens: "L8", name: "Cultural expectation of property appreciation",
+      left: "Conditional / weak", right: "Deeply entrenched",
+      short_definition: "How strongly households expect property prices to keep rising over time.",
+      why_it_matters: "Expectations can sustain demand for long periods — and the weakening of belief can itself become part of an adjustment.",
+      tradeoff: "Entrenched expectations can support demand and saving through property, until those expectations change.",
+      evidence_type: "behavioural", update_cadence: CAD.culture, always_interpretive: true,
+      comparability: "Always interpretive. A behavioural and institutional inference drawn from multiple signals, never a precise measurement." },
+    { id: "d24", n: 24, family: "F", lens: "L8", name: "Systemic sensitivity to a property downturn",
+      left: "Limited", right: "High",
+      short_definition: "How strongly a fall in property prices would transmit into households, developers, lenders and public finances.",
+      why_it_matters: "Price is the symptom; the balance sheets determine how a shock travels.",
+      tradeoff: "Systems deeply integrated with property can channel more capital into housing, while making the wider economy more exposed when prices fall.",
+      evidence_type: "synthesis", update_cadence: CAD.systemic,
+      comparability: "A synthesis of which balance sheets carry housing risk and how transmission channels currently work." },
+  ];
+
+  /* Copy deck (spec §20) — one source of truth for recurring lines. */
+  HSF.copy = {
+    headline: "What kind of housing machine are you looking at?",
+    deck: "Compare the systems around housing — demand, supply, finance, development, legal architecture and shock transmission — before assuming that “property” behaves the same everywhere.",
+    guardrail: "This is a fingerprint, not a scorecard. Farther left or right is not better; it is simply different.",
+    cue: "Same asset. Different system.",
+    method: "The Fingerprint describes the machine. It does not grade the machine.",
+    deepCta: "Explore all 24 dimensions",
+    evidenceCta: "Why is this placed here?",
+    antiRank: "Farther left or right is not better. Each endpoint describes a different system state.",
+    propertyGuard: "A country fingerprint is a starting context, not a forecast for a city or a recommendation for a property.",
+    freshness: "Evidence current to",
+    uncertainty: "Not enough comparable evidence to place confidently",
+    whichBetter: "Different housing systems optimise different things and create different trade-offs. There is no overall winner to find here. Start from your question — access, affordability, liquidity, leverage, delivery risk — and read the dimensions that bear on it.",
+  };
+
+  HSF.countries = HSF.countries || [];
+  HSF.registerCountry = function (c) {
+    HSF.countries = HSF.countries.filter((x) => x.id !== c.id).concat([c]);
+  };
+})(typeof self !== "undefined" ? self : globalThis);
