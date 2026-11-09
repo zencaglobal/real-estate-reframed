@@ -1,5 +1,5 @@
 /* ============================================================
-   Real Estate Reframed — shared site layer (window.ZencaSite)
+   Real Estate Reframed: shared site layer (window.ZencaSite)
    Owned by the deployment chat. Contract: DEPLOYMENT-PLAN.md §3a.
    URLs and dates: URL-REGISTRY.md (keep the two in sync).
 
@@ -44,7 +44,7 @@
     [2,  "Your House Doesn’t Really Have A Price",                     "2026-12-14"],
     [3,  "Your House’s Last Five Years Won’t Predict The Next Twenty", "2026-12-21"],
     [4,  "The Return You Think You Made On Your House Is Probably Wrong",  "2026-12-28"],
-    [5,  "Housing Always Costs Money — Even When You Own It",          "2027-01-04"],
+    [5,  "Housing Always Costs Money, Even When You Own It",          "2027-01-04"],
     [6,  "The Magic Of Real Estate Is Often Leverage",                     "2027-01-11"],
     [7,  "Your Rental Property Is A Business, Not Passive Income",         "2027-01-18"],
     [8,  "Your Parents’ 100× Is Not Your Forecast",              "2027-01-25"],
@@ -60,7 +60,7 @@
 
   /* Teaser copy for locked pages. */
   var PAGES = {
-    hub:         { name: "Real Estate Reframed", line: "Fourteen ways to separate the house, the investment, the financing, the lifestyle and the system around them — before putting them back together.", article: 1 },
+    hub:         { name: "Real Estate Reframed", line: "Fourteen ways to separate the house, the investment, the financing, the lifestyle and the system around them, before putting them back together.", article: 1 },
     methodology: { name: "Methodology & Concepts", line: "A reference guide to the language, frameworks and evidence standards behind Real Estate Reframed.", article: 1 },
     fingerprint: { name: "Housing System Fingerprint Explorer", line: "What kind of housing machine are you looking at? Compare the housing systems of India, China, Japan and the United States.", article: 3 },
     xray:        { name: "Property Decision X‑Ray", line: "X-ray this property, for this person, at this price. A diagnostic, not an oracle.", article: 14 },

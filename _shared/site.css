@@ -1,5 +1,5 @@
 /* ============================================================
-   Real Estate Reframed — shared deploy UI (owned by the deployment chat)
+   Real Estate Reframed: shared deploy UI (owned by the deployment chat)
    Styles only elements the deploy layer adds to the tools:
    series crumb, tool switcher, locked-page teaser, preview tag.
    Every class is zenca-prefixed so nothing collides with a tool's CSS.

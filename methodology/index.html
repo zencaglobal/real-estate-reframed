@@ -7,7 +7,7 @@
   <meta name="description" content="Definitions, frameworks and evidence standards used across Zenca’s Real Estate Reframed series, from property returns and housing utility to the Housing System Fingerprint and Property Decision X-Ray." />
   <meta property="og:type" content="article" />
   <meta property="og:site_name" content="Zenca" />
-  <meta property="og:title" content="Real Estate Reframed — Methodology &amp; Concepts" />
+  <meta property="og:title" content="Real Estate Reframed: Methodology &amp; Concepts" />
   <meta property="og:description" content="A reference guide to the language, frameworks and evidence standards behind Real Estate Reframed." />
   <meta property="og:url" content="https://real-estate-reframed.zenca.global/methodology/" />
   <meta property="og:image" content="https://real-estate-reframed.zenca.global/_shared/og/hub.png" />
@@ -20,12 +20,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../_shared/page.css?v=093122a466" />
-  <link rel="stylesheet" href="../_shared/site.css?v=1f6c7fd32f" />
-  <script src="../_shared/site.js?v=88c679d0bc" data-zenca-tool="methodology"></script>
+  <link rel="stylesheet" href="../_shared/page.css?v=3a9d3f1c0a" />
+  <link rel="stylesheet" href="../_shared/site.css?v=f06904db3f" />
+  <script src="../_shared/site.js?v=d02275a9c1" data-zenca-tool="methodology"></script>
   <script data-goatcounter="https://real-estate-reframed.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
 </head>
-<body>
+<body class="m-page">
   <a class="skip" href="#app">Skip to content</a>
   <header class="topbar">
     <div class="wrap topbar-inner">
@@ -44,238 +44,253 @@
   </header>
 
   <main id="app">
-    <div class="wrap read">
+    <div class="wrap">
 
-      <section class="m-hero" aria-labelledby="top">
-        <p class="eyebrow">Real Estate Reframed · Reference</p>
+      <section class="m-head" aria-labelledby="top">
         <h1 id="top">Methodology &amp; Concepts</h1>
-        <p class="lede">A reference guide to the language, frameworks and evidence standards behind Real Estate Reframed.</p>
-        <p>Real Estate Reframed separates ideas that property conversations often bundle together. Price is not return. Return is not wealth accumulation. Housing consumption is not the same thing as investment. And the same physical asset can behave very differently inside a different housing system — or for a different household.</p>
-        <p>This page is the reference layer behind the series. It explains what we mean by recurring terms, how the named concepts are used, and how we distinguish first principles, calculations, evidence, mechanisms, hypotheses and scenarios. It is not another argument about whether property is “good” or “bad”. Its job is to make the arguments elsewhere easier to read precisely.</p>
-        <nav aria-label="On this page">
-          <ul class="jump">
-            <li><a href="#decision-layers">Decision layers</a></li>
-            <li><a href="#core-distinctions">Core distinctions</a></li>
-            <li><a href="#concepts">Named concepts</a></li>
-            <li><a href="#research-principles">Research principles</a></li>
-            <li><a href="#evidence-methodology">Evidence methodology</a></li>
-            <li><a href="#source-hierarchy">Source hierarchy</a></li>
-            <li><a href="#freshness">Freshness</a></li>
-            <li><a href="#boundaries">Boundaries</a></li>
-          </ul>
-        </nav>
+        <div>
+          <p class="lede">A reference guide to the language, frameworks and evidence standards behind Real Estate Reframed.</p>
+          <p class="m-sub">What recurring terms mean, how the named concepts are used, and how claims are tested. Pick a section.</p>
+        </div>
       </section>
 
-      <section class="m-section" id="decision-layers" aria-labelledby="h-layers">
-        <h2 id="h-layers">The four decision layers</h2>
+      <div class="tabs" role="tablist" aria-label="Methodology sections">
+        <button role="tab" id="t-decision-layers" aria-controls="decision-layers">Decision layers</button>
+        <button role="tab" id="t-core-distinctions" aria-controls="core-distinctions">Distinctions</button>
+        <button role="tab" id="t-concepts" aria-controls="concepts">Named concepts</button>
+        <button role="tab" id="t-research-principles" aria-controls="research-principles">Principles</button>
+        <button role="tab" id="t-evidence-methodology" aria-controls="evidence-methodology">Evidence</button>
+        <button role="tab" id="t-uncertainty-labels" aria-controls="uncertainty-labels">Uncertainty</button>
+        <button role="tab" id="t-source-hierarchy" aria-controls="source-hierarchy">Sources</button>
+        <button role="tab" id="t-boundaries" aria-controls="boundaries">Boundaries</button>
+      </div>
+
+      <!-- ===== Decision layers ===== -->
+      <section class="panel" role="tabpanel" id="decision-layers" aria-labelledby="t-decision-layers" hidden="until-found">
+        <h2>The four decision layers</h2>
         <ol class="layers" aria-label="Country, then City, then Property, then Person">
-          <li>
-            <h3>Country</h3>
-            <p class="q">What housing system is this asset inside?</p>
-            <p>Demography, mortgage architecture, legal regime, development model and system-level incentives.</p>
-          </li>
-          <li>
-            <h3>City</h3>
-            <p class="q">What local economic machine supports this location?</p>
-            <p>Jobs, migration, infrastructure, supply, rents, vacancy and affordability.</p>
-          </li>
-          <li>
-            <h3>Property</h3>
-            <p class="q">What exactly is the asset?</p>
-            <p>Land, structure, rights, micro-location, title, developer, condition, rent, costs and liquidity.</p>
-          </li>
-          <li>
-            <h3>Person</h3>
-            <p class="q">What does owning it do to this household?</p>
-            <p>Leverage, cash flow, concentration, time horizon, liquidity needs, utility and financial plans.</p>
-          </li>
+          <li><h3>Country</h3><p class="q">What housing system is this asset inside?</p><p>Demography, mortgage architecture, legal regime, development model and system-level incentives.</p></li>
+          <li><h3>City</h3><p class="q">What local economic machine supports this location?</p><p>Jobs, migration, infrastructure, supply, rents, vacancy and affordability.</p></li>
+          <li><h3>Property</h3><p class="q">What exactly is the asset?</p><p>Land, structure, rights, micro-location, title, developer, condition, rent, costs and liquidity.</p></li>
+          <li><h3>Person</h3><p class="q">What does owning it do to this household?</p><p>Leverage, cash flow, concentration, time horizon, liquidity needs, utility and financial plans.</p></li>
         </ol>
         <p class="note"><strong>Core idea</strong>Country gives the system. City changes the local conditions. Property defines the asset. Person determines what that asset means for a particular buyer. A property cannot be evaluated properly from only one layer.</p>
       </section>
 
-      <section class="m-section" id="core-distinctions" aria-labelledby="h-dist">
-        <h2 id="h-dist">Core distinctions</h2>
-        <p>These terms are intentionally kept separate throughout the series. Many property stories become confusing only because several of them are described with the same word — usually “return”, “value” or “wealth”.</p>
+      <!-- ===== Core distinctions ===== -->
+      <section class="panel" role="tabpanel" id="core-distinctions" aria-labelledby="t-core-distinctions" hidden="until-found">
+        <h2>Core distinctions</h2>
+        <p class="panel-intro">These terms are kept separate throughout the series. Many property stories become confusing only because several of them are described with the same word: usually “return”, “value” or “wealth”.</p>
+        <div class="grid g3">
+          <div class="card" id="price-appreciation"><h3>Price appreciation</h3><p>The change in the property’s market value. It says nothing by itself about rent, costs, financing or inflation.</p></div>
+          <div class="card" id="asset-return"><h3>Asset return</h3><p>The return produced by the property itself, including relevant income and costs, before treating the owner’s financing as if it were part of the asset.</p></div>
+          <div class="card" id="leveraged-equity-return"><h3>Leveraged equity return</h3><p>The return experienced by the owner’s equity after financing. Leverage can magnify gains, losses and cash-flow demands; it is not the same thing as the property’s own return.</p></div>
+          <div class="card" id="wealth-accumulation"><h3>Wealth accumulation</h3><p>The increase in household wealth. It can come from investment return and also from additional saving, for example mortgage principal repayment. Wealth accumulation is therefore not identical to investment return.</p></div>
+          <div class="card" id="housing-consumption"><h3>Housing consumption</h3><p>The shelter, space, location and housing services a household consumes. Owning a home does not make the consumption component disappear.</p></div>
+          <div class="card" id="non-financial-utility"><h3>Non-financial utility</h3><p>The value of control, tenure stability, family continuity, convenience, identity, status, customisation and other benefits that may matter even when they do not appear in an IRR.</p></div>
+          <div class="card" id="liquidity"><h3>Liquidity</h3><p>The ability to convert wealth into usable capital with acceptable time, uncertainty and transaction friction.</p></div>
+          <div class="card" id="concentration"><h3>Concentration</h3><p>How dependent a household becomes on one asset, one geography or one housing market, sometimes without making another purchase.</p></div>
+          <div class="card" id="legal-execution-risk"><h3>Legal &amp; execution risk</h3><p>Whether the buyer can confidently obtain, hold, use, transfer or receive the asset that was promised, including title, transaction and project-delivery risk.</p></div>
+        </div>
+        <p class="note"><strong>Precision note</strong>Price appreciation, asset return and leveraged equity return are different return lenses. “Nominal” and “real” describe the measurement basis that can be applied to those returns; real return is not a separate fourth return type.</p>
       </section>
-    </div>
-    <div class="wrap">
-      <div class="cards">
-        <div class="card" id="price-appreciation"><h3>Price appreciation</h3><p>The change in the property’s market value. It says nothing by itself about rent, costs, financing or inflation.</p></div>
-        <div class="card" id="asset-return"><h3>Asset return</h3><p>The return produced by the property itself, including relevant income and costs, before treating the owner’s financing as if it were part of the asset.</p></div>
-        <div class="card" id="leveraged-equity-return"><h3>Leveraged equity return</h3><p>The return experienced by the owner’s equity after financing. Leverage can magnify gains, losses and cash-flow demands; it is not the same thing as the property’s own return.</p></div>
-        <div class="card" id="wealth-accumulation"><h3>Wealth accumulation</h3><p>The increase in household wealth. It can come from investment return and also from additional saving — for example, mortgage principal repayment. Wealth accumulation is therefore not identical to investment return.</p></div>
-        <div class="card" id="housing-consumption"><h3>Housing consumption</h3><p>The shelter, space, location and housing services a household consumes. Owning a home does not make the consumption component disappear.</p></div>
-        <div class="card" id="non-financial-utility"><h3>Non-financial utility</h3><p>The value of control, tenure stability, family continuity, convenience, identity, status, customisation and other benefits that may matter even when they do not appear in an IRR.</p></div>
-        <div class="card" id="liquidity"><h3>Liquidity</h3><p>The ability to convert wealth into usable capital with acceptable time, uncertainty and transaction friction.</p></div>
-        <div class="card" id="concentration"><h3>Concentration</h3><p>How dependent a household becomes on one asset, one geography or one housing market — sometimes without making another purchase.</p></div>
-        <div class="card" id="legal-execution-risk"><h3>Legal &amp; execution risk</h3><p>Whether the buyer can confidently obtain, hold, use, transfer or receive the asset that was promised, including title, transaction and project-delivery risk.</p></div>
-      </div>
-    </div>
-    <div class="wrap read">
-      <p class="note"><strong>Precision note</strong>Price appreciation, asset return and leveraged equity return are different return lenses. “Nominal” and “real” describe the measurement basis that can be applied to those returns; real return is not a separate fourth return type.</p>
 
-      <section class="m-section" id="concepts" aria-labelledby="h-concepts">
-        <h2 id="h-concepts">Named concepts</h2>
-        <p>The series uses a deliberately limited set of named concepts. The definitions below are canonical. “First introduced” is included so the page can link readers to the article that develops the idea in full.</p>
-        <div class="glossary">
-          <article class="concept" id="last-deal-fallacy">
+      <!-- ===== Named concepts ===== -->
+      <section class="panel" role="tabpanel" id="concepts" aria-labelledby="t-concepts" hidden="until-found">
+        <div class="panel-head">
+          <div>
+            <h2>Named concepts</h2>
+            <p class="panel-intro">Sixteen named concepts, in the order the series introduces them.</p>
+          </div>
+          <div class="subtabs" role="group" aria-label="Show concepts from">
+            <button type="button" data-group="g-a" aria-pressed="true">Articles 2 to 9</button>
+            <button type="button" data-group="g-b" aria-pressed="false">Article 10</button>
+            <button type="button" data-group="g-c" aria-pressed="false">Articles 11 to 14</button>
+          </div>
+        </div>
+
+        <div class="grid g2 cgroup" id="g-a">
+          <article class="card concept" id="last-deal-fallacy">
             <h3><a class="anchor" href="#last-deal-fallacy">Last-Deal Fallacy</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="2" href="#">Article 2</a></p>
             <p>The assumption that the most recent nearby transaction establishes the precise current value of your property. Comparable sales are useful evidence; the fallacy is turning one useful observation into an exact valuation.</p>
           </article>
-          <article class="concept" id="time-spread">
+          <article class="card concept" id="time-spread">
             <h3><a class="anchor" href="#time-spread">Time Spread</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="2" href="#">Article 2</a></p>
             <p>The uncertainty created when the transactions used to value a property occurred at meaningfully different points in time. Even a strong comparable can become less informative as rates, inventory, sentiment, infrastructure or demand change.</p>
           </article>
-          <article class="concept" id="housing-system-fingerprint">
+          <article class="card concept" id="housing-system-fingerprint">
             <h3><a class="anchor" href="#housing-system-fingerprint">Housing System Fingerprint</a></h3>
-            <p class="origin">First introduced: <a data-zenca-article="3" href="#">Article 3</a></p>
-            <p>A common set of dimensions describing the demographic, supply, financing, institutional and household conditions through which a country’s housing market operates. It is a snapshot, not a permanent national personality — and it describes the machine rather than grading it.</p>
-            <p class="tool-link"><a data-zenca-link="fingerprint" data-zenca-gate="fingerprint" href="../fingerprint/">Explore the Housing System Fingerprint &rarr;</a></p>
+            <p class="origin">First introduced: <a data-zenca-article="3" href="#">Article 3</a> · <a data-zenca-link="fingerprint" data-zenca-gate="fingerprint" href="../fingerprint/">Open the Explorer →</a></p>
+            <p>A common set of dimensions describing the demographic, supply, financing, institutional and household conditions through which a country’s housing market operates. It is a snapshot, not a permanent national personality, and it describes the machine rather than grading it.</p>
           </article>
-          <article class="concept" id="vacancy-tax">
+          <article class="card concept" id="vacancy-tax">
             <h3><a class="anchor" href="#vacancy-tax">Vacancy Tax</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="7" href="#">Article 7</a></p>
             <p>The portion of expected rental income lost because a property cannot remain continuously and productively occupied. It is an economic analogy, not a government tax, and reminds us that twelve months of scheduled rent is not automatically twelve months of received rent.</p>
           </article>
-          <article class="concept" id="accidental-concentration">
+          <article class="card concept" id="accidental-concentration">
             <h3><a class="anchor" href="#accidental-concentration">Accidental Concentration</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="9" href="#">Article 9</a></p>
             <p>A household becomes heavily exposed to one property not because it deliberately chose a concentrated portfolio, but because that property appreciated faster than the rest of its assets. Concentration can increase even when the household buys nothing else.</p>
           </article>
-          <article class="concept" id="fire-usable-wealth">
+          <article class="card concept" id="fire-usable-wealth">
             <h3><a class="anchor" href="#fire-usable-wealth">FIRE-Usable Wealth</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="9" href="#">Article 9</a></p>
-            <p>The portion of household wealth that can realistically support ongoing spending under the retirement or lifestyle plan the household actually intends to follow. A primary home can count fully toward net worth while contributing less — or nothing — to the withdrawal pool if the plan never monetises it.</p>
+            <p>The portion of household wealth that can realistically support ongoing spending under the retirement or lifestyle plan the household actually intends to follow. A primary home can count fully toward net worth while contributing less (or nothing) to the withdrawal pool if the plan never monetises it.</p>
           </article>
-          <article class="concept" id="control-premium">
+        </div>
+
+        <div class="grid g2 cgroup" id="g-b" hidden="until-found">
+          <article class="card concept" id="control-premium">
             <h3><a class="anchor" href="#control-premium">Control Premium</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="10" href="#">Article 10</a></p>
             <p>The extra amount a household may rationally be willing to pay for the right to control its housing environment rather than depend on a landlord or external owner. That control can create real utility even when it never appears in resale value.</p>
           </article>
-          <article class="concept" id="housing-consumption-premium">
+          <article class="card concept" id="housing-consumption-premium">
             <h3><a class="anchor" href="#housing-consumption-premium">Housing-Consumption Premium</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="10" href="#">Article 10</a></p>
             <p>The additional amount a household willingly commits to housing because the home itself provides lifestyle utility beyond the minimum financially efficient housing solution. The home may remain an asset; that does not make every extra rupee of housing spend an investment decision.</p>
           </article>
-          <article class="concept" id="enough-house-problem">
+          <article class="card concept" id="enough-house-problem">
             <h3><a class="anchor" href="#enough-house-problem">Enough-House Problem</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="10" href="#">Article 10</a></p>
             <p>The difficulty of identifying the point at which additional spending on housing stops materially improving financial security and primarily buys more consumption, comfort, location, space or status. There is no universal threshold; the answer is personal.</p>
           </article>
-          <article class="concept" id="zero-appreciation-test">
+          <article class="card concept" id="zero-appreciation-test">
             <h3><a class="anchor" href="#zero-appreciation-test">Zero-Appreciation Test</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="10" href="#">Article 10</a></p>
             <p>Ask: if this home never meaningfully increased your purchasing power in real terms, would you still want to own it? The test does not tell you whether to buy. It helps reveal how much of the case is housing utility and how much depends on appreciation.</p>
           </article>
-          <article class="concept" id="project-viability-is-not-project-liquidity">
+        </div>
+
+        <div class="grid g2 cgroup" id="g-c" hidden="until-found">
+          <article class="card concept" id="project-viability-is-not-project-liquidity">
             <h3><a class="anchor" href="#project-viability-is-not-project-liquidity">Project Viability <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> Project Liquidity</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="11" href="#">Article 11</a></p>
             <p>A project can make economic sense in the long run while still running short of the cash required to keep construction moving in the short run. Future profitability does not automatically pay today’s contractor.</p>
           </article>
-          <article class="concept" id="uncertainty-discount">
+          <article class="card concept" id="uncertainty-discount">
             <h3><a class="anchor" href="#uncertainty-discount">Uncertainty Discount</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="11" href="#">Article 11</a></p>
             <p>The price advantage an unfinished property should logically offer to compensate the buyer for unresolved risks. It is not a fixed percentage; the required compensation depends on developer, stage, approvals, financing, timeline, market conditions and the buyer’s circumstances.</p>
           </article>
-          <article class="concept" id="certainty-tax">
+          <article class="card concept" id="certainty-tax">
             <h3><a class="anchor" href="#certainty-tax">Certainty Tax</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="11" href="#">Article 11</a></p>
             <p>The premium a buyer may rationally pay for a completed, inspectable, legally clearer and immediately usable property because major uncertainties have already been resolved. Paying more for certainty is not automatically financially unsophisticated.</p>
           </article>
-          <article class="concept" id="cash-recycling-loop">
+          <article class="card concept" id="cash-recycling-loop">
             <h3><a class="anchor" href="#cash-recycling-loop">Cash Recycling Loop</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="12" href="#">Article 12</a></p>
             <p>A mechanism through which undeclared cash used in one property transaction can change hands and subsequently be deployed into other transactions, assets or expenditure. It is a mechanism, not a claim about the current national prevalence or magnitude of undeclared consideration.</p>
           </article>
-          <article class="concept" id="tax-gravity">
+          <article class="card concept" id="tax-gravity">
             <h3><a class="anchor" href="#tax-gravity">Tax Gravity</a></h3>
             <p class="origin">First introduced: <a data-zenca-article="12" href="#">Article 12</a></p>
             <p>The tendency for transaction taxes and valuation rules to exert pressure on how participants structure, time or document property transactions. The concept is deliberately neutral: taxes change the relative price of behaviours, but do not by themselves establish which response is most common.</p>
           </article>
-          <article class="concept" id="property-decision-x-ray">
+          <article class="card concept" id="property-decision-x-ray">
             <h3><a class="anchor" href="#property-decision-x-ray">Property Decision X-Ray</a></h3>
-            <p class="origin">First introduced: <a data-zenca-article="14" href="#">Article 14</a></p>
-            <p>A decision framework that examines a purchase through Country → City → Property → Person and then exposes returns, utility, leverage, liquidity, concentration and execution dependencies. It produces a profile of trade-offs and unresolved questions — not a numeric BUY/SELL score.</p>
-            <p class="tool-link"><a data-zenca-link="xray" data-zenca-gate="xray" href="../x-ray/">Run the Property Decision X-Ray &rarr;</a></p>
+            <p class="origin">First introduced: <a data-zenca-article="14" href="#">Article 14</a> · <a data-zenca-link="xray" data-zenca-gate="xray" href="../x-ray/">Run the X-Ray →</a></p>
+            <p>A decision framework that examines a purchase through Country → City → Property → Person and then exposes returns, utility, leverage, liquidity, concentration and execution dependencies. It produces a profile of trade-offs and unresolved questions, not a numeric BUY/SELL score.</p>
           </article>
         </div>
       </section>
 
-      <section class="m-section" id="research-principles" aria-labelledby="h-principles">
-        <h2 id="h-principles">Research principles</h2>
-        <div class="rows">
-          <div class="row"><h3>Mechanism <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> prevalence</h3><p>Explaining how something can happen does not establish how often, how widely or how materially it happens. Plausible mechanisms stay labelled as mechanisms until evidence establishes magnitude.</p></div>
-          <div class="row"><h3>Historical outcome <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> forward forecast</h3><p>A strong historical result is evidence of what happened, not a forecast of what happens next. The series respects historical success enough to study the conditions that produced it.</p></div>
-          <div class="row"><h3>Tailwind weakening <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> headwind</h3><p>A force can become less supportive without becoming negative. Slower urbanisation, income growth or credit expansion is not automatically the same thing as contraction.</p></div>
-          <div class="row"><h3>Same asset. Different system.</h3><p>Housing outcomes depend on the surrounding system: demography, supply, finance, law, developer structure and household balance sheets. Cross-country evidence is used to expose mechanisms, not to declare a best housing market.</p></div>
-          <div class="row"><h3>No fake precision</h3><p>Where outcomes vary by city, micro-market, property type, financing structure, household or period, the series says so. Ranges, sensitivities and explicit assumptions are preferred to invented national averages.</p></div>
-          <div class="row"><h3>No universal allocation, yield or return rule</h3><p>There is no single normal Indian property return, universal rental yield, universal safe real-estate allocation, or universal LTV/EMI rule. Any threshold must be supported by the decision context rather than smuggled in as a law.</p></div>
-          <div class="row"><h3>Scenarios are not forecasts</h3><p>Zero/low/base/high cases, stress tests and sensitivities are used to expose dependency on uncertain inputs. A compounded assumption remains an assumption.</p></div>
-          <div class="row"><h3>Decision quality <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> outcome quality</h3><p>A good decision can produce a disappointing outcome and a poor decision can be rescued by rising prices. The series is trying to improve the quality of the decision before the future is known.</p></div>
+      <!-- ===== Research principles ===== -->
+      <section class="panel" role="tabpanel" id="research-principles" aria-labelledby="t-research-principles" hidden="until-found">
+        <h2>Research principles</h2>
+        <div class="grid g2">
+          <div class="card"><h3>Mechanism <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> prevalence</h3><p>Explaining how something can happen does not establish how often, how widely or how materially it happens. Plausible mechanisms stay labelled as mechanisms until evidence establishes magnitude.</p></div>
+          <div class="card"><h3>Historical outcome <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> forward forecast</h3><p>A strong historical result is evidence of what happened, not a forecast of what happens next. The series respects historical success enough to study the conditions that produced it.</p></div>
+          <div class="card"><h3>Tailwind weakening <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> headwind</h3><p>A force can become less supportive without becoming negative. Slower urbanisation, income growth or credit expansion is not automatically the same thing as contraction.</p></div>
+          <div class="card"><h3>Same asset. Different system.</h3><p>Housing outcomes depend on the surrounding system: demography, supply, finance, law, developer structure and household balance sheets. Cross-country evidence is used to expose mechanisms, not to declare a best housing market.</p></div>
+          <div class="card"><h3>No fake precision</h3><p>Where outcomes vary by city, micro-market, property type, financing structure, household or period, the series says so. Ranges, sensitivities and explicit assumptions are preferred to invented national averages.</p></div>
+          <div class="card"><h3>No universal allocation, yield or return rule</h3><p>There is no single normal Indian property return, universal rental yield, universal safe real-estate allocation, or universal LTV/EMI rule. Any threshold must be supported by the decision context rather than smuggled in as a law.</p></div>
+          <div class="card"><h3>Scenarios are not forecasts</h3><p>Zero/low/base/high cases, stress tests and sensitivities are used to expose dependency on uncertain inputs. A compounded assumption remains an assumption.</p></div>
+          <div class="card"><h3>Decision quality <span aria-hidden="true">≠</span><span class="sr">is not equal to</span> outcome quality</h3><p>A good decision can produce a disappointing outcome and a poor decision can be rescued by rising prices. The series is trying to improve the quality of the decision before the future is known.</p></div>
         </div>
       </section>
 
-      <section class="m-section" id="evidence-methodology" aria-labelledby="h-evidence">
-        <h2 id="h-evidence">Evidence methodology</h2>
-        <p>Different claims require different kinds of support. The series does not apply the same citation burden to a mathematical identity, a current mortgage rate, a behavioural claim and a future scenario.</p>
-        <div class="rows">
-          <div class="row"><h3>First principles</h3><p>Used where logic, economics or accounting can establish the relationship. The reasoning should be explicit enough for the reader to inspect.</p></div>
-          <div class="row"><h3>Calculations</h3><p>Used for results generated from stated inputs. Assumptions and arithmetic are shown or made clear; an illustrative calculation is never presented as a market fact.</p></div>
-          <div class="row"><h3>Historical evidence</h3><p>Used for claims about what happened previously. Period and geography matter, and historical outcomes are not automatically projected forward.</p></div>
-          <div class="row"><h3>Current data</h3><p>Used for rates, prices, yields, supply, affordability and other time-sensitive conditions. These are refreshed close to publication rather than treated as permanent facts.</p></div>
-          <div class="row"><h3>Legal &amp; regulatory sources</h3><p>Used for tax, RERA, title, statutory definitions and similar claims. Primary and authoritative sources are preferred and current wording is checked immediately before publication where material.</p></div>
-          <div class="row"><h3>Behavioural research</h3><p>Used when the series makes claims about how people perceive, decide or behave. Credible research supports the claim; intuition alone is not treated as prevalence evidence.</p></div>
-          <div class="row"><h3>Scenario analysis</h3><p>Used where the future is uncertain. Sensitivity tables and stress cases ask what must be true for the decision to work; they do not pretend that one forecast is known.</p></div>
+      <!-- ===== Evidence methodology ===== -->
+      <section class="panel" role="tabpanel" id="evidence-methodology" aria-labelledby="t-evidence-methodology" hidden="until-found">
+        <h2>Evidence methodology</h2>
+        <p class="panel-intro">Different claims require different kinds of support. The series does not apply the same citation burden to a mathematical identity, a current mortgage rate, a behavioural claim and a future scenario.</p>
+        <div class="grid g3">
+          <div class="card"><h3>First principles</h3><p>Used where logic, economics or accounting can establish the relationship. The reasoning should be explicit enough for the reader to inspect.</p></div>
+          <div class="card"><h3>Calculations</h3><p>Used for results generated from stated inputs. Assumptions and arithmetic are shown or made clear; an illustrative calculation is never presented as a market fact.</p></div>
+          <div class="card"><h3>Historical evidence</h3><p>Used for claims about what happened previously. Period and geography matter, and historical outcomes are not automatically projected forward.</p></div>
+          <div class="card"><h3>Current data</h3><p>Used for rates, prices, yields, supply, affordability and other time-sensitive conditions. These are refreshed close to publication rather than treated as permanent facts.</p></div>
+          <div class="card"><h3>Legal &amp; regulatory sources</h3><p>Used for tax, RERA, title, statutory definitions and similar claims. Primary and authoritative sources are preferred and current wording is checked immediately before publication where material.</p></div>
+          <div class="card"><h3>Behavioural research</h3><p>Used when the series makes claims about how people perceive, decide or behave. Credible research supports the claim; intuition alone is not treated as prevalence evidence.</p></div>
+          <div class="card"><h3>Scenario analysis</h3><p>Used where the future is uncertain. Sensitivity tables and stress cases ask what must be true for the decision to work; they do not pretend that one forecast is known.</p></div>
         </div>
-        <h3 style="font-size:1.2rem;margin-top:28px">How uncertain claims are labelled</h3>
-        <div class="rows">
-          <div class="row"><h3>Mechanism / hypothesis</h3><p>A logically plausible causal pathway whose magnitude may be unknown. If it has not been established empirically, the wording says so.</p></div>
-          <div class="row"><h3>Investigative hypothesis</h3><p>An interesting proposition worth testing, not a fact waiting to be decorated with a citation. It can be modified or killed if the evidence does not support it.</p></div>
-          <div class="row"><h3>Illustrative scenario</h3><p>A deliberately chosen example used to reveal mechanics or sensitivity. It must be visually and verbally separated from claims about the broader market.</p></div>
+      </section>
+
+      <!-- ===== Uncertainty labels ===== -->
+      <section class="panel" role="tabpanel" id="uncertainty-labels" aria-labelledby="t-uncertainty-labels" hidden="until-found">
+        <h2>How uncertain claims are labelled</h2>
+        <div class="grid g3">
+          <div class="card"><h3>Mechanism / hypothesis</h3><p>A logically plausible causal pathway whose magnitude may be unknown. If it has not been established empirically, the wording says so.</p></div>
+          <div class="card"><h3>Investigative hypothesis</h3><p>An interesting proposition worth testing, not a fact waiting to be decorated with a citation. It can be modified or killed if the evidence does not support it.</p></div>
+          <div class="card"><h3>Illustrative scenario</h3><p>A deliberately chosen example used to reveal mechanics or sensitivity. It must be visually and verbally separated from claims about the broader market.</p></div>
         </div>
         <p class="note"><strong>The standing rule</strong>A persuasive sentence is not allowed to quietly change category from “interesting hypothesis” to “fact”.</p>
       </section>
 
-      <section class="m-section" id="source-hierarchy" aria-labelledby="h-sources">
-        <h2 id="h-sources">Source hierarchy</h2>
-        <div class="rows">
-          <div class="row"><h3>1. Primary / authoritative</h3><p>Preferred whenever available: official datasets, ministries/departments, statutes, regulators, court decisions and other direct institutional sources.</p></div>
-          <div class="row"><h3>2. Multilateral / academic</h3><p>Used for cross-country evidence, deeper analytical work and peer-reviewed or institutionally rigorous research.</p></div>
-          <div class="row"><h3>3. Institutional market research</h3><p>Useful for granular current market information where official datasets are insufficient. Definitions and segment labels must be checked rather than assumed comparable.</p></div>
-          <div class="row"><h3>4. High-quality journalism</h3><p>Useful for chronology, company/developer cases, enforcement developments and interviews. Not the first choice for fundamental numbers when primary data exists.</p></div>
-          <div class="row"><h3>5. Anecdote / community</h3><p>Useful for discovering questions, cases and lived experiences. It is not evidence of prevalence.</p></div>
+      <!-- ===== Sources & freshness ===== -->
+      <section class="panel" role="tabpanel" id="source-hierarchy" aria-labelledby="t-source-hierarchy" hidden="until-found">
+        <div class="two-col">
+          <div>
+            <h2>Source hierarchy</h2>
+            <ol class="stack">
+              <li class="card"><h3>1. Primary / authoritative</h3><p>Preferred whenever available: official datasets, ministries/departments, statutes, regulators, court decisions and other direct institutional sources.</p></li>
+              <li class="card"><h3>2. Multilateral / academic</h3><p>Used for cross-country evidence, deeper analytical work and peer-reviewed or institutionally rigorous research.</p></li>
+              <li class="card"><h3>3. Institutional market research</h3><p>Useful for granular current market information where official datasets are insufficient. Definitions and segment labels must be checked rather than assumed comparable.</p></li>
+              <li class="card"><h3>4. High-quality journalism</h3><p>Useful for chronology, company/developer cases, enforcement developments and interviews. Not the first choice for fundamental numbers when primary data exists.</p></li>
+              <li class="card"><h3>5. Anecdote / community</h3><p>Useful for discovering questions, cases and lived experiences. It is not evidence of prevalence.</p></li>
+            </ol>
+          </div>
+          <div id="freshness">
+            <h2>Freshness rules</h2>
+            <ol class="stack">
+              <li class="card"><h3>Stable / refresh rarely</h3><p>First-principles maths, conceptual frameworks, older historical series once accurately established.</p></li>
+              <li class="card"><h3>Refresh periodically / before publication</h3><p>Recent property-price indices, rental yields, affordability, launch composition, stalled-project data and other slowly changing market evidence.</p></li>
+              <li class="card"><h3>Refresh immediately before publication</h3><p>Mortgage and LAP rates, tax rules, capital-gains treatment, regulatory wording, thresholds, stamp-duty rules and other legally or commercially sensitive current facts.</p></li>
+            </ol>
+          </div>
         </div>
       </section>
 
-      <section class="m-section" id="freshness" aria-labelledby="h-fresh">
-        <h2 id="h-fresh">Freshness rules</h2>
-        <div class="rows">
-          <div class="row"><h3>Stable / refresh rarely</h3><p>First-principles maths, conceptual frameworks, older historical series once accurately established.</p></div>
-          <div class="row"><h3>Refresh periodically / before publication</h3><p>Recent property-price indices, rental yields, affordability, launch composition, stalled-project data and other slowly changing market evidence.</p></div>
-          <div class="row"><h3>Refresh immediately before publication</h3><p>Mortgage and LAP rates, tax rules, capital-gains treatment, regulatory wording, thresholds, stamp-duty rules and other legally or commercially sensitive current facts.</p></div>
+      <!-- ===== Boundaries ===== -->
+      <section class="panel" role="tabpanel" id="boundaries" aria-labelledby="t-boundaries" hidden="until-found">
+        <div class="two-col">
+          <div>
+            <h2>What this methodology does not promise</h2>
+            <ul class="bounds">
+              <li>It does not turn uncertainty into a point estimate simply because a number looks authoritative.</li>
+              <li>It does not treat one city, developer, property or household as representative of India.</li>
+              <li>It does not use China as a prophecy for India, Japan as proof that zoning alone solves affordability, or the United States as an institution set that can be imported wholesale.</li>
+              <li>It does not treat RERA as a guarantee of completion or the existence of a mechanism as evidence of present-day prevalence.</li>
+              <li>It does not reduce a property decision to a composite score. A decision framework should expose trade-offs, not hide them inside an algorithm.</li>
+            </ul>
+          </div>
+          <div class="closing">
+            <h2>Why all this precision</h2>
+            <p>The purpose is not to make property feel impossibly complicated. It is to separate the moving parts before recombining them. Once price, return, leverage, consumption, utility, liquidity, concentration and execution risk are visible as different things, the question becomes much more useful than “Is real estate a good investment?”</p>
+            <p class="q">The better question is: what exactly am I buying, what produces its economics, what assumptions does the return depend on, and what does owning this particular property do to my financial life?</p>
+          </div>
         </div>
       </section>
 
-      <section class="m-section closing" id="boundaries" aria-labelledby="h-bound">
-        <h2 id="h-bound">What this methodology does not promise</h2>
-        <ul>
-          <li>It does not turn uncertainty into a point estimate simply because a number looks authoritative.</li>
-          <li>It does not treat one city, developer, property or household as representative of India.</li>
-          <li>It does not use China as a prophecy for India, Japan as proof that zoning alone solves affordability, or the United States as an institution set that can be imported wholesale.</li>
-          <li>It does not treat RERA as a guarantee of completion or the existence of a mechanism as evidence of present-day prevalence.</li>
-          <li>It does not reduce a property decision to a composite score. A decision framework should expose trade-offs, not hide them inside an algorithm.</li>
-        </ul>
-        <p>The purpose of all this precision is not to make property feel impossibly complicated. It is to separate the moving parts before recombining them. Once price, return, leverage, consumption, utility, liquidity, concentration and execution risk are visible as different things, the question becomes much more useful than “Is real estate a good investment?”</p>
-        <p class="q">The better question is: what exactly am I buying, what produces its economics, what assumptions does the return depend on, and what does owning this particular property do to my financial life?</p>
-      </section>
     </div>
   </main>
 
   <footer class="site-foot">
     <div class="wrap">
-      <p class="disclaimer">This is educational content, not financial, investment, tax, or legal advice. Zenca shares perspectives and frameworks to help you think clearly — your decisions are your own.</p>
+      <p class="disclaimer">This is educational content, not financial, investment, tax, or legal advice. Zenca shares perspectives and frameworks to help you think clearly; your decisions are your own.</p>
       <p class="colophon">The reference layer for the <strong>Real Estate Reframed</strong> series. <a data-zenca-link="series" href="https://zenca.global/p/real-estate-reframed-series" target="_blank" rel="noopener">Read it on Zenca &rarr;</a></p>
       <p class="colophon">Anonymous visits are counted, cookie-free.</p>
       <nav class="foot-nav" aria-label="Zenca">
@@ -286,5 +301,67 @@
       </nav>
     </div>
   </footer>
+
+  <script>
+  /* Tabs. Each section is a tab; concept anchors (#housing-system-fingerprint etc.)
+     open the right tab and group. Panels use hidden="until-found" so the browser's
+     find-in-page still reaches hidden text and opens its tab. */
+  (function () {
+    var tabs = [].slice.call(document.querySelectorAll('[role="tab"]'));
+    var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
+    var groups = [].slice.call(document.querySelectorAll(".cgroup"));
+    var groupBtns = [].slice.call(document.querySelectorAll(".subtabs button"));
+
+    function showGroup(id) {
+      groups.forEach(function (g) { if (g.id === id) g.removeAttribute("hidden"); else g.setAttribute("hidden", "until-found"); });
+      groupBtns.forEach(function (b) { b.setAttribute("aria-pressed", String(b.getAttribute("data-group") === id)); });
+    }
+    function select(i, focus, keepHash) {
+      tabs.forEach(function (t, k) {
+        var on = k === i;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        if (on) panels[k].removeAttribute("hidden"); else panels[k].setAttribute("hidden", "until-found");
+      });
+      if (focus) tabs[i].focus();
+      if (!keepHash) history.replaceState(null, "", "#" + panels[i].id);
+    }
+    function openTarget(id, scroll) {
+      var el = id && document.getElementById(id);
+      if (!el) return false;
+      var panel = el.closest('[role="tabpanel"]');
+      if (!panel) return false;
+      select(panels.indexOf(panel), false, true);
+      var grp = el.closest(".cgroup");
+      if (grp) showGroup(grp.id);
+      if (scroll && el === panel) requestAnimationFrame(function () { window.scrollTo(0, 0); });
+      if (scroll && el !== panel) {
+        el.classList.add("flash");
+        setTimeout(function () { el.classList.remove("flash"); }, 1600);
+        el.scrollIntoView({ block: "center" });
+      }
+      return true;
+    }
+
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () {
+        select(i, false);
+        if (window.ZencaSite) ZencaSite.track("tab/" + panels[i].id, true);
+      });
+      t.addEventListener("keydown", function (e) {
+        var n = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+        if (e.key === "Home") n = -i; else if (e.key === "End") n = tabs.length - 1 - i;
+        if (n === undefined) return;
+        e.preventDefault();
+        select((i + n + tabs.length) % tabs.length, true);
+      });
+    });
+    groupBtns.forEach(function (b) { b.addEventListener("click", function () { showGroup(b.getAttribute("data-group")); }); });
+    document.addEventListener("beforematch", function (e) { openTarget(e.target.id || (e.target.closest("[id]") || {}).id, false); });
+    window.addEventListener("hashchange", function () { openTarget(location.hash.slice(1), true); });
+
+    if (!openTarget(location.hash.slice(1), true)) select(0, false, true);
+  })();
+  </script>
 </body>
 </html>

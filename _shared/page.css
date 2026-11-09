@@ -1,5 +1,5 @@
 /* ============================================================
-   Real Estate Reframed — hub and Methodology & Concepts pages
+   Real Estate Reframed: hub and Methodology & Concepts pages
    Same Zenca system as the tools: dark + gold, Fraunces + Inter.
    (Owned by the deployment chat.)
    ============================================================ */
@@ -27,7 +27,7 @@ strong { font-weight: 600; color: var(--ink); }
 .skip { position: absolute; left: -999px; top: 8px; background: var(--gold); color: var(--bg); padding: 8px 14px; border-radius: 8px; z-index: 100; }
 .skip:focus { left: 12px; }
 
-/* Top bar — same pattern as the tools */
+/* Top bar: same pattern as the tools */
 .topbar { position: sticky; top: 0; z-index: 50; background: rgba(14,15,19,0.92); border-bottom: 1px solid var(--line); }
 .topbar-inner { display: flex; align-items: center; justify-content: space-between; height: 60px; gap: 12px; }
 .crumbs { display: flex; align-items: center; gap: 9px; min-width: 0; font-size: 0.9rem; }
@@ -53,12 +53,15 @@ strong { font-weight: 600; color: var(--ink); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 26px 0 0; }
 .section { padding: 46px 0; border-top: 1px solid var(--line); }
 .section h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 10px; }
-.section-intro { color: var(--ink-soft); margin: 0 0 26px; max-width: 70ch; }
+.section-intro { color: var(--ink-soft); margin: 0 0 26px; }
 
 /* ---------- Hub ---------- */
-.hero { padding: 76px 0 46px; }
-.hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 20px; }
-.hero p.body { color: var(--ink-soft); max-width: 68ch; margin: 0 0 14px; }
+.hero { padding: 72px 0 46px; }
+.hero h1 { font-size: clamp(2.4rem, 6vw, 4rem); margin-bottom: 18px; }
+.hero .lede { margin: 0 0 22px; line-height: 1.5; }
+.hero p.body { color: var(--ink-soft); font-size: 1.02rem; line-height: 1.65; margin: 0 0 12px; }
+.hero .lede br { display: block; }
+@media (max-width: 720px) { .hero .lede br { display: none; } }
 
 .tools { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .tool { display: flex; flex-direction: column; gap: 10px; padding: 22px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(180deg, var(--card), var(--bg-2)); }
@@ -82,46 +85,56 @@ strong { font-weight: 600; color: var(--ink); }
 
 @media (max-width: 900px) { .tools { grid-template-columns: 1fr; } .acts { grid-template-columns: 1fr; } }
 
-/* ---------- Methodology ---------- */
-.m-hero { padding: 64px 0 22px; }
-.m-hero h1 { font-size: clamp(2.2rem, 5vw, 3.2rem); margin-bottom: 14px; }
-.m-hero p { color: var(--ink-soft); margin: 0 0 14px; }
-.jump { display: flex; flex-wrap: wrap; gap: 8px; padding: 14px 0 6px; margin: 8px 0 0; list-style: none; }
-.jump a { display: inline-block; font-size: 0.85rem; color: var(--ink-soft); text-decoration: none; border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; }
-.jump a:hover { color: var(--gold); border-color: var(--gold-soft); }
-.m-section { padding: 40px 0 10px; border-top: 1px solid var(--line); margin-top: 30px; }
-.m-section h2 { font-size: clamp(1.45rem, 3vw, 1.9rem); margin-bottom: 10px; }
-.m-section > p { color: var(--ink-soft); }
-.layers { display: flex; flex-wrap: wrap; align-items: stretch; gap: 10px; margin: 18px 0; padding: 0; list-style: none; }
-.layers li { flex: 1 1 200px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
-.layers li h3 { font-size: 1.1rem; color: var(--gold); margin-bottom: 6px; }
-.layers li p { margin: 0 0 6px; color: var(--ink-soft); font-size: 0.92rem; }
-.layers li p.q { color: var(--ink); }
-.note { padding: 14px 18px; border-left: 3px solid var(--gold-soft); background: var(--gold-dim); border-radius: 0 10px 10px 0; color: var(--ink-soft); margin: 18px 0; }
-.note strong { color: var(--gold); display: block; margin-bottom: 2px; }
-.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 18px 0; }
-.card { padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
-.card h3 { font-family: "Inter", sans-serif; font-size: 0.98rem; font-weight: 600; margin-bottom: 6px; }
-.card p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
-.glossary { margin: 18px 0; }
-.concept { padding: 18px 0; border-bottom: 1px solid var(--line); }
-.concept h3 { font-size: 1.25rem; margin-bottom: 4px; }
+/* ---------- Methodology (tabbed) ---------- */
+.m-page .wrap { max-width: 1240px; }
+.m-head { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 44px; align-items: end; padding: 26px 0 16px; }
+.m-head h1 { font-size: clamp(1.9rem, 3.6vw, 2.6rem); white-space: nowrap; }
+.m-head .eyebrow { margin-bottom: 8px; }
+.m-head .lede { margin: 0 0 4px; font-size: 1.05rem; }
+.m-sub { margin: 0; color: var(--ink-mute); font-size: 0.88rem; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tabs button { flex: 0 0 auto; font: 500 0.9rem/1.2 "Inter", sans-serif; color: var(--ink-soft); background: none; border: 0; border-bottom: 2px solid transparent; padding: 11px 13px 10px; cursor: pointer; white-space: nowrap; }
+.tabs button:hover { color: var(--ink); }
+.tabs button[aria-selected="true"] { color: var(--gold); border-bottom-color: var(--gold); }
+.panel { padding: 14px 0 4px; }
+.panel h2 { font-size: 1.3rem; margin-bottom: 4px; }
+.panel-intro { color: var(--ink-soft); margin: 0 0 12px; font-size: 0.9rem; }
+.panel-head { display: flex; align-items: center; justify-content: space-between; gap: 6px 24px; margin-bottom: 12px; }
+.panel-head .panel-intro { margin: 0; }
+.subtabs { flex: 0 0 auto; display: inline-flex; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 999px; }
+.subtabs button { font: 500 0.82rem/1.2 "Inter", sans-serif; color: var(--ink-soft); background: none; border: 0; border-radius: 999px; padding: 6px 12px; cursor: pointer; white-space: nowrap; }
+.subtabs button[aria-pressed="true"] { background: var(--gold); color: var(--bg); font-weight: 600; }
+.grid { display: grid; gap: 10px; margin: 0 0 12px; }
+.g2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.card { padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.card h3 { font-family: "Inter", sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; color: var(--ink); }
+.card p { margin: 0; color: var(--ink-soft); font-size: 0.87rem; line-height: 1.46; }
+.concept h3 { font-family: "Fraunces", serif; font-weight: 500; font-size: 1.08rem; margin-bottom: 2px; }
 .concept h3 a.anchor { color: inherit; text-decoration: none; }
 .concept h3 a.anchor:hover { color: var(--gold); }
-.concept .origin { font-size: 0.85rem; color: var(--ink-mute); margin: 0 0 8px; }
+.concept p.origin { font-size: 0.78rem; color: var(--ink-mute); margin: 0 0 5px; }
 .concept .origin a { color: var(--gold-soft); }
-.concept p { margin: 0; color: var(--ink-soft); }
-.concept p.tool-link { margin-top: 8px; font-size: 0.92rem; }
-.rows { margin: 18px 0; }
-.row { display: grid; grid-template-columns: 240px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
-.row h3 { font-family: "Inter", sans-serif; font-size: 0.98rem; font-weight: 600; }
-.row p { margin: 0; color: var(--ink-soft); }
-.m-section ul { color: var(--ink-soft); padding-left: 1.2em; }
-.m-section ul li { margin: 6px 0; }
-.closing p { color: var(--ink-soft); }
-.closing p.q { color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; }
-@media (max-width: 1023px) { .cards { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 767px) { .cards { grid-template-columns: 1fr; } .row { grid-template-columns: 1fr; gap: 4px; } }
+.card.flash { border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold-dim); }
+.layers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 14px 0; padding: 0; list-style: none; counter-reset: layer; }
+.layers li { position: relative; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.layers li + li:before { content: "→"; position: absolute; left: -12px; top: 50%; transform: translate(-50%, -50%); color: var(--gold-soft); }
+.layers li h3 { font-size: 1.15rem; color: var(--gold); margin-bottom: 6px; }
+.layers li p { margin: 0 0 6px; color: var(--ink-soft); font-size: 0.9rem; }
+.layers li p.q { color: var(--ink); }
+.note { padding: 10px 16px; border-left: 3px solid var(--gold-soft); background: var(--gold-dim); border-radius: 0 10px 10px 0; color: var(--ink-soft); margin: 4px 0 10px; font-size: 0.92rem; }
+.note strong { color: var(--gold); display: block; margin-bottom: 2px; }
+.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; }
+.stack { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
+.stack .card { padding: 9px 14px; }
+.stack .card h3 { margin-bottom: 2px; }
+.bounds { color: var(--ink-soft); padding-left: 1.2em; margin: 10px 0 0; }
+.bounds li { margin: 8px 0; }
+.closing p { color: var(--ink-soft); margin: 10px 0 0; }
+.closing p.q { color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; line-height: 1.45; margin-top: 16px; }
+@media (max-width: 1023px) { .g3, .layers { grid-template-columns: repeat(2, minmax(0, 1fr)); } .layers li:nth-child(3):before { display: none; } .m-head { grid-template-columns: 1fr; } .panel-head { flex-wrap: wrap; } }
+@media (max-width: 767px) { .g2, .g3, .layers, .two-col { grid-template-columns: 1fr; } .layers li + li:before { display: none; } }
 
 /* Footer */
 .site-foot { border-top: 1px solid var(--line); padding: 36px 0 56px; margin-top: 40px; }
@@ -134,7 +147,8 @@ strong { font-weight: 600; color: var(--ink); }
 
 @media print {
   body { background: #fff; color: #111; }
-  .topbar, .jump, .site-foot .foot-nav, .actions { display: none !important; }
+  .topbar, .tabs, .subtabs, .site-foot .foot-nav, .actions { display: none !important; }
+  [role="tabpanel"][hidden], .cgroup[hidden] { display: block !important; content-visibility: visible !important; }
   .card, .layers li, .tool { background: #fff; border-color: #ccc; }
   .card p, .row p, .concept p, .m-section > p, .layers li p { color: #222; }
 }
