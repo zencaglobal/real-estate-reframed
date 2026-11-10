@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../_shared/page.css?v=0d41b60de9" />
+  <link rel="stylesheet" href="../_shared/page.css?v=92d8e15926" />
   <link rel="stylesheet" href="../_shared/site.css?v=f06904db3f" />
   <script src="../_shared/site.js?v=d02275a9c1" data-zenca-tool="methodology"></script>
   <script data-goatcounter="https://real-estate-reframed.goatcounter.com/count" data-goatcounter-settings='{"no_onload": true}' async src="https://gc.zgo.at/count.js"></script>
@@ -222,12 +222,20 @@
       </section>
 
       <section class="panel" role="tabpanel" id="source-hierarchy" aria-labelledby="t-source-hierarchy" hidden="until-found">
-        <h2>Sources</h2>
-        <p class="panel-intro">Preference order: official and primary sources, then multilateral and academic research, then industry research. Journalism is used for context only, and anecdotes never as evidence of how common something is. Each source shows when it was published, the period its data covers, and when it was accessed.</p>
-        <div class="src-wrap" id="src-register" aria-live="polite">
-          <p class="src-empty">The source register loads with the Housing System Fingerprint’s data.</p>
+        <div class="panel-head">
+          <div>
+            <h2>Sources</h2>
+            <p class="panel-intro">Every source behind the series research, with its publication date where the source gives one. All were accessed in October 2026. Preference order: official, then multilateral and academic, then industry; journalism for context only.</p>
+          </div>
+          <label class="src-filter">Show
+            <select id="src-select" aria-label="Show sources for">
+              <option value="all">All sources</option>
+            </select>
+          </label>
         </div>
-        <p class="src-foot">This register covers the Housing System Fingerprint. Each article lists its own sources; the X-Ray and Worksheet examples are illustrative, not market data.</p>
+        <div class="src-wrap" id="src-register" aria-live="polite">
+          <p class="src-empty">Loading sources.</p>
+        </div>
       </section>
 
       <section class="panel" role="tabpanel" id="boundaries" aria-labelledby="t-boundaries" hidden="until-found">
@@ -321,23 +329,68 @@
     if (!openTarget(location.hash.slice(1), true)) select(0, false, true);
   })();
   </script>
+  <script src="sources.js?v=84dbd1a063"></script>
   <script>
-  /* Source register: read straight from the Fingerprint's own source file,
-     so the page and the Explorer can never disagree. */
+  /* Source register: the series research (sources.js, generated from the dossiers)
+     plus the Housing System Fingerprint's own source file, read live so the two
+     can never disagree. */
   (function () {
     var box = document.getElementById("src-register");
+    var sel = document.getElementById("src-select");
+    var R = window.RER_SOURCES || { sources: [] };
+    var rows = R.sources.slice();
+    var TITLES = ((window.ZencaSite && ZencaSite.articles) || []).reduce(function (m, a) { m[a.n] = a.title; return m; }, {});
+    var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var date = function (d) { var m = /^(\d{4})(?:-(\d{2}))?/.exec(d || ""); return m ? (m[2] ? MONTHS[+m[2] - 1] + " " + m[1] : m[1]) : "Not stated"; };
+
+    for (var n = 1; n <= 14; n++) {
+      var o = document.createElement("option");
+      o.value = "a" + n; o.textContent = "Article " + n + (TITLES[n] ? ": " + TITLES[n] : "");
+      sel.appendChild(o);
+    }
+    var fo = document.createElement("option"); fo.value = "fp"; fo.textContent = "Housing System Fingerprint"; sel.appendChild(fo);
+
+    function render() {
+      var v = sel.value;
+      var list = rows.filter(function (r) {
+        if (v === "all") return true;
+        if (v === "fp") return r.fp;
+        return r.articles.indexOf(+v.slice(1)) !== -1;
+      });
+      box.innerHTML = '<table class="src"><caption class="sr">Sources</caption><thead><tr><th scope="col">Source (' + list.length + ')</th><th scope="col">Type</th><th scope="col">Published</th></tr></thead><tbody>' +
+        list.map(function (r) {
+          var head = r.title ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title) + '</a>'
+                             : '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.host) + '</a><span class="src-cited">Used for: ' + esc(r.cited) + '</span>';
+          return '<tr><td><span class="src-pub">' + esc(r.publisher) + '</span>' + head + (r.period ? '<span class="src-cited">Data: ' + esc(r.period) + '</span>' : "") + '</td><td>' + esc(r.type) + '</td><td>' + esc(date(r.published)) + '</td></tr>';
+        }).join("") + '</tbody></table>';
+    }
+    sel.addEventListener("change", render);
+    render();
+
+    var FP_TYPE = function (t) {
+      t = (t || "").toLowerCase();
+      if (/regulat|legislat/.test(t)) return "Law & courts";
+      if (/official|central bank|programme|policy$|fiscal/.test(t) && !/independent/.test(t)) return "Official";
+      if (/multilateral/.test(t)) return "Multilateral";
+      if (/academic|research/.test(t)) return "Research";
+      if (/industry|gse/.test(t)) return "Industry & data";
+      if (/news/.test(t)) return "Journalism";
+      return "Research";
+    };
     var base = (window.ZencaSite && ZencaSite.links.fingerprint) || "../fingerprint/";
     var sc = document.createElement("script");
     sc.src = base + "data/sources.js";
     sc.onload = function () {
-      var list = ((window.HSF && HSF.sources) || []).filter(function (s) { return s.url; });
-      if (!list.length) return;
-      var esc = function (t) { return String(t == null ? "" : t).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
-      var rows = list.map(function (s) {
-        return '<tr><td><span class="src-pub">' + esc(s.publisher) + '</span><a href="' + esc(s.url) + '" target="_blank" rel="noopener">' + esc(s.title) + '</a></td>' +
-          '<td>' + esc(s.geography) + '</td><td>' + esc(s.publication_date) + '</td><td>' + esc(s.data_period) + '</td><td>' + esc(s.accessed_date) + '</td></tr>';
-      }).join("");
-      box.innerHTML = '<table class="src"><caption class="sr">Sources used in the Housing System Fingerprint</caption><thead><tr><th scope="col">Source (' + list.length + ')</th><th scope="col">Covers</th><th scope="col">Published</th><th scope="col">Data period</th><th scope="col">Accessed</th></tr></thead><tbody>' + rows + '</tbody></table>';
+      var seen = {}; rows.forEach(function (r) { seen[r.url.replace(/\/$/, "")] = r; });
+      ((window.HSF && HSF.sources) || []).forEach(function (s) {
+        if (!s.url) return;
+        var k = s.url.replace(/\/$/, "");
+        if (seen[k]) { seen[k].fp = true; seen[k].period = seen[k].period || s.data_period; return; }
+        rows.push({ publisher: s.publisher, title: s.title, url: s.url, host: "", published: String(s.publication_date || "").replace(/\s.*$/, ""),
+                    type: FP_TYPE(s.source_type), articles: [3, 13, 14], fp: true, period: s.data_period });
+      });
+      render();
     };
     document.head.appendChild(sc);
   })();
