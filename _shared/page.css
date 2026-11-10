@@ -133,8 +133,20 @@ strong { font-weight: 600; color: var(--ink); }
 .bounds li { margin: 8px 0; }
 .closing p { color: var(--ink-soft); margin: 10px 0 0; }
 .closing p.q { color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; line-height: 1.45; margin-top: 16px; }
+.src-wrap { max-height: calc(100vh - 330px); min-height: 260px; overflow: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--card); }
+.src { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+.src th { position: sticky; top: 0; background: var(--card-2); color: var(--gold-soft); font-weight: 600; text-align: left; padding: 9px 12px; white-space: nowrap; }
+.src td { padding: 8px 12px; border-top: 1px solid var(--line); color: var(--ink-soft); vertical-align: top; }
+.src td:first-child { min-width: 320px; }
+.src td:nth-child(n+3) { white-space: nowrap; }
+.src a { color: var(--ink); text-decoration: none; }
+.src a:hover { color: var(--gold); text-decoration: underline; }
+.src-pub { display: block; font-size: 0.76rem; color: var(--ink-mute); }
+.src-empty { margin: 0; padding: 16px; color: var(--ink-mute); }
+.src-foot { margin: 10px 0 0; color: var(--ink-mute); font-size: 0.85rem; }
+.closing-q { margin: 18px 0 0; color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; line-height: 1.45; max-width: 80ch; }
 @media (max-width: 1023px) { .g3, .layers { grid-template-columns: repeat(2, minmax(0, 1fr)); } .layers li:nth-child(3):before { display: none; } .m-head { grid-template-columns: 1fr; } .panel-head { flex-wrap: wrap; } }
-@media (max-width: 767px) { .g2, .g3, .layers, .two-col { grid-template-columns: 1fr; } .layers li + li:before { display: none; } }
+@media (max-width: 767px) { .g2, .g3, .layers, .two-col { grid-template-columns: 1fr; } .layers li + li:before { display: none; } .src-wrap { max-height: 70vh; } .src td:first-child { min-width: 240px; } }
 
 /* Footer */
 .site-foot { border-top: 1px solid var(--line); padding: 36px 0 56px; margin-top: 40px; }
@@ -149,6 +161,7 @@ strong { font-weight: 600; color: var(--ink); }
   body { background: #fff; color: #111; }
   .topbar, .tabs, .subtabs, .site-foot .foot-nav, .actions { display: none !important; }
   [role="tabpanel"][hidden], .cgroup[hidden] { display: block !important; content-visibility: visible !important; }
+  .src-wrap { max-height: none; overflow: visible; }
   .card, .layers li, .tool { background: #fff; border-color: #ccc; }
   .card p, .row p, .concept p, .m-section > p, .layers li p { color: #222; }
 }
