@@ -147,7 +147,7 @@ strong { font-weight: 600; color: var(--ink); }
 .src-filter select { max-width: 360px; font: 500 0.85rem "Inter", sans-serif; color: var(--ink); background: var(--card-2); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; }
 .src-empty { margin: 0; padding: 16px; color: var(--ink-mute); }
 .src-foot { margin: 10px 0 0; color: var(--ink-mute); font-size: 0.85rem; }
-.closing-q { margin: 18px 0 0; color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; line-height: 1.45; max-width: 80ch; }
+.closing-q { margin: 18px 0 0; color: var(--ink); font-family: "Fraunces", serif; font-size: 1.15rem; line-height: 1.45; }
 @media (max-width: 1023px) { .g3, .layers { grid-template-columns: repeat(2, minmax(0, 1fr)); } .layers li:nth-child(3):before { display: none; } .m-head { grid-template-columns: 1fr; } .panel-head { flex-wrap: wrap; } }
 @media (max-width: 767px) { .g2, .g3, .layers, .two-col { grid-template-columns: 1fr; } .layers li + li:before { display: none; } .src-wrap { max-height: 70vh; } .src td:first-child { min-width: 240px; } }
 
