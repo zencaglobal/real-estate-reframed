@@ -14,7 +14,7 @@
     {
       id: "rise", tab: "Prices rise 10%",
       title: "Four countries report house prices up 10%.",
-      intro: "The number is identical. What produces it is not — so neither is what it implies about the next twenty years.",
+      intro: "The number is identical. What produces it is not, so neither is what it implies about the next twenty years.",
       caption: "Same number. Different cause.",
       chains: {
         IN: { period: "Today", steps: ["Urbanisation", "Rising incomes", "Constrained useful supply", "Price"], dims: ["d01", "d03", "d07", "d09"] },
@@ -30,10 +30,10 @@
       caption: "Price is the symptom. The balance sheets tell you the disease.",
       chains: {
         IN: { period: "Channels today", steps: ["Lower paper wealth for property-heavy households", "Weaker developer sales", "Some collateral stress", "Weaker investment sentiment"], dims: ["d15", "d16", "d14", "d24"],
-              note: "Less pervasive equity extraction and no China-scale presale dependence may weaken some channels. No modern national episode of this kind has been established — a fact, not a forecast." },
+              note: "Less pervasive equity extraction and no China-scale presale dependence may weaken some channels. No modern national episode of this kind has been established: a fact, not a forecast." },
         CN: { period: "Current downturn", steps: ["Household confidence", "Presales", "Developer cash", "Construction", "Land purchases", "Local-government finances"], dims: ["d23", "d16", "d17", "d18", "d24"] },
         JP: { period: "1990s", steps: ["Lower land values", "Corporate collateral", "Banks", "Borrower balance sheets", "Long adjustment"], dims: ["d22", "d23", "d24"],
-              note: "This is the historical channel. Today’s configuration — large financial savings, limited equity extraction — is placed mid-left on systemic sensitivity." },
+              note: "This is the historical channel. Today’s configuration (large financial savings, limited equity extraction) is placed mid-left on systemic sensitivity." },
         US: { period: "2008", steps: ["Negative equity", "Mortgage defaults", "Foreclosures", "Mortgage-security losses", "Financial-institution stress"], dims: ["d13", "d11", "d14", "d24"],
               note: "Leverage relative to housing values is now well below pre-crisis peaks, and fixed-rate mortgages protect most payments from rate shocks." },
       },

@@ -206,10 +206,10 @@
     {
       id: "place", n: 2, title: "Country, city & location", short: "Location",
       ask: "What system, city and location am I buying into?",
-      intro: "Country context informs the prior; it does not decide this property. Record only what could materially change this case — then test the location story you are relying on.",
+      intro: "Country context informs the prior; it does not decide this property. Record only what could materially change this case: then test the location story you are relying on.",
       groups: [
         { id: "system", title: "The housing system", custom: "countryContext",
-          why: "The Housing System Fingerprint describes the machine — demand, supply, mortgage structure, title — not what one apartment will do. Farther left or right on a spectrum is not better; it is different.",
+          why: "The Housing System Fingerprint describes the machine (demand, supply, mortgage structure, title) not what one apartment will do. Farther left or right on a spectrum is not better; it is different.",
           fields: [
             { k: "market.system.key_feature", t: "area", label: "Which system feature could materially change this decision?", wide: true, rows: 2, unk: true, help: "For example: floating-rate loans, thin resale markets, buyer-side title verification, presale project finance." },
           ],
@@ -223,9 +223,9 @@
           ] },
         { id: "destinations", title: "Effective access", custom: "destinations",
           lead: "Straight-line distance, map distance and real accessibility are different metrics.",
-          why: "Economic location is how easily the life you actually lead can be reached from here — at the hours you travel, by the routes that exist. Kilometres hide peak-hour traffic, a poor last mile, or a single road in." },
+          why: "Economic location is how easily the life you actually lead can be reached from here: at the hours you travel, by the routes that exist. Kilometres hide peak-hour traffic, a poor last mile, or a single road in." },
         { id: "scenarios", title: "Stress-test the location thesis", custom: "scenarios",
-          lead: "Three ways the location story can play out. No probabilities — just two questions.",
+          lead: "Three ways the location story can play out. No probabilities: just two questions.",
           why: "A location thesis is usually told as Scenario A. Most of the useful information is in B and C: whether you would still want to own it if the upside is shared with new supply, and whether you could live with it if the story disappoints.",
           fields: [
             { k: "thesis.happy_b", t: "choice", label: (c) => "Would I still be happy owning this " + (homeish(c) ? "home" : "property") + " under Scenario B?", opts: O.scenario, req: true },
@@ -237,7 +237,7 @@
     {
       id: "property", n: 3, title: "The property", short: "Property",
       ask: "What am I buying, and what evidence supports the price?",
-      intro: "Keep the property return, the financing return and housing consumption separate. Do not manufacture a point 'fair value' — if comparable evidence is thin, write that down. Unknown is an answer.",
+      intro: "Keep the property return, the financing return and housing consumption separate. Do not manufacture a point 'fair value': if comparable evidence is thin, write that down. Unknown is an answer.",
       groups: [
         { id: "buying", title: "What exactly are you buying?", fields: [
           { k: "property.components", t: "multi", label: "Which of these are you paying for?", opts: O.components, wide: true },
@@ -254,21 +254,21 @@
           ] },
         { id: "services", title: "Water, access and essential services",
           lead: "Ownership rights and functional control are not always the same thing.",
-          why: "You can hold clear title to a home you cannot reliably reach, supply or service. These are diligence prompts, not legal advice — the usual sources are your lawyer, the society or association, the utility and the neighbours.",
+          why: "You can hold clear title to a home you cannot reliably reach, supply or service. These are diligence prompts, not legal advice; the usual sources are your lawyer, the society or association, the utility and the neighbours.",
           fields: [
             { t: "sub", label: "Water security" },
             { k: "water.source", t: "choice", label: "Primary water source", opts: waterSourceOpts, wide: true, req: true },
             { t: "note", text: "Low water cost today does not prove long-term water security." },
-            { k: "water.reliability", t: "choice", label: "How reliable has supply been — especially in the dry season?", opts: O.waterReliability, unk: true },
+            { k: "water.reliability", t: "choice", label: "How reliable has supply been, especially in the dry season?", opts: O.waterReliability, unk: true },
             { k: "water.tanker", t: "choice", label: (c) => "How dependent is the property on " + waterTerms(c).truckNoun + "?", opts: O.tanker, unk: true },
             { k: "water.monthly_cost", t: "money", label: "What does current water dependence cost?", unit: "/ month", help: "Utility bills, water deliveries, treatment, pumping." },
             { k: "water.future_connection", t: "choice", label: "Am I assuming a future municipal / piped connection that doesn't exist today?", opts: O.futureConn },
-            { k: "water.failure", t: "area", label: "What happens if the primary source fails — and is there adequate storage or backup?", wide: true, rows: 2, unk: true, ph: "Sump and overhead capacity, a second source, how many days you could manage…" },
+            { k: "water.failure", t: "area", label: "What happens if the primary source fails, and is there adequate storage or backup?", wide: true, rows: 2, unk: true, ph: "Sump and overhead capacity, a second source, how many days you could manage…" },
             { t: "sub", label: "Access and dependencies" },
             { k: "access.legal", t: "choice", label: "Does the property have clear, legally documented access?", opts: O.legalAccess, req: true, unk: true },
             { k: "access.year_round", t: "choice", label: "Is the final approach usable and reliable year-round?", opts: O.yearRound },
             { k: "access.road", t: "choice", label: "Is the access road public, private, shared or dependent on another landowner?", opts: O.road, wide: true },
-            { k: "access.third_party", t: "choice", label: "Does normal use of the property — or an essential utility or service — depend on neighbours, other owners or arrangements outside your control?", opts: O.thirdParty, wide: true, unk: true },
+            { k: "access.third_party", t: "choice", label: "Does normal use of the property (or an essential utility or service) depend on neighbours, other owners or arrangements outside your control?", opts: O.thirdParty, wide: true, unk: true },
             { k: "access.dependency_note", t: "area", label: "What depends on someone else, and on what terms?", wide: true, rows: 2, show: (c) => ["some", "material", "unknown"].indexOf((c.access || {}).third_party) >= 0,
               ph: "e.g. a shared borewell, a society-run treatment plant, a road maintained by the neighbouring layout, power through another plot" },
           ],
@@ -282,7 +282,7 @@
           fields: [
             { k: "property.acq_total", t: "money", label: "Acquisition costs", help: "Stamp, registration, brokerage, legal, loan fees." },
             { k: "property.initial_work", t: "money", label: "Initial work / fit-out" },
-            { k: "property.expected_monthly_rent", t: "money", label: "Monthly rent", unit: "/ month", help: "Expected rent — or, for a home, the equivalent market rent.", unk: true },
+            { k: "property.expected_monthly_rent", t: "money", label: "Monthly rent", unit: "/ month", help: "Expected rent, or, for a home, the equivalent market rent.", unk: true },
             { k: "property.owner_annual", t: "money", label: "Annual owner costs", unit: "/ year", help: "Maintenance, taxes, repairs, insurance." },
           ],
           more: { label: "Exit assumptions (optional)", fields: [
@@ -293,7 +293,7 @@
         { id: "rental", title: "If it's a rental: the business without appreciation", show: letting,
           why: "Rent less vacancy, maintenance, repairs, management, taxes and eventual capital expenditure. A weak answer does not make the property unattractive; it tells you appreciation is doing more of the work than income.",
           fields: [
-            { k: "property.rental_without_appr", t: "area", label: "Does the rental business make sense if the property never appreciates?", wide: true, rows: 3, unk: true, ph: "What makes the rental economics work — or why the case still relies on appreciation." },
+            { k: "property.rental_without_appr", t: "area", label: "Does the rental business make sense if the property never appreciates?", wide: true, rows: 3, unk: true, ph: "What makes the rental economics work, or why the case still relies on appreciation." },
           ] },
         { id: "uc", title: "Under construction: underwriting, not inspection", show: isUC, calc: "uc",
           why: "The less finished the asset, the more of the decision belongs to underwriting rather than inspection. Registration makes information available; information is not certainty.",
@@ -302,7 +302,7 @@
             { k: "uc.stage", t: "text", label: "Project stage", ph: "e.g. structure complete to 12th floor" },
             { k: "uc.possession", t: "month", label: "Promised possession" },
             { k: "uc.registration", t: "choice", label: "Registration / approvals / title", opts: O.resolved, wide: true },
-            { k: "uc.ready_alt_price", t: "money", label: "Comparable ready property — all-in", unk: true },
+            { k: "uc.ready_alt_price", t: "money", label: "Comparable ready property: all-in", unk: true },
             { k: "uc.delay_cost", t: "money", label: "If possession is 24 months late: extra rent + finance + lost rent", help: "Leave blank to use the rough estimate below." },
             { k: "uc.worth_it", t: "choice", label: "Is the discount still worth the unresolved uncertainty?", opts: O.yesUnsureNo, wide: true },
           ] },
@@ -326,7 +326,7 @@
             { k: "financing.reset_note", t: "area", label: "Any rate-reset or prepayment issue that matters?", wide: true, rows: 2, unk: true },
           ] } },
         { id: "stay", title: "Can the financing let you stay invested?", fields: [
-          { k: "financing.stay_invested", t: "area", label: "Would a flat five-year market create a cash-flow problem, a forced sale — or simply disappointment?", wide: true, rows: 3, req: true, unk: true },
+          { k: "financing.stay_invested", t: "area", label: "Would a flat five-year market create a cash-flow problem, a forced sale, or simply disappointment?", wide: true, rows: 3, req: true, unk: true },
         ] },
       ],
     },
@@ -342,12 +342,12 @@
           { k: "household.financial", t: "money", label: "Long-term financial assets", help: "Investments and retirement savings." },
           { k: "household.existing_re_value", t: "money", label: "Existing real-estate value" },
           { k: "household.existing_re_debt", t: "money", label: "Existing real-estate debt" },
-          { k: "constraints.min_liquid", t: "money", label: "Minimum liquidity I want to preserve", help: "Your own red line — not a universal threshold.", req: true },
+          { k: "constraints.min_liquid", t: "money", label: "Minimum liquidity I want to preserve", help: "Your own red line, not a universal threshold.", req: true },
           { k: "household.living_expenses", t: "money", label: "Monthly living costs", unit: "/ month", help: "Excluding housing debt. Used for the income-stops test." },
         ],
           more: { label: "Funding from long-term assets · known future outlays", fields: [
             { k: "household.from_long_term", t: "money", label: "Of the cash needed, how much comes from long-term investments?" },
-            { k: "household.outlays_note", t: "area", label: "Known future outlays", rows: 2, wide: true, ph: "Education, caregiving, retirement, business, other — roughly how much and when." },
+            { k: "household.outlays_note", t: "area", label: "Known future outlays", rows: 2, wide: true, ph: "Education, caregiving, retirement, business, other: roughly how much and when." },
           ] } },
         { id: "exposure", title: "Concentration and lost options", fields: [
           { k: "household.city_exposure", t: "area", label: "How much of our financial life will depend on the same city?", rows: 2, wide: true, ph: "Employment + property + other exposure", unk: true },
@@ -360,18 +360,18 @@
     },
     {
       id: "life", n: 6, title: "Life & alternatives", short: "Life",
-      ask: "What am I buying for my life — and what would I genuinely do instead?",
+      ask: "What am I buying for my life, and what would I genuinely do instead?",
       intro: "A primary home does not have to be your highest-returning asset. But its non-financial value should be named rather than quietly counted as financial return.",
       groups: [
         { id: "zat", title: "The Zero-Appreciation Test",
-          why: "If this home never appreciated in real terms, would you still want it? A clear yes means the purchase stands on its utility. A no means appreciation is carrying the decision — worth knowing before you buy.",
+          why: "If this home never appreciated in real terms, would you still want it? A clear yes means the purchase stands on its utility. A no means appreciation is carrying the decision: worth knowing before you buy.",
           fields: [
             { k: "life.zat", t: "choice", label: (c) => homeish(c) ? "If this home never appreciated in real terms, would you still want it?" : "If this property never appreciated in real terms, would you still want to own it?", opts: O.zat, wide: true, req: true },
             { k: "life.zat_why", t: "multi", label: "Why?", opts: O.utility, wide: true, show: (c) => homeish(c) },
             { k: "life.life_problem", t: "area", label: "The life problem this property solves", wide: true, rows: 2, show: (c) => homeish(c) },
           ] },
         { id: "enough", title: "The Enough-House Problem", show: homeish, calc: "premium",
-          why: "The gap between the least expensive home that would genuinely satisfy you and this one is the Housing-Consumption Premium. It can be worth paying — but it is paid with liquidity, savings, flexibility, lower leverage or earlier financial independence.",
+          why: "The gap between the least expensive home that would genuinely satisfy you and this one is the Housing-Consumption Premium. It can be worth paying, but it is paid with liquidity, savings, flexibility, lower leverage or earlier financial independence.",
           fields: [
             { k: "life.enough_price", t: "money", label: "Least expensive home that would genuinely satisfy us", unk: true },
             { k: "life.enough_rent", t: "money", label: "…or its rent", unit: "/ month" },
@@ -396,7 +396,7 @@
     {
       id: "stress", n: 7, title: "Zero appreciation & stress", short: "Stress",
       ask: "Can the household survive disappointment?",
-      intro: "The question is not only how likely a bad outcome is. It is what happens to you if it occurs — risk capacity, not risk prediction.",
+      intro: "The question is not only how likely a bad outcome is. It is what happens to you if it occurs: risk capacity, not risk prediction.",
       groups: [
         { id: "dependency", title: "Appreciation dependency", calc: "friction",
           why: "How much future appreciation have you already spent in order to justify today's decision? Appreciation dependency is judged against your own objective: Low if the job is still done at zero appreciation; High if only an upside makes it work.",
@@ -420,7 +420,7 @@
     {
       id: "read", n: 8, title: "Your read", short: "Your read",
       ask: "What is this purchase, really?",
-      intro: "No score and no verdict. Write the profile in your own words — the summary is built from what you say here.",
+      intro: "No score and no verdict. Write the profile in your own words: the summary is built from what you say here.",
       groups: [
         { id: "thesis", title: "The hidden thesis", fields: [
           { k: "close.works_if", t: "area", label: "This purchase works if…", wide: true, rows: 2, req: true },
@@ -429,13 +429,13 @@
           { k: "close.risks", t: "lines", label: "Main risks and concerns", help: "One per line. Stresses that break, failing gates and water or access warnings are added automatically.", rows: 3 },
         ] },
         { id: "gates", title: "Non-negotiables and preferences", custom: "gates",
-          lead: "A serious failure in a non-negotiable is not offset by strengths elsewhere. It is resolved — or it is a reason to walk away.",
+          lead: "A serious failure in a non-negotiable is not offset by strengths elsewhere. It is resolved, or it is a reason to walk away.",
           why: "Lifestyle positives and price trade-offs can be weighed against each other. Non-negotiables cannot: no amount of view, space or upside compensates for a home you cannot legally reach, reliably supply with water, or afford to keep through a bad patch. Demote a gate to 'Preference only' if, for you, it genuinely is one.",
           fields: [
-            { k: "close.preferences", t: "lines", label: "Preferences and trade-offs — things we'd like but could live without", help: "One per line. These are weighed; non-negotiables are not.", rows: 3, wide: true },
+            { k: "close.preferences", t: "lines", label: "Preferences and trade-offs: things we'd like but could live without", help: "One per line. These are weighed; non-negotiables are not.", rows: 3, wide: true },
           ] },
-        { id: "profile", title: "Decision profile — no score, no verdict", custom: "profile",
-          why: "Each read is yours. Where your answers point somewhere, the worksheet says so — you decide whether it's right." },
+        { id: "profile", title: "Decision profile: no score, no verdict", custom: "profile",
+          why: "Each read is yours. Where your answers point somewhere, the worksheet says so; you decide whether it's right." },
         { id: "open", title: "Open questions and next diligence", custom: "openQuestions",
           why: "Anything you marked 'Not sure yet' is listed below. Promote the ones that matter into a question with an owner, so the uncertainty becomes a to-do list." },
         { id: "statement", title: "Decision statement", custom: "statementPreview", fields: [
@@ -450,7 +450,7 @@
   /* ---------- The tests (landing) ------------------------------------ */
   const TESTS = [
     ["What exactly am I buying?", "property"],
-    ["Do I control what I need to use it — water, access, services?", "property"],
+    ["Do I control what I need to use it: water, access, services?", "property"],
     ["What creates the expected return?", "property"],
     ["What evidence supports today's price?", "property"],
     ["What if the location story only half-works?", "place"],
@@ -480,7 +480,7 @@
     },
     system: {
       key_feature: "Floating-rate home loans: a rate rise passes straight into the EMI. Title verification sits largely with the buyer.",
-      demand: "Urbanisation still adds households to this metro.", supply: "Supply responds slowly and unevenly — but new towers are coming nearby.",
+      demand: "Urbanisation still adds households to this metro.", supply: "Supply responds slowly and unevenly, but new towers are coming nearby.",
       mortgage: "Floating, repo-linked; resets within months of a policy move.", institutions: "Buyer carries more of the verification burden; registration formalises the sale.",
     },
     priced_in: "The metro extension is widely discussed. We assume at least part of it is already in today's price.",
@@ -505,7 +505,7 @@
 
   const EXAMPLES = {
     A: {
-      meta: { name: "Household A — the long-stay family", example: "A", people: "Example from Article 14" },
+      meta: { name: "Household A: the long-stay family", example: "A", people: "Example from Article 14" },
       destinations: [
         { dest: "Work (both offices)", distance: "12 km", normal: "30 min", peak: "55 min", lastmile: "Arterial road, good", alt: "yes" },
         { dest: "School", distance: "2 km", normal: "8 min", peak: "15 min", lastmile: "Quiet residential street", alt: "yes" },
@@ -513,7 +513,7 @@
         { dest: "Airport", distance: "38 km", normal: "55 min", peak: "1 h 50 min", lastmile: "Expressway with one choke point", alt: "partly" },
       ],
       decision: { purpose: "home", status: "ready", occupancy: "self", holding_years: 20, move_risk: "low",
-        job: "A stable family home near the children's school for the next twenty years. Return is secondary — it must simply not damage our financial plan." },
+        job: "A stable family home near the children's school for the next twenty years. Return is secondary: it must simply not damage our financial plan." },
       market: sharedMarket(),
       property: Object.assign(sharedProperty(), {
         return_engine: ["land", "jobs", "inflation"], initial_work: 1000000,
@@ -523,7 +523,7 @@
         reset_note: "Repo-linked floating rate; prepayment without penalty.",
         stay_invested: "Simply disappointment. The EMI is small against our income and liquidity sits outside the house." },
       household: { income: 600000, existing_debt_service: 0, liquid: 30000000, financial: 80000000, existing_re_value: 0, existing_re_debt: 0,
-        living_expenses: 225000, outlays_note: "Children's university — roughly ₹80 L in about nine years.",
+        living_expenses: 225000, outlays_note: "Children's university: roughly ₹80 L in about nine years.",
         city_exposure: "Both incomes are in this city, and this would be our only property.", options_lost: ["portfolio"], need_capital: "unlikely",
         need_capital_why: "University costs are planned from long-term investments." },
       constraints: { min_liquid: 2500000 },
@@ -532,17 +532,17 @@
       life: { zat: "yes", zat_why: ["location", "school", "family", "permanence", "control"],
         life_problem: "Ends the cycle of renting and moving while the children are in school.",
         enough_price: 22000000, enough_rent: 55000, premium_buys: ["space", "location"], premium_costs: ["liquidity"],
-        alt_type: "rent", alt_note: "Rent a similar flat nearby and keep the capital invested — and we genuinely would invest it.",
+        alt_type: "rent", alt_note: "Rent a similar flat nearby and keep the capital invested, and we genuinely would invest it.",
         alt_compare: { cash: "About ₹2.4 Cr less tied up today", monthly: "Rent ≈ ₹75k vs EMI ≈ ₹78k plus owner costs", liquidity: "Far higher if we rent", utility: "Lower: the landlord decides how long we stay", friction: "None to exit; buying costs ≈ 7% of price" } },
       dependency: { zero_ok: "yes", implied_appr: 5, engine_note: "Land in an established neighbourhood, carried by local job growth",
         key_assumption: "That we really stay fifteen to twenty years. An early move turns a housing decision into a short-hold trade with heavy transaction costs." },
       stress: {
         flat: { note: "Disappointing. Nothing changes in cash flow.", breaks: "no" },
         fall: { note: "A paper loss. No reason or need to sell.", breaks: "no" },
-        rate: { note: "EMI rises by roughly ₹11k a month — absorbed by income.", breaks: "no" },
+        rate: { note: "EMI rises by roughly ₹11k a month, absorbed by income.", breaks: "no" },
         income: { note: "Post-purchase liquidity covers well over a year of outgoings.", breaks: "no" },
         shock_amount: 5000000, shock_source: "Long-term investments, not the house.",
-        forcing: "Only a long income loss arriving alongside the university outlay. Even then, investments — not the home — would be sold.",
+        forcing: "Only a long income loss arriving alongside the university outlay. Even then, investments (not the home) would be sold.",
       },
       walkaway: ["the society NOC is not issued before the agreement is signed", "the all-in cost goes above ₹3.35 Cr", "post-purchase liquid assets would fall below ₹25 L"],
       close: {
@@ -552,7 +552,7 @@
         risks: "Most of our liquid savings move into an illiquid home\nBoth incomes and the house depend on one city",
         profile: { price_evidence: "strong", appr_dependency: "low", leverage: "low", liquidity: "manageable", concentration: "deliberate", utility: "strong", execution: "partly" },
         open: [
-          { q: "Is the society transfer NOC confirmed?", who: "Seller and society secretary — before the agreement" },
+          { q: "Is the society transfer NOC confirmed?", who: "Seller and society secretary: before the agreement" },
           { q: "Are property-tax and society dues clear?", who: "Ask the seller for receipts; check with the municipality" },
         ],
         gates: { title: "open", access: "clear", water: "clear", financing: "clear", wa0: "open", wa1: "clear", wa2: "clear" },
@@ -564,7 +564,7 @@
       unknown: {},
     },
     B: {
-      meta: { name: "Household B — the leveraged bet", example: "B", people: "Example from Article 14" },
+      meta: { name: "Household B: the leveraged bet", example: "B", people: "Example from Article 14" },
       destinations: [
         { dest: "Work", distance: "21 km", normal: "45 min", peak: "1 h 30 min", lastmile: "Single arterial road; metro would change this", alt: "no" },
         { dest: "Future metro station", distance: "1.5 km", normal: "—", peak: "—", lastmile: "Not built yet", alt: "" },
@@ -587,8 +587,8 @@
       ...sharedServices(),
       thesis: { happy_b: "no", survive_c: "no", note: "Under B we'd hold a low-yield flat on a large loan for no real gain. Under C we would probably be forced sellers into a weak resale market." },
       life: { zat: "no", alt_type: "invest", alt_note: "Keep the ₹50 L in our existing investments and stay put." },
-      dependency: { zero_ok: "no", implied_appr: 9, engine_note: "The metro extension changing the economic location — if it isn't already priced in",
-        key_assumption: "That prices rise sharply within four years. Everything else — the EMI gap, the transaction costs, the exit — depends on it." },
+      dependency: { zero_ok: "no", implied_appr: 9, engine_note: "The metro extension changing the economic location: if it isn't already priced in",
+        key_assumption: "That prices rise sharply within four years. Everything else (the EMI gap, the transaction costs, the exit) depends on it." },
       stress: {
         flat: { note: "Four years of EMI top-ups; selling at the same price loses the buying and selling costs.", breaks: "yes" },
         fall: { note: "Equity falls below the loan's cushion; a sale would not repay the loan with much left.", breaks: "yes" },

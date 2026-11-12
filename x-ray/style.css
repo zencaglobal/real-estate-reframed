@@ -247,7 +247,7 @@ input[type="month"] { color-scheme: dark; }
 
 /* ---------- Tables ---------- */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-table.grid { border-collapse: collapse; width: 100%; font-size: 0.86rem; font-variant-numeric: tabular-nums; }
+table.grid { display: table; border-collapse: collapse; width: 100%; font-size: 0.86rem; font-variant-numeric: tabular-nums; }
 table.grid th, table.grid td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.grid th { color: var(--gold-soft); font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
 table.grid td { color: var(--ink-soft); }

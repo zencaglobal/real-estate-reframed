@@ -129,10 +129,10 @@
     similarity: [["high", "High"], ["medium", "Medium"], ["low", "Low"]],
     projectStage: [["launch", "Launch"], ["early", "Early"], ["structure", "Structure"], ["finishing", "Finishing"], ["near", "Near completion"]],
     regStatus: [["registered", "Registered"], ["pending", "Pending"], ["not", "Not registered"], ["na", "Not applicable"], ["unknown", "Unknown"]],
-    fundMode: [["cash", "Cash — no loan"], ["loan", "With a loan"]],
+    fundMode: [["cash", "Cash: no loan"], ["loan", "With a loan"]],
     rateType: [["floating", "Floating"], ["fixed", "Fixed"], ["hybrid", "Hybrid"]],
     stability: [["stable", "Stable"], ["variable", "Variable"], ["concentrated", "Concentrated"], ["uncertain", "Uncertain"]],
-    zat: [["yes", "Yes — I'd still want it"], ["unsure", "Unsure"], ["no", "No — I'm counting on appreciation"]],
+    zat: [["yes", "Yes, I'd still want it"], ["unsure", "Unsure"], ["no", "No, I'm counting on appreciation"]],
     utility: Object.keys(E.UTILITY).map((k) => [k, E.UTILITY[k].replace(/^./, (c) => c.toUpperCase())]),
     engines: Object.keys(E.ENGINES).map((k) => [k, E.ENGINES[k].replace(/^./, (c) => c.toUpperCase())]),
     alt: [["rent", "Rent the same home"], ["cheaper", "Buy a cheaper home"], ["ready", "Buy a ready alternative"], ["wait", "Wait"], ["invest", "Invest elsewhere"], ["larger_down", "Larger down payment"], ["custom", "Something else"]],
@@ -186,7 +186,7 @@
         { k: "market.micro_market", t: "text", label: "Micro-market", placeholder: "Neighbourhood, corridor or project cluster" },
         { t: "custom", render: renderFingerprintPreview, wide: true },
       ] },
-      { title: "City context", intro: "What local economic machine supports this location? Mark only what you have evidence for — everything else stays unknown, and an unknown city layer is reported as insufficient data, never inferred.", fields: [
+      { title: "City context", intro: "What local economic machine supports this location? Mark only what you have evidence for: everything else stays unknown, and an unknown city layer is reported as insufficient data, never inferred.", fields: [
         { k: "market.city_stage", t: "choice", label: "Where is this location in its economic life?", opts: O.cityStage, wide: true, help: "Early does not mean good. Mature does not mean bad. Price matters." },
         { t: "custom", render: renderSignals, wide: true },
       ] },
@@ -199,10 +199,10 @@
         { k: "property.equivalent_market_rent", t: "money", label: "Rent for an equivalent home", show: selfUse, help: "What it would cost to rent this or a genuinely comparable home. Enables rent-v-own." },
       ], more: [
         { k: "property.area", t: "num", label: "Area", unit: "sq ft / m²" },
-        { k: "property.area_basis", t: "select", label: "Area definition", opts: O.areaBasis, help: "Kept explicit — no carpet-to-saleable conversion is assumed." },
+        { k: "property.area_basis", t: "select", label: "Area definition", opts: O.areaBasis, help: "Kept explicit: no carpet-to-saleable conversion is assumed." },
         { k: "property.age_years", t: "num", label: "Age of building", unit: "years" },
       ] },
-      { title: "Costs", intro: "Optional but material. Leave blank if unknown — the report will label returns incomplete rather than guess a percentage.", fields: [
+      { title: "Costs", intro: "Optional but material. Leave blank if unknown: the report will label returns incomplete rather than guess a percentage.", fields: [
         { k: "property.acq.stamp", t: "money", label: "Stamp duty / transfer tax" },
         { k: "property.acq.registration", t: "money", label: "Registration" },
         { k: "property.acq.brokerage", t: "money", label: "Brokerage" },
@@ -219,12 +219,12 @@
         { k: "property.letting_costs_annual", t: "money", label: "Tenant turnover / letting costs", unit: "/ year", show: letting, help: "Kept separate from vacancy so the Vacancy Tax doesn't swallow other costs." },
         { k: "property.exit_tax", t: "money", label: "Tax payable on sale (if you know it)" },
       ] },
-      { title: "Price evidence", intro: "What is today's price actually based on? Transactions and listings are kept separate — one recent sale is evidence, not a valuation (the Last-Deal Fallacy).", fields: [
+      { title: "Price evidence", intro: "What is today's price actually based on? Transactions and listings are kept separate: one recent sale is evidence, not a valuation (the Last-Deal Fallacy).", fields: [
         { t: "custom", render: renderComps, wide: true },
         { k: "property.price_evidence_note", t: "textarea", label: "Why do you believe this price is supported?", wide: true },
         { k: "property.return_engine", t: "multi", label: "Which part of this property do you expect to create the return?", opts: O.engines, wide: true, help: "Every price forecast is a driver forecast in disguise. If you can't name one, that's useful information." },
       ] },
-      { title: "Access and dependency", intro: "Ownership rights and functional control are not identical. A property can be legally yours and still depend on roads, neighbours or services you don't control. Record what you know — this is a diligence checklist, not a legal opinion.", fields: [
+      { title: "Access and dependency", intro: "Ownership rights and functional control are not identical. A property can be legally yours and still depend on roads, neighbours or services you don't control. Record what you know: this is a diligence checklist, not a legal opinion.", fields: [
         { t: "custom", render: renderLegalAccess, wide: true },
         { k: "property.access.type", t: "choice", label: "How is the property reached?", opts: O.accessType, wide: true },
         { k: "property.access.last_mile", t: "choice", label: "Last-mile road quality", opts: O.lastMile },
@@ -246,7 +246,7 @@
         { k: "property.water.shortages", t: "choice", label: "History of shortages", opts: O.ynu },
         { k: "property.water.borewells", t: "num", label: "Number of borewells", show: (c) => ((c.property.water || {}).sources || []).indexOf("borewell") >= 0 },
         { k: "property.water.borewell_status", t: "choice", label: "Borewell status", opts: O.borewellStatus, show: (c) => ((c.property.water || {}).sources || []).indexOf("borewell") >= 0, help: "Deeper borewell does not automatically mean more secure water. Depth alone says nothing reliable about recharge or the groundwater trend." },
-        { k: "property.water.groundwater", t: "choice", label: "Groundwater trend — only with credible information", opts: O.groundwater, wide: true, help: "The X-Ray does not infer groundwater security. Leave unknown unless you have a credible source." },
+        { k: "property.water.groundwater", t: "choice", label: "Groundwater trend: only with credible information", opts: O.groundwater, wide: true, help: "The X-Ray does not infer groundwater security. Leave unknown unless you have a credible source." },
         { k: "property.water.groundwater_note", t: "text", label: "Source for that view" },
         { k: "property.water.contingency", t: "text", label: "What happens if the primary source fails?" },
         { k: "property.water.treatment", t: "text", label: "Treatment / filtration in place or needed" },
@@ -255,9 +255,9 @@
         { k: "property.water.tanker_monthly", t: "money", label: "Tanker cost", unit: "/ month, average", help: "Added to owner costs." },
         { k: "property.water.treatment_annual", t: "money", label: "Treatment / filtration upkeep", unit: "/ year", help: "Added to owner costs." },
         { k: "property.water.pumping_annual", t: "money", label: "Pumping / water common-area cost", unit: "/ year", help: "Only if not already in maintenance. Added to owner costs." },
-        { k: "property.water.maintenance_share", t: "money", label: "Water share of maintenance, if identifiable", unit: "/ year", help: "For information — already inside maintenance, not added again." },
+        { k: "property.water.maintenance_share", t: "money", label: "Water share of maintenance, if identifiable", unit: "/ year", help: "For information: already inside maintenance, not added again." },
       ] },
-      { title: "Effective access", intro: "Distance is not access. Economic location is the property's actual relationship with the places your household needs to reach — measured in time, reliability and alternatives, not kilometres. Add only the destinations that matter to you.", fields: [
+      { title: "Effective access", intro: "Distance is not access. Economic location is the property's actual relationship with the places your household needs to reach: measured in time, reliability and alternatives, not kilometres. Add only the destinations that matter to you.", fields: [
         { t: "custom", render: renderDestinations, wide: true },
       ] },
       { title: "Under construction", show: isUC, intro: "The less finished the asset, the more of the purchase belongs to underwriting rather than inspection.", fields: [
@@ -271,12 +271,12 @@
         { k: "diligence.developer_evidence", t: "textarea", label: "Developer execution evidence", placeholder: "Past delivery, current project load, anything you've verified", wide: true },
         { t: "custom", render: renderSchedule, wide: true },
       ] },
-      { title: "Legal and documentation status", intro: "Record what you know. The X-Ray records status; it does not certify title, approvals or a developer. Unknown is a valid answer — and it stays visible.", fields: [
+      { title: "Legal and documentation status", intro: "Record what you know. The X-Ray records status; it does not certify title, approvals or a developer. Unknown is a valid answer, and it stays visible.", fields: [
         { t: "custom", render: renderDiligence, wide: true },
       ] },
     ] },
     { id: "financing", title: "Financing", short: "Financing", groups: [
-      { title: "How is it funded?", intro: "Use the terms you have actually been offered — no generic mortgage rate is assumed.", fields: [
+      { title: "How is it funded?", intro: "Use the terms you have actually been offered; no generic mortgage rate is assumed.", fields: [
         { k: "financing.mode", t: "choice", label: "Funding", opts: O.fundMode, req: true, wide: true },
         { k: "financing.loan_amount", t: "money", label: "Loan amount", show: loan, req: loan, echo: loanEcho },
         { k: "financing.rate", t: "pct", label: "Interest rate", unit: "% a year", show: loan, req: loan },
@@ -288,7 +288,7 @@
     ] },
     { id: "household", title: "The household", short: "Household", groups: [
       { title: "Income and obligations", intro: "The asset is only half the decision. The buyer is the other half.", fields: [
-        { k: "household.income", t: "money", label: "Household after-tax income", unit: "/ month", req: true, help: "Cash income after tax — not gross salary." },
+        { k: "household.income", t: "money", label: "Household after-tax income", unit: "/ month", req: true, help: "Cash income after tax, not gross salary." },
         { k: "household.stability", t: "choice", label: "Income stability", opts: O.stability, req: true },
         { k: "household.existing_debt_service", t: "money", label: "Existing debt payments", unit: "/ month", req: true, help: "All other loan payments. Zero is fine." },
         { k: "household.living_expenses", t: "money", label: "Living expenses, excluding housing", unit: "/ month", help: "Recommended: without it, household surplus and income-interruption tests are incomplete." },
@@ -317,19 +317,19 @@
       ] },
     ] },
     { id: "life", title: "Life objective and alternative", short: "Objective", groups: [
-      { title: "The Zero-Appreciation Test", show: homeish, intro: "The test tells you why you are buying — not whether you should.", fields: [
+      { title: "The Zero-Appreciation Test", show: homeish, intro: "The test tells you why you are buying, not whether you should.", fields: [
         { k: "life.zat", t: "choice", label: "If this home never increased your purchasing power in real terms, would you still want to own it?", opts: O.zat, req: homeish, wide: true },
         { k: "life.zat_note", t: "textarea", label: "Why?", wide: true },
         { k: "life.utility", t: "multi", label: "What are you buying for your life?", opts: O.utility, wide: true, req: homeish },
       ] },
-      { title: "The Enough-House", show: homeish, intro: "What is the least expensive home that would genuinely satisfy your household? The gap is the Housing-Consumption Premium — it may be worth paying, but it is paid with something.", fields: [
+      { title: "The Enough-House", show: homeish, intro: "What is the least expensive home that would genuinely satisfy your household? The gap is the Housing-Consumption Premium; it may be worth paying, but it is paid with something.", fields: [
         { k: "life.enough_price", t: "money", label: "Price of a home that would be enough" },
         { k: "life.enough_rent", t: "money", label: "…or its monthly rent" },
       ] },
-      { title: "How it compares on what matters to you", intro: "Rate only what you have a view on, and say how much each matters. These are ranked by your importance — never added up into a score, and never allowed to offset a fundamental gate such as title, access, water or financial survivability.", fields: [
+      { title: "How it compares on what matters to you", intro: "Rate only what you have a view on, and say how much each matters. These are ranked by your importance, never added up into a score, and never allowed to offset a fundamental gate such as title, access, water or financial survivability.", fields: [
         { t: "custom", render: renderCompare, wide: true },
       ] },
-      { title: "Your realistic alternative", intro: "Compare against what you would actually do — not a theoretically perfect alternative. Equities are never assumed.", fields: [
+      { title: "Your realistic alternative", intro: "Compare against what you would actually do, not a theoretically perfect alternative. Equities are never assumed.", fields: [
         { k: "life.alt_type", t: "choice", label: "If you don't buy this, you would most likely…", opts: O.alt, req: true, wide: true },
         { k: "life.alt_rent", t: "money", label: "Rent you'd pay", unit: "/ month", show: (c) => c.life.alt_type === "rent", help: "Defaults to the equivalent rent you entered." },
         { k: "life.alt_invests", t: "choice", label: "Would you genuinely invest the money you didn't put into the home?", opts: O.yesno, show: (c) => ["rent", "invest", "wait"].indexOf(c.life.alt_type) >= 0, help: "If the real answer is 'rent and spend the difference', compare against that." },
@@ -341,10 +341,10 @@
       ] },
     ] },
     { id: "redlines", title: "Your red lines", short: "Red lines", groups: [
-      { title: "Decide your walk-away conditions now", intro: "Set these before you see the result — the best time to define a walk-away condition is before you fall in love with the house. Nothing here is pre-filled; no universal threshold is applied. Leave a line blank and it simply isn't tested.", fields: [
-        { k: "constraints.min_liquid_mode", t: "choice", label: "Minimum liquidity to keep — as", opts: O.liqMode },
+      { title: "Decide your walk-away conditions now", intro: "Set these before you see the result: the best time to define a walk-away condition is before you fall in love with the house. Nothing here is pre-filled; no universal threshold is applied. Leave a line blank and it simply isn't tested.", fields: [
+        { k: "constraints.min_liquid_mode", t: "choice", label: "Minimum liquidity to keep, as", opts: O.liqMode },
         { k: "constraints.min_liquid", t: (c) => (c.constraints.min_liquid_mode === "months" ? "num" : "money"), label: "Minimum liquidity after purchase", unit: (c) => (c.constraints.min_liquid_mode === "months" ? "months" : "") },
-        { k: "constraints.max_outflow_mode", t: "choice", label: "Maximum monthly property outflow — as", opts: O.outMode },
+        { k: "constraints.max_outflow_mode", t: "choice", label: "Maximum monthly property outflow, as", opts: O.outMode },
         { k: "constraints.max_outflow", t: (c) => (c.constraints.max_outflow_mode === "pct" ? "pct" : "money"), label: "Maximum monthly property outflow", unit: (c) => (c.constraints.max_outflow_mode === "pct" ? "% of income" : "/ month"), help: "Loan payment plus owner costs, net of any rent received." },
         { k: "constraints.max_debt_service_pct", t: "pct", label: "Maximum total debt payments", unit: "% of income" },
         { k: "constraints.min_return", t: "pct", label: "Minimum return on your equity", unit: "% a year", show: finObjective, help: "If omitted, investment economics are described but never called adequate or inadequate." },
@@ -357,15 +357,15 @@
       ] },
     ] },
     { id: "scenarios", title: "Scenarios", short: "Scenarios", groups: [
-      { title: "Scenarios, not forecasts", intro: "These test what you can survive, not what will happen. Values marked illustrative are editable placeholders, not expectations — replace them with your own view. Each one is listed in the report's provenance.", fields: [
+      { title: "Scenarios, not forecasts", intro: "These test what you can survive, not what will happen. Values marked illustrative are editable placeholders, not expectations: replace them with your own view. Each one is listed in the report's provenance.", fields: [
         { k: "scenarios.base_appr", t: "pct", label: "Your base-case appreciation", unit: "% a year", scen: true },
         { k: "scenarios.upside_appr", t: "pct", label: "Your upside appreciation", unit: "% a year", scen: true },
         { k: "scenarios.inflation", t: "pct", label: "Inflation", unit: "% a year", scen: true, help: "Leave blank and real returns are not shown." },
         { k: "scenarios.rent_growth", t: "pct", label: "Rent growth", unit: "% a year", scen: true, help: "Blank = same as inflation." },
         { k: "scenarios.vacancy_base_months", t: "num", label: "Normal vacancy", unit: "months / year", scen: true, show: letting },
       ] },
-      { title: "Location-thesis scenarios", intro: "If part of the case is that this location will grow, test three versions of that story. No probabilities — the point is how much of the decision depends on the first one, and whether you can live with the other two.", fields: [
-        { t: "custom", render: (c) => '<p class="field-note"><b>A · Growth thesis works</b> — employment, infrastructure and demand deepen; absorption stays healthy. Uses your upside appreciation (' + (isBlank(c.scenarios.upside_appr) ? "not set" : c.scenarios.upside_appr + "% a year") + ').</p>', wide: true },
+      { title: "Location-thesis scenarios", intro: "If part of the case is that this location will grow, test three versions of that story. No probabilities: the point is how much of the decision depends on the first one, and whether you can live with the other two.", fields: [
+        { t: "custom", render: (c) => '<p class="field-note"><b>A · Growth thesis works</b>: employment, infrastructure and demand deepen; absorption stays healthy. Uses your upside appreciation (' + (isBlank(c.scenarios.upside_appr) ? "not set" : c.scenarios.upside_appr + "% a year") + ').</p>', wide: true },
         { k: "scenarios.thesis_b_appr", t: "pct", label: "B · Area develops, but supply absorbs the upside", unit: "% a year", scen: true, help: "Infrastructure improves and the area becomes more useful, but competing supply keeps appreciation modest." },
         { k: "scenarios.thesis_c_appr", t: "pct", label: "C · Thesis disappoints", unit: "% a year", scen: true, help: "Jobs or infrastructure underwhelm, water/access constraints remain, prices correct. Rents also stop growing." },
         { k: "scenarios.thesis_c_exit_extra", t: "pct", label: "C · Extra cost of selling into a weak resale market", unit: "% of sale price", scen: true },
@@ -381,7 +381,7 @@
         { k: "scenarios.vacancy_months", t: "num", label: "Rental vacancy", unit: "months", scen: true, show: letting },
         { k: "scenarios.delay_a", t: "num", label: "Construction delay A", unit: "months", scen: true, show: isUC },
         { k: "scenarios.delay_b", t: "num", label: "Construction delay B", unit: "months", scen: true, show: isUC },
-        { k: "scenarios.shock_amount", t: "money", label: "Liquidity shock — amount", scen: true },
+        { k: "scenarios.shock_amount", t: "money", label: "Liquidity shock: amount", scen: true },
         { k: "scenarios.shock_year", t: "num", label: "…in year", scen: true },
         { k: "scenarios.compound", t: "multi", label: "Combine into one compound stress (pick two or more)", opts: O.compound, wide: true, scen: true },
       ] },
@@ -472,7 +472,7 @@
 
   function renderFingerprintPreview(c) {
     const cc = D.COUNTRIES[c.market.country];
-    if (!cc || !cc.fingerprint) return '<p class="field-note">No curated Housing System Fingerprint is bundled for this country. The Country layer will be shown as unavailable — the financial core still works.</p>';
+    if (!cc || !cc.fingerprint) return '<p class="field-note">No curated Housing System Fingerprint is bundled for this country. The Country layer will be shown as unavailable; the financial core still works.</p>';
     return '<div class="fp-mini"><span class="eyebrow-sm">Housing System Fingerprint · ' + esc(cc.name) + '</span><strong>' + esc(cc.fingerprint) + "</strong><p>" + esc(cc.meaning) + "</p></div>";
   }
 
@@ -504,7 +504,7 @@
 
   function renderSchedule(c) {
     const rows = c.diligence.schedule || [];
-    return '<span class="field-label">Payment schedule</span><p class="help">Month from booking and % of price. Payments at or after the promised possession month move with any delay. Leave empty to use an illustrative construction-linked plan (20% at booking, the rest evenly to possession) — flagged in the report.</p><div class="rows">' +
+    return '<span class="field-label">Payment schedule</span><p class="help">Month from booking and % of price. Payments at or after the promised possession month move with any delay. Leave empty to use an illustrative construction-linked plan (20% at booking, the rest evenly to possession): flagged in the report.</p><div class="rows">' +
       rows.map((r, i) => '<div class="row sched-row"><label>Month<input type="text" inputmode="numeric" data-row="diligence.schedule" data-i="' + i + '" data-f="month" value="' + esc(r.month) + '" /></label><label>% of price<input type="text" inputmode="decimal" data-row="diligence.schedule" data-i="' + i + '" data-f="pct" value="' + esc(r.pct) + '" /></label><button type="button" class="row-del" data-del="diligence.schedule" data-i="' + i + '" aria-label="Remove instalment">×</button></div>').join("") +
       '</div><button type="button" class="btn-ghost" data-add="diligence.schedule">+ Add an instalment</button>';
   }
@@ -553,7 +553,7 @@
     return '<div class="cmp"><div class="cmp-row cmp-head"><span></span><span>How this home does</span><span>How much it matters</span></div>' + E.COMPARE_DIMS.map((d) => {
       const v = cmp[d.id] || {};
       return '<div class="cmp-row"><span class="cmp-label">' + esc(d.label) + "</span>" + seg(d.id, "rating", O.rating, v.rating) + seg(d.id, "importance", O.importance, v.importance) + "</div>";
-    }).join("") + '</div><p class="help">Financial attractiveness isn\'t rated here — the X-Ray derives it from the economics, separately.</p>';
+    }).join("") + '</div><p class="help">Financial attractiveness isn\'t rated here: the X-Ray derives it from the economics, separately.</p>';
   }
 
   function renderDiligence(c) {
@@ -588,11 +588,11 @@
     app.innerHTML = '<section class="hero"><div class="wrap">' +
       '<p class="eyebrow">Real Estate Reframed · Flagship companion</p>' +
       "<h1>X-ray <em>this</em> property,<br />for <em>this</em> person, at <em>this</em> price.</h1>" +
-      '<p class="lede">Not “is property a good investment?” — but does this property, at this price, financed this way, inside this housing system, make sense for your household? The X-Ray doesn\'t answer with a score or a verdict. It shows what the purchase depends on, what you can survive, what you\'re trading, and what is still unresolved.</p>' +
+      '<p class="lede">The question isn’t “is property a good investment?” It’s whether this property, at this price, financed this way, inside this housing system, makes sense for your household. The X-Ray doesn\'t answer with a score or a verdict. It shows what the purchase depends on, what you can survive, what you\'re trading, and what is still unresolved.</p>' +
       '<div class="start-grid">' +
       '<button type="button" class="start-card start-primary" data-act="new"><span class="start-k">Start</span><strong>X-ray a property</strong><span>About 10 minutes. Essentials first; detail when you want it.</span></button>' +
       '<button type="button" class="start-card" data-act="example" data-ex="A"><span class="start-k">Example · Household A</span><strong>The long-stay family</strong><span>₹3 Cr apartment, modest loan, 20-year stay, high utility.</span></button>' +
-      '<button type="button" class="start-card" data-act="example" data-ex="B"><span class="start-k">Example · Household B</span><strong>The leveraged bet</strong><span>The same apartment, the same price — 80% loan, a 4-year hold, an appreciation thesis.</span></button>' +
+      '<button type="button" class="start-card" data-act="example" data-ex="B"><span class="start-k">Example · Household B</span><strong>The leveraged bet</strong><span>The same apartment, the same price: 80% loan, a 4-year hold, an appreciation thesis.</span></button>' +
       "</div>" +
       '<p class="hero-note">Same apartment. Same price. Open both examples: the property didn\'t change, but almost everything about the decision did.</p>' +
       "</div></section>" +
@@ -602,7 +602,7 @@
       '<section class="part"><div class="part-head"><span class="part-num">The hierarchy</span><h2>Country → City → Property → Person</h2><p class="part-sub">Country gives the prior. City modifies it. Property determines the asset. Person determines whether the asset makes sense.</p></div>' +
       '<ol class="layers"><li><b>Country</b><span>What housing system am I buying inside?</span></li><li><b>City</b><span>What local economic machine supports this location?</span></li><li><b>Property</b><span>What exactly is this asset, and what is today\'s price based on?</span></li><li><b>Person</b><span>What does owning it do to this household?</span></li></ol></section>' +
       '<section class="part"><div class="part-head"><span class="part-num">Kept separate</span><h2>Seven things property tempts us to merge</h2><p class="part-sub">Most weak property analysis begins when two or more of these quietly become one story called “return”. The X-Ray never adds them up.</p></div>' +
-      '<div class="seven">' + [["Asset return", "What the property earns: rent, costs and value change."], ["Leveraged equity return", "What financing does to your capital — and your margin for error."], ["Housing consumption", "How much house you're choosing to consume."], ["Non-financial utility", "Control, permanence, family, location."], ["Liquidity", "How accessible your capital remains."], ["Concentration", "How much of your balance sheet is one building in one city."], ["Legal / execution risk", "What has to go right before you truly own and can use it."]].map((x, i) => '<div class="seven-item"><span class="seven-n">' + (i + 1) + "</span><strong>" + x[0] + "</strong><span>" + x[1] + "</span></div>").join("") +
+      '<div class="seven">' + [["Asset return", "What the property earns: rent, costs and value change."], ["Leveraged equity return", "What financing does to your capital, and your margin for error."], ["Housing consumption", "How much house you're choosing to consume."], ["Non-financial utility", "Control, permanence, family, location."], ["Liquidity", "How accessible your capital remains."], ["Concentration", "How much of your balance sheet is one building in one city."], ["Legal / execution risk", "What has to go right before you truly own and can use it."]].map((x, i) => '<div class="seven-item"><span class="seven-n">' + (i + 1) + "</span><strong>" + x[0] + "</strong><span>" + x[1] + "</span></div>").join("") +
       "</div></section></main>";
   }
 
@@ -675,7 +675,7 @@
     const pctv = (v) => (isBlank(v) ? "—" : v + "%");
     const u = (v) => (isBlank(v) ? "Not provided" : "Your input");
     const cc = D.COUNTRIES[c.market.country];
-    add("Country", "Housing System Fingerprint", cc && cc.fingerprint ? cc.name + " — " + cc.fingerprint : "Unavailable", cc && cc.fingerprint ? "Curated framework" : "Not provided", cc && cc.fingerprint ? D.FINGERPRINT_SOURCE.source_name + " · " + D.FINGERPRINT_SOURCE.as_of_date : "");
+    add("Country", "Housing System Fingerprint", cc && cc.fingerprint ? cc.name + ": " + cc.fingerprint : "Unavailable", cc && cc.fingerprint ? "Curated framework" : "Not provided", cc && cc.fingerprint ? D.FINGERPRINT_SOURCE.source_name + " · " + D.FINGERPRINT_SOURCE.as_of_date : "");
     const sig = c.market.signals || {};
     const nSig = E.CITY_SIGNALS.filter((s) => (sig[s.id] || {}).status && sig[s.id].status !== "unknown").length;
     add("City", "City signals", nSig + " of " + E.CITY_SIGNALS.length + " marked", nSig ? "Your input" : "Not provided", "Your own observations; no external city data is used.");
@@ -753,14 +753,14 @@
       '<div id="share-box" class="share-box" hidden></div>';
 
     // Decision statement
-    h += '<section class="memo"><span class="eyebrow-sm">Decision statement</span><p class="memo-text">' + esc(R.statement) + '</p><p class="memo-foot">A profile, not a verdict. Nothing here adds up to a score — each dimension stands on its own.</p></section>';
+    h += '<section class="memo"><span class="eyebrow-sm">Decision statement</span><p class="memo-text">' + esc(R.statement) + '</p><p class="memo-foot">A profile, not a verdict. Nothing here adds up to a score: each dimension stands on its own.</p></section>';
 
     // Layer 1 — fundamental gates
     h += gatesHTML(R);
 
     // What you are buying
     h += '<section class="block"><h3 class="block-h">What you are buying</h3><ol class="layers layers-case">' +
-      "<li><b>Country</b><span>" + esc(cc.fingerprint ? cc.name + " — " + cc.fingerprint : (m.country === "OTHER" ? "No curated fingerprint" : cc.name)) + "</span></li>" +
+      "<li><b>Country</b><span>" + esc(cc.fingerprint ? cc.name + ": " + cc.fingerprint : (m.country === "OTHER" ? "No curated fingerprint" : cc.name)) + "</span></li>" +
       "<li><b>City</b><span>" + esc([C().market.city, C().market.micro_market].filter(Boolean).join(" · ") || "—") + (R.city.stage ? " · " + esc((O.cityStage.find((x) => x[0] === R.city.stage) || [, ""])[1].toLowerCase()) : "") + "</span></li>" +
       "<li><b>Property</b><span>" + esc((O.ptype.find((x) => x[0] === C().property.property_type) || [, "Property"])[1]) + " · " + $(m.P) + " · " + (m.uc ? "under construction, possession in " + m.T0 + " months" : "ready") + "</span></li>" +
       "<li><b>Person</b><span>" + esc(purposeLabel) + " · " + esc((O.occupancy.find((x) => x[0] === m.occ) || [, ""])[1].toLowerCase()) + " · " + E.years(m.H) + " hold" + (m.financed ? " · loan " + E.pct(m.LTV, 0) + " of price" : " · no loan") + "</span></li></ol></section>";
@@ -814,24 +814,24 @@
     const m = R.m, $ = (v) => E.money(v, m.ccy), cards = [];
     const card = (title, label, body, anchor, kind) => cards.push('<div class="pcard"><div class="pcard-top"><span class="pcard-t">' + esc(title) + "</span>" + (label ? chip(label, kind) : chip("Not labelled", "none")) + '</div><p>' + body + "</p>" + (anchor ? '<a class="pcard-more" href="#' + anchor + '" data-scroll="' + anchor + '">Show the numbers</a>' : "") + "</div>");
     const cc = D.COUNTRIES[m.country];
-    card("Housing system", cc && cc.fingerprint ? "Context" : "Unavailable", cc && cc.fingerprint ? esc(cc.fingerprint) + ". Describes the machine; it does not grade it." : "No curated fingerprint for this country — shown as unavailable, not inferred.", "x-market");
+    card("Housing system", cc && cc.fingerprint ? "Context" : "Unavailable", cc && cc.fingerprint ? esc(cc.fingerprint) + ". Describes the machine; it does not grade it." : "No curated fingerprint for this country: shown as unavailable, not inferred.", "x-market");
     card("City context", R.city.insufficient ? "Insufficient data" : R.city.provided + " of " + R.city.total + " signals", R.city.insufficient ? "No local signals entered." : (R.city.tailwind.length ? "Tailwinds: " + esc(R.city.tailwind.join(", ").toLowerCase()) + ". " : "") + (R.city.headwind.length ? "Headwinds: " + esc(R.city.headwind.join(", ").toLowerCase()) + ". " : "") + (R.city.unknown.length ? "Unknown: " + R.city.unknown.length + "." : ""), "x-market", R.city.insufficient ? "none" : "");
     card("Price evidence", R.evidence.label, esc(R.evidence.reason) + (R.evidence.indicative && R.evidence.position ? " Your price is <b>" + R.evidence.position + "</b> the range of " + (R.evidence.basisIsTx ? "transactions" : "observations") + "." : ""), "x-price", R.evidence.label === "Insufficient" ? "none" : "");
     const gk = (l) => (l === "Potential disqualifier" ? "warn" : l === "Concern" ? "concern" : l === "Not assessed" ? "none" : "");
     const A = R.access;
-    card("Access & dependency", A.gate.label, A.assessed ? "Reached by " + esc(E.ACCESS_TYPES[A.type] || "an unrecorded route") + "; last mile " + esc(A.lastMile || "not recorded") + "; " + ({ yes: "usable year-round", seasonal: "seasonal problems", no: "not usable year-round" }[A.yearRound] || "year-round use unknown") + ". Legal access: " + esc((O.dilStatus.find((o) => o[0] === A.legal) || [, "unknown"])[1].toLowerCase()) + "." : "Not recorded — ownership rights and functional control are not the same thing.", "x-access", gk(A.gate.label));
-    card("Water security", R.water.gate.label, R.water.assessed ? esc(R.water.chain.map((x) => x.status).join(" → ")) + "." : "Not recorded — unknown, not assumed.", "x-access", gk(R.water.gate.label));
+    card("Access & dependency", A.gate.label, A.assessed ? "Reached by " + esc(E.ACCESS_TYPES[A.type] || "an unrecorded route") + "; last mile " + esc(A.lastMile || "not recorded") + "; " + ({ yes: "usable year-round", seasonal: "seasonal problems", no: "not usable year-round" }[A.yearRound] || "year-round use unknown") + ". Legal access: " + esc((O.dilStatus.find((o) => o[0] === A.legal) || [, "unknown"])[1].toLowerCase()) + "." : "Not recorded: ownership rights and functional control are not the same thing.", "x-access", gk(A.gate.label));
+    card("Water security", R.water.gate.label, R.water.assessed ? esc(R.water.chain.map((x) => x.status).join(" → ")) + "." : "Not recorded: unknown, not assumed.", "x-access", gk(R.water.gate.label));
     const X = R.effective;
-    card("Effective access", X.assessed ? X.rows.length + " destination" + (X.rows.length > 1 ? "s" : "") : "Not assessed", X.assessed ? (X.flagged.length ? esc(X.flagged.slice(0, 2).map((r) => r.label + ": " + r.flags.join(", ")).join("; ")) + "." : "No destination is peak-sensitive, single-route or behind a poor last mile.") : "Add the places your household needs to reach — distance alone isn't access.", "x-access", X.assessed ? "" : "none");
+    card("Effective access", X.assessed ? X.rows.length + " destination" + (X.rows.length > 1 ? "s" : "") : "Not assessed", X.assessed ? (X.flagged.length ? esc(X.flagged.slice(0, 2).map((r) => r.label + ": " + r.flags.join(", ")).join("; ")) + "." : "No destination is peak-sensitive, single-route or behind a poor last mile.") : "Add the places your household needs to reach: distance alone isn't access.", "x-access", X.assessed ? "" : "none");
     const sh = R.apprShare;
     card("Asset economics", R.assetCharacter, sh === null ? "Not enough to decompose." : "In your base case, about " + E.pct(sh, 0) + " of the asset's positive economics comes from price appreciation and " + E.pct(1 - sh, 0) + " from " + (m.letting ? "net rent" : "the housing it provides (rent you don't pay)") + (R.rental ? ". Net yield " + E.pct(R.rental.netYield, 1) + "." : "."), "x-economics");
     const fd = R.apprDep.financial, hd = R.apprDep.home;
-    if (fd) card(m.purpose === "mixed" ? "Appreciation dependency — financial" : "Appreciation dependency", fd.label, "Against " + esc(fd.objective) + ". " + esc(fd.reason), "x-thesis", fd.label === "High" ? "warn" : "");
-    if (hd) card(m.purpose === "mixed" ? "Appreciation dependency — home" : "Appreciation dependency", hd.label, esc(hd.reason), "x-thesis", hd.label === "High" ? "warn" : "");
+    if (fd) card(m.purpose === "mixed" ? "Appreciation dependency: financial" : "Appreciation dependency", fd.label, "Against " + esc(fd.objective) + ". " + esc(fd.reason), "x-thesis", fd.label === "High" ? "warn" : "");
+    if (hd) card(m.purpose === "mixed" ? "Appreciation dependency: home" : "Appreciation dependency", hd.label, esc(hd.reason), "x-thesis", hd.label === "High" ? "warn" : "");
     card("Leverage sensitivity", R.leverage.label, esc(R.leverage.reason), "x-stress", R.leverage.label === "High" ? "warn" : R.leverage.label === "Not applicable" ? "none" : "");
     const hh = R.hh;
     card("Liquidity", hh.L1 === null ? null : m.reserve === null ? "No floor set" : (R.stress[0].breaches.some((t) => t.id === "min_liquid") ? "Base case: below your floor" : "Base case: within your floor"),
-      hh.L1 === null ? "Liquid assets not entered." : "Liquid after purchase " + $(hh.L1) + (hh.before ? " (from " + $(hh.before.liquid) + ")" : "") + (m.reserve !== null ? "; your floor " + $(m.reserve) : "") + (hh.gapToFinancial ? ". The purchase itself needs " + $(hh.gapToFinancial) + " more than your liquid assets — taken from long-term investments" : "") + ".", "x-household", hh.L1 !== null && m.reserve !== null && R.stress[0].breaches.some((t) => t.id === "min_liquid") ? "warn" : "");
+      hh.L1 === null ? "Liquid assets not entered." : "Liquid after purchase " + $(hh.L1) + (hh.before ? " (from " + $(hh.before.liquid) + ")" : "") + (m.reserve !== null ? "; your floor " + $(m.reserve) : "") + (hh.gapToFinancial ? ". The purchase itself needs " + $(hh.gapToFinancial) + " more than your liquid assets: taken from long-term investments" : "") + ".", "x-household", hh.L1 !== null && m.reserve !== null && R.stress[0].breaches.some((t) => t.id === "min_liquid") ? "warn" : "");
     card("Concentration", "Facts only", hh.before && hh.after ? "Real-estate equity moves from " + E.pct(hh.before.equityShare || 0, 0) + " to " + E.pct(hh.after.equityShare || 0, 0) + " of net worth; gross property exposure from " + E.pct(hh.before.grossShare, 0) + " to " + E.pct(hh.after.grossShare, 0) + " of assets." + (hh.after.re ? " " + E.pct(hh.reCity1 / hh.after.re, 0) + " of your property is in this city" + (m.incomeSameCity ? ", where your income also depends." : ".") : "") + " No universal threshold applied." : "Assets not entered.", "x-household", "none");
     card("Housing utility", R.utility.label, esc(R.utility.reason), "x-thesis", R.utility.label === "Not the job of this purchase" ? "none" : "");
     card("Execution", R.execution.label, esc(R.execution.reason), "x-open", R.execution.label === "Resolved" ? "" : "warn");
@@ -843,11 +843,11 @@
     const m = R.m, $ = (v) => E.money(v, m.ccy);
     const eng = m.engines.filter((e) => e !== "none").map((e) => E.ENGINES[e]);
     let s = '<section class="block" id="x-thesis"><h3 class="block-h">The hidden thesis</h3>';
-    s += '<p class="thesis">' + (eng.length ? "You expect the return to come from <b>" + esc(eng.join(", ")) + "</b>. " : m.engines.indexOf("none") >= 0 ? "You haven't identified what creates the return — <b>that is itself useful information</b>. " : "You didn't name a return engine. ") +
+    s += '<p class="thesis">' + (eng.length ? "You expect the return to come from <b>" + esc(eng.join(", ")) + "</b>. " : m.engines.indexOf("none") >= 0 ? "You haven't identified what creates the return: <b>that is itself useful information</b>. " : "You didn't name a return engine. ") +
       "In your base case (" + E.pct(m.base) + " a year), the asset's own return before financing is <b>" + E.pct(R.ledger.unlevIRR) + "</b>" + (m.selfUse && R.ledger.unlevIRRImp !== null ? " in cash terms, or " + E.pct(R.ledger.unlevIRRImp) + " counting the rent you no longer pay" : "") +
       "; the return on your own equity after financing is <b>" + E.pct(R.ledger.eqIRR) + "</b>" + (m.selfUse && R.ledger.eqIRRImp !== null ? " (" + E.pct(R.ledger.eqIRRImp) + " with rent saved)" : "") + ". These are kept separate on purpose.</p>";
     s += '<div class="chart-card card"><div class="chart-title">How much of the case depends on appreciation?</div><div class="chart-wrap"><svg id="dep-chart" viewBox="0 0 720 300" role="img" aria-label="Outcome against annual appreciation, with your scenarios marked"></svg></div><p class="chart-hint" id="dep-hint"></p></div>';
-    s += '<div class="chart-card card"><div class="chart-title">What creates the return — base case, before and after financing</div><div class="chart-wrap"><svg id="wf-chart" viewBox="0 0 720 300" role="img" aria-label="Waterfall of the base-case return components"></svg></div><p class="chart-hint">Undiscounted totals over ' + E.years(m.H) + ". " + (m.selfUse ? "“Housing received” is the rent you would otherwise pay — shown, never counted as cash or as utility. " : "") + "Principal repaid is not shown: it is your own money moving into equity, not profit and not cost.</p></div>";
+    s += '<div class="chart-card card"><div class="chart-title">What creates the return: base case, before and after financing</div><div class="chart-wrap"><svg id="wf-chart" viewBox="0 0 720 300" role="img" aria-label="Waterfall of the base-case return components"></svg></div><p class="chart-hint">Undiscounted totals over ' + E.years(m.H) + ". " + (m.selfUse ? "“Housing received” is the rent you would otherwise pay: shown, never counted as cash or as utility. " : "") + "Principal repaid is not shown: it is your own money moving into equity, not profit and not cost.</p></div>";
     s += thesisHTML(R);
     return s + "</section>";
   }
@@ -856,9 +856,9 @@
 
   function gatesHTML(R) {
     const kind = (l) => (l === "Potential disqualifier" ? "warn" : l === "Concern" ? "concern" : l === "Not assessed" ? "none" : "");
-    const empty = { title: "All title and approval checks are resolved.", access: "No access information recorded.", water: "No water information recorded — unknown, not assumed.", finance: "No cash-flow red line set, so survivability can't be tested against your own limits." };
+    const empty = { title: "All title and approval checks are resolved.", access: "No access information recorded.", water: "No water information recorded: unknown, not assumed.", finance: "No cash-flow red line set, so survivability can't be tested against your own limits." };
     const link = { title: "x-open", access: "x-access", water: "x-access", finance: "x-stress" };
-    return '<section class="block" id="x-gates"><h3 class="block-h">Fundamental gates</h3><p class="block-sub">Layer 1. Some things are not compensatory: no view, finish, community or projected return offsets a serious title problem, insecure access, insecure water or unsafe financing. Each gate is judged on its own visible rule — never averaged.</p><div class="gates">' +
+    return '<section class="block" id="x-gates"><h3 class="block-h">Fundamental gates</h3><p class="block-sub">Layer 1. Some things are not compensatory: no view, finish, community or projected return offsets a serious title problem, insecure access, insecure water or unsafe financing. Each gate is judged on its own visible rule, never averaged.</p><div class="gates">' +
       R.gates.map((g) => '<div class="gate gate-' + (kind(g.label) || "ok") + '"><div class="pcard-top"><span class="pcard-t">' + esc(g.name) + "</span>" + chip(g.label, kind(g.label)) + "</div>" +
         (g.reasons.length ? '<ul class="gate-reasons">' + g.reasons.map((r) => "<li>" + esc(capFirst(r)) + "</li>").join("") + "</ul>" : "<p>" + esc(g.label === "Acceptable" && g.id !== "title" ? "Nothing recorded triggers this gate's rule." : empty[g.id]) + "</p>") +
         (g.notes.length ? '<p class="gate-note">' + esc(capFirst(g.notes.join("; "))) + ".</p>" : "") +
@@ -868,21 +868,21 @@
   function compareHTML(R) {
     const C = R.comparative;
     const rl = { strong: "Strong", adequate: "Adequate", weak: "Weak" }, il = { high: "Matters a lot", medium: "Matters", low: "Matters a little" };
-    let s = '<section class="block" id="x-compare"><h3 class="block-h">Comparative profile</h3><p class="block-sub">Layer 2 — how this home does on what matters to you, ranked by the importance you gave each. Not added up, and never allowed to offset a fundamental gate.</p>';
-    if (!C.assessed) s += '<p class="muted">Not rated — add your view in <a href="#/case/life">Objective</a>.</p>';
+    let s = '<section class="block" id="x-compare"><h3 class="block-h">Comparative profile</h3><p class="block-sub">Layer 2: how this home does on what matters to you, ranked by the importance you gave each. Not added up, and never allowed to offset a fundamental gate.</p>';
+    if (!C.assessed) s += '<p class="muted">Not rated: add your view in <a href="#/case/life">Objective</a>.</p>';
     else s += '<div class="cmp-out">' + C.rows.map((r) => '<div class="cmp-out-row"><span class="cmp-imp">' + esc(il[r.importance] || "Importance not set") + "</span><b>" + esc(r.label) + "</b>" + (r.rating ? chip(rl[r.rating], r.rating === "weak" ? "concern" : "") : chip("Not rated", "none")) + (r.evidence ? "<small>" + esc(r.evidence) + "</small>" : "") + "</div>").join("") + "</div>";
-    s += '<p class="detail-p"><b>Financial attractiveness</b> — derived from the economics, not rated: ' + esc(C.financial.text) + ".</p>";
+    s += '<p class="detail-p"><b>Financial attractiveness</b>: derived from the economics, not rated: ' + esc(C.financial.text) + ".</p>";
     return s + "</section>";
   }
 
   function thesisHTML(R) {
     const m = R.m, T = R.thesis, $ = (v) => E.money(v, m.ccy);
     const hurdle = m.k.minReturn !== null && m.purpose !== "home";
-    const ans = (v) => (v === "yes" ? "Yes, you said." : v === "no" ? "No, you said." : v === "unsure" ? "You're unsure." : 'Not answered — <a href="#/case/scenarios">answer in Scenarios</a>.');
-    let s = '<div class="card thesis-card" id="x-scenarios"><div class="chart-title">Location-thesis scenarios — no probabilities, just exposure</div><div class="table-scroll"><table class="grid"><thead><tr><th>Scenario</th><th>Appreciation</th><th>Value at sale</th><th>Equity at sale</th><th>Your cash back v paid in</th><th>Equity return</th>' + (hurdle ? "<th>Your " + m.k.minReturn + "% hurdle</th>" : "") + "</tr></thead><tbody>" +
+    const ans = (v) => (v === "yes" ? "Yes, you said." : v === "no" ? "No, you said." : v === "unsure" ? "You're unsure." : 'Not answered: <a href="#/case/scenarios">answer in Scenarios</a>.');
+    let s = '<div class="card thesis-card" id="x-scenarios"><div class="chart-title">Location-thesis scenarios: no probabilities, just exposure</div><div class="table-scroll"><table class="grid"><thead><tr><th>Scenario</th><th>Appreciation</th><th>Value at sale</th><th>Equity at sale</th><th>Your cash back v paid in</th><th>Equity return</th>' + (hurdle ? "<th>Your " + m.k.minReturn + "% hurdle</th>" : "") + "</tr></thead><tbody>" +
       T.rows.map((r) => "<tr><td><b>" + r.id + " · " + esc(r.name) + "</b><br><small class=\"muted\">" + esc(r.desc) + "</small></td><td>" + E.pct(r.appr) + "/yr</td><td>" + $(r.V) + "</td><td>" + $(r.eqSale) + (r.externalToExit ? '<br><small class="warn-text">needs ' + $(r.externalToExit) + " of other cash to exit</small>" : "") + "</td><td>" + $(r.net) + "</td><td>" + E.pct(r.eqIRR) + "</td>" + (hurdle ? "<td>" + (r.hurdleMet ? "Met" : "Missed") + "</td>" : "") + "</tr>").join("") +
       '</tbody></table></div><div class="thesis-q"><p><b>Would you still be happy owning it under Scenario B?</b> ' + ans(T.bHappy) + "</p><p><b>Can your finances and life plans survive Scenario C?</b> " + ans(T.cSurvive) + "</p></div>" +
-      '<p class="chart-hint">Values are your scenarios (B and C are illustrative until you edit them). "Cash back v paid in" counts every rupee in and out, undiscounted. The question is not which scenario is likely — it is how much of the decision only works in A.</p></div>';
+      '<p class="chart-hint">Values are your scenarios (B and C are illustrative until you edit them). "Cash back v paid in" counts every rupee in and out, undiscounted. The question is not which scenario is likely; it is how much of the decision only works in A.</p></div>';
     return s;
   }
 
@@ -899,10 +899,10 @@
       A.services.map((x) => kv(esc(x.label), esc(E.PROVIDERS[x.provider]))).join("") +
       (A.note ? kv("Notes", esc(A.note)) : "") + "</tbody></table></div>";
     s += '<h4 class="sub-h">Water security</h4><p class="detail-p">Source → reliability → quality → cost → fallback → dependency.</p>';
-    if (!W.assessed) s += '<p class="muted">Not recorded — water security is unknown, not assumed.</p>';
+    if (!W.assessed) s += '<p class="muted">Not recorded: water security is unknown, not assumed.</p>';
     else s += '<div class="wchain">' + W.chain.map((x) => '<div class="wstep"><span class="wstep-k">' + esc(x.step) + "</span><b>" + esc(x.status) + "</b>" + (x.text ? "<small>" + esc(x.text) + "</small>" : "") + "</div>").join("") + "</div>" + (W.borewellNote ? '<p class="chart-hint">' + esc(W.borewellNote) + "</p>" : "");
-    s += '<p class="chart-hint">Low water cost today does not prove long-term water security. The X-Ray does not infer groundwater security from borewell depth or anything else — it records what you know.</p>';
-    s += '<h4 class="sub-h">Effective access</h4><p class="detail-p">Economic location is the property\'s actual relationship with the places your household needs to reach — time, reliability and alternatives, not kilometres.</p>';
+    s += '<p class="chart-hint">Low water cost today does not prove long-term water security. The X-Ray does not infer groundwater security from borewell depth or anything else; it records what you know.</p>';
+    s += '<h4 class="sub-h">Effective access</h4><p class="detail-p">Economic location is the property\'s actual relationship with the places your household needs to reach: time, reliability and alternatives, not kilometres.</p>';
     if (!X.assessed) s += '<p class="muted">No destinations entered.</p>';
     else s += '<div class="table-scroll"><table class="grid"><thead><tr><th>Destination</th><th>Distance</th><th>Normal</th><th>Peak</th><th>Last mile</th><th>Other route</th><th>Watch</th></tr></thead><tbody>' +
       X.rows.map((r) => "<tr><td><b>" + esc(r.label) + '</b><br><small class="muted">' + esc(E.DEST_KINDS[r.kind] || "") + "</small></td><td>" + (r.km !== null ? r.km + " km" : "—") + "</td><td>" + (r.normal !== null ? r.normal + " min" : "—") + "</td><td>" + (r.peak !== null ? r.peak + " min" : "—") + "</td><td>" + esc(r.lastMile || "—") + "</td><td>" + esc(r.alt || "—") + "</td><td>" + esc(r.flags.join("; ") || "—") + "</td></tr>").join("") +
@@ -930,7 +930,7 @@
       '<div class="controls">' + slider("base_appr", "Base-case appreciation", -5, 15, 0.5, "%") + slider("upside_appr", "Upside appreciation", -5, 20, 0.5, "%") +
       (m.financed && m.floating ? slider("rate_rise_bps", "Rate rise", 0, 500, 25, " bps") : "") + slider("income_months", "Income interruption", 0, 24, 1, " mo") +
       slider("price_fall_pct", "Price fall", 0, 50, 5, "%") + (m.letting ? slider("vacancy_months", "Vacancy", 0, 12, 1, " mo") : "") + (m.uc ? slider("delay_a", "Delay A", 0, 48, 3, " mo") + slider("delay_b", "Delay B", 0, 60, 3, " mo") : "") + "</div>" +
-      '<div class="field wide"><span class="field-label">Combined stress — pick two or more</span><div class="chips">' + avail.map((o) => '<button type="button" class="chip' + (sel.indexOf(o[0]) >= 0 ? " is-on" : "") + '" data-multi="scenarios.compound" data-v="' + o[0] + '" data-live="1" aria-pressed="' + (sel.indexOf(o[0]) >= 0) + '">' + o[1] + "</button>").join("") + "</div></div></div>";
+      '<div class="field wide"><span class="field-label">Combined stress: pick two or more</span><div class="chips">' + avail.map((o) => '<button type="button" class="chip' + (sel.indexOf(o[0]) >= 0 ? " is-on" : "") + '" data-multi="scenarios.compound" data-v="' + o[0] + '" data-live="1" aria-pressed="' + (sel.indexOf(o[0]) >= 0) + '">' + o[1] + "</button>").join("") + "</div></div></div>";
     return s + "</section>";
   }
   const uniq = (a) => a.filter((x, i) => a.indexOf(x) === i);
@@ -946,22 +946,22 @@
   function economicsHTML(R, c) {
     const m = R.m, $ = (v) => E.money(v, m.ccy), L = R.ledger;
     let s = '<section class="block" id="x-economics"><h3 class="block-h">Economics detail</h3>';
-    if (L.incomplete) s += '<p class="partial-line">Incomplete: ' + [!m.acqKnown ? "acquisition costs" : "", !m.ownerKnown ? "owner costs" : "", !m.exitKnown ? "selling costs" : ""].filter(Boolean).join(", ") + " not entered — figures below exclude them.</p>";
+    if (L.incomplete) s += '<p class="partial-line">Incomplete: ' + [!m.acqKnown ? "acquisition costs" : "", !m.ownerKnown ? "owner costs" : "", !m.exitKnown ? "selling costs" : ""].filter(Boolean).join(", ") + " not entered: figures below exclude them.</p>";
     // Return ledger
-    s += '<details class="detail" open id="x-ledger"><summary>Return ledger — asset vs equity</summary><div class="table-scroll"><table class="grid kv"><tbody>' +
-      kv("Price appreciation over the hold", E.pct(L.priceAppreciation, 0) + " (" + E.pct(m.base) + " a year — your base scenario)") +
+    s += '<details class="detail" open id="x-ledger"><summary>Return ledger: asset vs equity</summary><div class="table-scroll"><table class="grid kv"><tbody>' +
+      kv("Price appreciation over the hold", E.pct(L.priceAppreciation, 0) + " (" + E.pct(m.base) + " a year, your base scenario)") +
       kv("Sale value / selling costs / net proceeds", $(L.saleValue) + " / " + $(L.exitCost) + " / " + $(L.netSale)) +
       kv("Unlevered return (property cash flows, before financing)", E.pct(L.unlevIRR) + (L.unlevReal !== null ? " nominal · " + E.pct(L.unlevReal) + " real" : "")) +
       (L.unlevIRRImp !== null ? kv("…counting rent you no longer pay", E.pct(L.unlevIRRImp)) : "") +
       kv("Equity return (your cash in and out, after financing)", E.pct(L.eqIRR) + (L.eqReal !== null ? " nominal · " + E.pct(L.eqReal) + " real" : "")) +
       (L.eqIRRImp !== null ? kv("…counting rent you no longer pay", E.pct(L.eqIRRImp)) : "") +
-      (m.financed ? kv("Interest paid over the hold", $(L.interest)) + kv("Principal repaid (equity built — not profit, not cost)", $(L.principal)) + kv("Loan outstanding at sale", $(L.balanceEnd)) : "") +
+      (m.financed ? kv("Interest paid over the hold", $(L.interest)) + kv("Principal repaid (equity built, not profit, not cost)", $(L.principal)) + kv("Loan outstanding at sale", $(L.balanceEnd)) : "") +
       kv("Round-trip transaction friction", E.pct(R.roundTripFriction, 1) + " of price" + (isFinite(R.frictionYears) ? " · absorbed by appreciation in about " + E.years(R.frictionYears) : " · never absorbed at this appreciation")) +
       "</tbody></table></div></details>";
     // Rental P&L
     if (R.rental) {
       const r = R.rental;
-      s += '<details class="detail" open id="x-rental"><summary>Rental P&amp;L — year one</summary><div class="table-scroll"><table class="grid kv"><tbody>' +
+      s += '<details class="detail" open id="x-rental"><summary>Rental P&amp;L: year one</summary><div class="table-scroll"><table class="grid kv"><tbody>' +
         kv("Scheduled rent", $(r.sched)) + kv("Vacancy loss (Vacancy Tax " + E.pct(r.vacancyTax, 1) + ")", "−" + $(r.vac)) + kv("Effective rental revenue", $(r.coll)) +
         kv("Owner costs", "−" + $(r.owner)) + (r.mgmt ? kv("Management", "−" + $(r.mgmt)) : "") + (r.letting ? kv("Turnover / letting (shown separately from vacancy)", "−" + $(r.letting)) : "") +
         kv("<b>Net operating income</b>", "<b>" + $(r.noi) + "</b>", true) + kv("Gross yield / net yield", E.pct(r.grossYield, 2) + " / " + E.pct(r.netYield, 2)) +
@@ -975,14 +975,14 @@
       s += '<details class="detail" open id="x-housing"><summary>True cost of housing</summary><div class="table-scroll"><table class="grid kv"><tbody>' +
         kv("Interest (average a year)", $(hc.interestAnnual)) + kv("Owner costs (average a year)", $(hc.ownerAnnual)) + kv("Transaction costs spread over the hold", $(hc.transactionAnnual)) +
         kv("<b>Cash cost of ownership a year</b> (principal excluded)", "<b>" + $(hc.annualCashCost) + "</b>", true) +
-        (hc.oppAnnual !== null ? kv("Opportunity cost of " + $(hc.capitalCommitted) + " committed, at your " + E.pct(m.opp, 1) + " (scenario)", $(hc.oppAnnual) + " a year") : kv("Opportunity cost", "Not computed — no rate entered")) +
-        (hc.rentAnnual !== null ? kv("Rent for the equivalent home, year one", $(hc.rentAnnual)) : kv("Equivalent rent", "Not entered — comparison withheld")) +
+        (hc.oppAnnual !== null ? kv("Opportunity cost of " + $(hc.capitalCommitted) + " committed, at your " + E.pct(m.opp, 1) + " (scenario)", $(hc.oppAnnual) + " a year") : kv("Opportunity cost", "Not computed: no rate entered")) +
+        (hc.rentAnnual !== null ? kv("Rent for the equivalent home, year one", $(hc.rentAnnual)) : kv("Equivalent rent", "Not entered: comparison withheld")) +
         "</tbody></table></div><p class=\"chart-hint\">Never compare rent with the full EMI: the principal part of the EMI builds your equity.</p></details>";
       if (R.rentVsOwn) {
         const rv = R.rentVsOwn, be = rv.breakEven;
-        s += '<details class="detail" open><summary>Rent v own — dated cash flows over ' + E.years(m.H) + "</summary><p class=\"detail-p\">Owner: every cash flow above, ending with equity after sale. Renter: rents the equivalent home at " + $(rv.base.rent0) + "/mo (growing " + E.pct(m.rentGrowth, 1) + ") and puts the owner's capital " + (rv.base.invests ? "and monthly differences" : "(but not monthly differences — you said they'd be spent)") + " to work at " + (m.opp !== null ? E.pct(m.opp, 1) : "0% (no rate entered)") + '.</p><div class="table-scroll"><table class="grid"><thead><tr><th>Appreciation</th><th>Owner ends with</th><th>Renter ends with</th><th>Difference</th></tr></thead><tbody>' +
+        s += '<details class="detail" open><summary>Rent v own: dated cash flows over ' + E.years(m.H) + "</summary><p class=\"detail-p\">Owner: every cash flow above, ending with equity after sale. Renter: rents the equivalent home at " + $(rv.base.rent0) + "/mo (growing " + E.pct(m.rentGrowth, 1) + ") and puts the owner's capital " + (rv.base.invests ? "and monthly differences" : "(but not monthly differences: you said they'd be spent)") + " to work at " + (m.opp !== null ? E.pct(m.opp, 1) : "0% (no rate entered)") + '.</p><div class="table-scroll"><table class="grid"><thead><tr><th>Appreciation</th><th>Owner ends with</th><th>Renter ends with</th><th>Difference</th></tr></thead><tbody>' +
           [["Flat (0%)", rv.flat], ["Base (" + E.pct(m.base) + ")", rv.base], ["Upside (" + E.pct(m.upside) + ")", rv.upside]].map((x) => "<tr><td>" + x[0] + "</td><td>" + $(x[1].ownerWealth) + "</td><td>" + $(x[1].renterWealth) + "</td><td>" + $(x[1].ownerWealth - x[1].renterWealth) + "</td></tr>").join("") +
-          "</tbody></table></div><p class=\"chart-hint\">" + (be ? (be.bound === null ? "Break-even appreciation: about " + E.pct(be.value) + " a year." : be.bound === "below" ? "Owning ends ahead even with falling prices." : "Owning doesn't catch up within +40% a year.") : "") + " This measures money only — it says nothing about the utility of owning, which you weigh yourself.</p></details>";
+          "</tbody></table></div><p class=\"chart-hint\">" + (be ? (be.bound === null ? "Break-even appreciation: about " + E.pct(be.value) + " a year." : be.bound === "below" ? "Owning ends ahead even with falling prices." : "Owning doesn't catch up within +40% a year.") : "") + " This measures money only: it says nothing about the utility of owning, which you weigh yourself.</p></details>";
       }
     }
     // Mortgage schedule
@@ -994,13 +994,13 @@
       s += '<details class="detail" open id="x-uc"><summary>Under-construction economics</summary>';
       const d0 = R.uc.delays[0];
       if (d0.cmp) {
-        s += '<p class="detail-p">Sticker gap to the ready comparable: <b>' + $(d0.cmp.sticker) + "</b> (" + E.pct(d0.cmp.stickerPct, 1) + "). After waiting costs on the promised schedule, the observed <b>Uncertainty Discount</b> is <b>" + $(d0.cmp.advantage) + "</b> — equivalently, a Certainty Tax of that amount for buying ready. " +
+        s += '<p class="detail-p">Sticker gap to the ready comparable: <b>' + $(d0.cmp.sticker) + "</b> (" + E.pct(d0.cmp.stickerPct, 1) + "). After waiting costs on the promised schedule, the observed <b>Uncertainty Discount</b> is <b>" + $(d0.cmp.advantage) + "</b>; equivalently, a Certainty Tax of that amount for buying ready. " +
           (R.uc.breakEven === 0 ? "Even on time, waiting costs exceed the sticker gap." : isFinite(R.uc.breakEven) ? "About <b>" + E.months(R.uc.breakEven) + "</b> of delay would consume it" + (m.k.maxDelay !== null ? " (your tolerance: " + m.k.maxDelay + " months)" : "") + "." : "No delay within ten years consumes it.") + "</p>";
         s += '<div class="chart-card card"><div class="chart-title">Uncertainty Discount remaining as possession slips</div><div class="chart-wrap"><svg id="uc-chart" viewBox="0 0 720 260" role="img" aria-label="Advantage of the under-construction route versus delay in months"></svg></div></div>';
-      } else s += '<p class="detail-p">No ready comparable price entered — the Uncertainty Discount / Certainty Tax cannot be measured. Delay costs are still shown.</p>';
+      } else s += '<p class="detail-p">No ready comparable price entered: the Uncertainty Discount / Certainty Tax cannot be measured. Delay costs are still shown.</p>';
       s += '<div class="table-scroll"><table class="grid"><thead><tr><th>Delay</th><th>Housing while waiting</th><th>Lost rent</th><th>Extra interest</th><th>Opportunity cost</th><th>Total delay cost</th>' + (d0.cmp ? "<th>Discount left</th>" : "") + "</tr></thead><tbody>" +
         R.uc.delays.map((d) => "<tr><td>" + (d.D ? "+" + d.D + " months" : "On time") + "</td><td>" + $(d.cost.overlap) + "</td><td>" + $(d.cost.lostRent) + "</td><td>" + $(d.cost.financing) + "</td><td>" + (d.cost.opportunity === null ? "—" : $(d.cost.opportunity)) + "</td><td><b>" + $(d.cost.total) + "</b></td>" + (d.cmp ? "<td>" + $(d.cmp.advantage) + "</td>" : "") + "</tr>").join("") +
-        '</tbody></table></div><p class="chart-hint">' + (R.uc.scheduleEntered ? "" : "Payment schedule not entered — illustrative 20% at booking, balance evenly to possession. ") + (R.uc.scheduleScaled ? "Your instalments didn't sum to 100% and were scaled. " : "") + "Owner charges assumed to begin at possession. Delay costs are gross — everything paid or forgone while you cannot use the home. The on-time comparison treats the ready loan as interest-only until possession and values costs at the promised date" + (m.opp !== null ? " using your " + E.pct(m.opp, 1) + " opportunity rate" : " with no opportunity cost (no rate entered)") + ".</p></details>";
+        '</tbody></table></div><p class="chart-hint">' + (R.uc.scheduleEntered ? "" : "Payment schedule not entered: illustrative 20% at booking, balance evenly to possession. ") + (R.uc.scheduleScaled ? "Your instalments didn't sum to 100% and were scaled. " : "") + "Owner charges assumed to begin at possession. Delay costs are gross: everything paid or forgone while you cannot use the home. The on-time comparison treats the ready loan as interest-only until possession and values costs at the promised date" + (m.opp !== null ? " using your " + E.pct(m.opp, 1) + " opportunity rate" : " with no opportunity cost (no rate entered)") + ".</p></details>";
     }
     return s + "</section>";
   }
@@ -1027,8 +1027,8 @@
       [["Liquid assets", "liquid"], ["Long-term financial assets", "financial"], ["Retirement-restricted", "retirement"], ["Real estate (value)", "re"], ["Real-estate debt", "reDebt"], ["Net worth", "nw"]].map((x) => "<tr" + (x[1] === "nw" ? ' class="kv-strong"' : "") + "><td>" + x[0] + "</td><td>" + $(hh.before[x[1]]) + "</td><td>" + $(hh.after[x[1]]) + "</td></tr>").join("") +
       "<tr><td>Property equity, share of net worth</td><td>" + E.pct(hh.before.equityShare || 0, 0) + "</td><td>" + E.pct(hh.after.equityShare || 0, 0) + "</td></tr>" +
       "<tr><td>Monthly debt payments, share of income</td><td>" + (m.income ? E.pct(m.existingDS / m.income, 0) : "—") + "</td><td>" + E.pct(hh.dsPct, 0) + "</td></tr>" +
-      "</tbody></table></div><p class=\"chart-hint\">Net worth falls on day one by acquisition costs, fees and fit-out (" + $(m.acq + m.fees + m.work) + "). Home equity counts toward net worth — it is not discarded for being illiquid — but it is not liquid.</p>";
-    if (R.liqPath) s += '<div class="chart-card card"><div class="chart-title">Liquid assets through the hold — base case' + (R.liqPath.savingsKnown ? "" : " (excluding savings: living expenses not entered)") + '</div><div class="chart-wrap"><svg id="liq-chart" viewBox="0 0 720 240" role="img" aria-label="Liquid assets by year with your floor"></svg></div><p class="chart-hint">Includes known outlays; assumes no investment return on cash.</p></div>';
+      "</tbody></table></div><p class=\"chart-hint\">Net worth falls on day one by acquisition costs, fees and fit-out (" + $(m.acq + m.fees + m.work) + "). Home equity counts toward net worth (it is not discarded for being illiquid) but it is not liquid.</p>";
+    if (R.liqPath) s += '<div class="chart-card card"><div class="chart-title">Liquid assets through the hold: base case' + (R.liqPath.savingsKnown ? "" : " (excluding savings: living expenses not entered)") + '</div><div class="chart-wrap"><svg id="liq-chart" viewBox="0 0 720 240" role="img" aria-label="Liquid assets by year with your floor"></svg></div><p class="chart-hint">Includes known outlays; assumes no investment return on cash.</p></div>';
     if (R.fire.status !== "Not assessed") {
       const f = R.fire;
       s += '<details class="detail" open><summary>FIRE-usable wealth</summary><div class="table-scroll"><table class="grid"><thead><tr><th></th><th>Without this purchase</th><th>With it</th></tr></thead><tbody>' +
@@ -1042,7 +1042,7 @@
     const label = (O.alt.find((x) => x[0] === m.alt) || [, "Not chosen"])[1];
     let s = '<section class="block" id="x-alt"><h3 class="block-h">Realistic alternative: ' + esc(label.toLowerCase()) + "</h3>";
     const hh = R.hh;
-    if (!m.alt) return s + '<p class="muted">No alternative chosen — the X-Ray compares against what you would actually do, so choose one in <a href="#/case/life">Objective</a>.</p></section>';
+    if (!m.alt) return s + '<p class="muted">No alternative chosen: the X-Ray compares against what you would actually do, so choose one in <a href="#/case/life">Objective</a>.</p></section>';
     if (m.alt === "rent") {
       if (R.rentVsOwn) { const b = R.rentVsOwn.base; s += '<p class="detail-p">At your base appreciation, owning ends with <b>' + $(b.ownerWealth) + "</b>; renting the equivalent home ends with <b>" + $(b.renterWealth) + "</b>. Renting keeps " + $(hh.cashNeed) + " liquid today and leaves you free to move; owning buys control and permanence. Full comparison in Economics detail.</p>"; }
       else s += '<p class="muted">Needs an equivalent rent and self-occupation to compare.</p>';
@@ -1050,7 +1050,7 @@
       if (!m.enoughPrice) s += '<p class="muted">Enter the price of the cheaper home to compare.</p>';
       else {
         const alt = altCase(c, (x) => { const r = m.enoughPrice / m.P; x.property.purchase_price = m.enoughPrice; ["stamp", "registration", "brokerage", "legal", "other"].forEach((k) => { if (!isBlank(x.property.acq[k])) x.property.acq[k] = x.property.acq[k] * r; }); ["maintenance", "property_tax", "insurance", "repairs"].forEach((k) => { if (!isBlank(x.property.owner[k])) x.property.owner[k] = x.property.owner[k] * r; }); if (x.financing.mode === "loan") x.financing.loan_amount = Math.max(0, m.enoughPrice - (m.P - m.L)); });
-        s += compareTable(R, alt, "This home", "Cheaper home (" + $(m.enoughPrice) + ", same down payment)") + '<p class="chart-hint">Housing-Consumption Premium: <b>' + $(m.P - m.enoughPrice) + "</b> of extra capital" + (m.enoughRent && m.Req ? " — or " + $(m.Req - m.enoughRent) + "/mo in rent terms" : "") + ". It may buy location, space or permanence worth having; this shows what it is paid with.</p>";
+        s += compareTable(R, alt, "This home", "Cheaper home (" + $(m.enoughPrice) + ", same down payment)") + '<p class="chart-hint">Housing-Consumption Premium: <b>' + $(m.P - m.enoughPrice) + "</b> of extra capital" + (m.enoughRent && m.Req ? ", or " + $(m.Req - m.enoughRent) + "/mo in rent terms" : "") + ". It may buy location, space or permanence worth having; this shows what it is paid with.</p>";
       }
     } else if (m.alt === "larger_down") {
       if (!m.altExtraDown || !m.financed) s += '<p class="muted">Enter the extra down payment (needs a loan) to compare.</p>';
@@ -1067,7 +1067,7 @@
       else {
         const sim = R.sims.base; const mo = Math.pow(1 + o, 1 / 12) - 1; let pot = 0;
         for (let t = 0; t <= sim.months; t++) { if (t) pot *= 1 + mo; const f = sim.eq[t] - (t === sim.months ? sim.eqSale : 0); pot += -f; }
-        s += '<div class="table-scroll"><table class="grid kv"><tbody>' + kv("Property: equity at sale (base case)", $(sim.eqSale)) + kv("Same cash flows invested at your " + E.pct(o, 1), $(pot)) + kv("Property equity return vs your alternative", E.pct(R.ledger.eqIRR) + " vs " + E.pct(o, 1)) + "</tbody></table></div><p class=\"chart-hint\">Every rupee you put into the property — down payment, costs, EMIs net of rent — is assumed invested instead, at your rate. A scenario, not a forecast; and only valid if you would genuinely invest it.</p>";
+        s += '<div class="table-scroll"><table class="grid kv"><tbody>' + kv("Property: equity at sale (base case)", $(sim.eqSale)) + kv("Same cash flows invested at your " + E.pct(o, 1), $(pot)) + kv("Property equity return vs your alternative", E.pct(R.ledger.eqIRR) + " vs " + E.pct(o, 1)) + "</tbody></table></div><p class=\"chart-hint\">Every rupee you put into the property (down payment, costs, EMIs net of rent) is assumed invested instead, at your rate. A scenario, not a forecast; and only valid if you would genuinely invest it.</p>";
       }
     } else if (m.alt === "custom") {
       s += '<p class="detail-p">' + esc(c.life.alt_custom || "Described alternative not entered.") + '</p><p class="chart-hint">No calculation is run for a custom alternative; weigh it against the profile above.</p>';
@@ -1083,7 +1083,7 @@
     return '<div class="table-scroll"><table class="grid"><thead><tr><th></th><th>' + esc(la) + "</th><th>" + esc(lb) + "</th></tr></thead><tbody>" +
       row("Cash needed at purchase", $(R.hh.cashNeed), $(A.hh.cashNeed)) + row("Liquid after purchase", $(R.hh.L1), $(A.hh.L1)) +
       row("Monthly property outflow", $(R.hh.outflow), $(A.hh.outflow)) + (R.m.financed ? row("EMI after a rate rise", rate(R), rate(A)) + row("Interest over the hold", $(R.ledger.interest), $(A.ledger.interest)) : "") +
-      row("Equity at sale — base case", $(R.sims.base.eqSale), $(A.sims.base.eqSale)) + row("Equity at sale — flat market", $(R.sims.flat.eqSale), $(A.sims.flat.eqSale)) +
+      row("Equity at sale: base case", $(R.sims.base.eqSale), $(A.sims.base.eqSale)) + row("Equity at sale: flat market", $(R.sims.flat.eqSale), $(A.sims.flat.eqSale)) +
       row("Red-line breaches across stresses", R.stress.filter((x) => x.status === "breach").length, A.stress.filter((x) => x.status === "breach").length) + "</tbody></table></div>";
   }
 
@@ -1092,8 +1092,8 @@
     let s = '<section class="block" id="x-market"><h3 class="block-h">Market context</h3>';
     if (cc && cc.fingerprint) {
       const rel = D.relevantDims(c);
-      s += '<p class="detail-p"><b>' + esc(cc.name) + " — " + esc(cc.fingerprint) + ".</b> " + esc(cc.meaning) + "</p>";
-      s += '<p class="fp-guard">The Fingerprint describes the machine. It does not grade the machine. Farther left or right is not better — it is simply different.</p>';
+      s += '<p class="detail-p"><b>' + esc(cc.name) + ": " + esc(cc.fingerprint) + ".</b> " + esc(cc.meaning) + "</p>";
+      s += '<p class="fp-guard">The Fingerprint describes the machine. It does not grade the machine. Farther left or right is not better: it is simply different.</p>';
       const fpBase = toolLink("fingerprint") || "../fingerprint/";
       if (toolOpen("fingerprint")) s += '<p><a class="read-article" href="' + esc(fpBase + "#/country/" + m.country) + '">See the full fingerprint for ' + esc(cc.name) + ' <span aria-hidden="true">&rarr;</span></a></p>';
       else if (opensOn("fingerprint")) s += '<p class="chart-hint opens-note">The full Housing System Fingerprint Explorer opens on ' + esc(opensOn("fingerprint")) + ".</p>";
@@ -1102,7 +1102,7 @@
       s += '<p class="chart-hint">' + esc(D.FINGERPRINT_SOURCE.source_name) + " · " + esc(D.FINGERPRINT_SOURCE.as_of_date) + ". " + esc(D.FINGERPRINT_SOURCE.confidence_note) + " Only the dimensions that bear on this case are shown first.</p>";
     } else s += '<p class="muted">No curated Housing System Fingerprint for this country. The Country layer is unavailable; the property and household analysis is unaffected.</p>';
     s += '<h4 class="sub-h">City</h4>';
-    if (R.city.insufficient) s += '<p class="muted">Insufficient data — no city signals entered, so nothing is inferred. National tailwinds do not automatically reach every micro-market.</p>';
+    if (R.city.insufficient) s += '<p class="muted">Insufficient data: no city signals entered, so nothing is inferred. National tailwinds do not automatically reach every micro-market.</p>';
     else {
       const sig = c.market.signals || {};
       s += '<div class="city-grid">' + E.CITY_SIGNALS.map((x) => { const v = (sig[x.id] || {}).status || "unknown"; return '<div class="city-sig city-' + v + '"><span>' + esc(x.label) + "</span><b>" + esc((O.signal.find((o) => o[0] === v) || [, ""])[1]) + "</b>" + ((sig[x.id] || {}).note ? "<small>" + esc(sig[x.id].note) + "</small>" : "") + "</div>"; }).join("") + "</div>";
@@ -1197,7 +1197,7 @@
     });
     const req = fin ? R.apprDep.financial.required : rvo ? R.rentVsOwn.breakEven : null;
     hint.textContent = (fin || !rvo ? "Return on your equity after financing, at each annual appreciation rate. " : "How much wealthier owning leaves you than renting the equivalent home (your stated alternative), at each appreciation rate. ") +
-      (req && req.bound === null ? "The line crosses " + (fin && R.apprDep.financial.hurdleGiven ? "your hurdle" : "break-even") + " at about " + E.pct(req.value) + " a year — that is the appreciation already spent to justify today's decision." : "");
+      (req && req.bound === null ? "The line crosses " + (fin && R.apprDep.financial.hurdleGiven ? "your hurdle" : "break-even") + " at about " + E.pct(req.value) + " a year: that is the appreciation already spent to justify today's decision." : "");
   }
 
   function drawWaterfall(R) {
@@ -1263,18 +1263,18 @@
   /* ---------- Method page ------------------------------------------ */
 
   function renderMethod() {
-    app.innerHTML = '<section class="hero hero-sm"><div class="wrap"><p class="eyebrow">The honest math</p><h1>How the X-Ray works</h1><p class="lede">Nothing here is a black box. Every figure is deterministic arithmetic on the inputs you supply and the scenarios you set — and every qualitative label is local to one dimension, with its rule visible.</p></div></section>' +
+    app.innerHTML = '<section class="hero hero-sm"><div class="wrap"><p class="eyebrow">The honest math</p><h1>How the X-Ray works</h1><p class="lede">Nothing here is a black box. Every figure is deterministic arithmetic on the inputs you supply and the scenarios you set, and every qualitative label is local to one dimension, with its rule visible.</p></div></section>' +
       '<main class="wrap"><section class="part"><div class="method-grid">' +
-      mcard("What it will never do", "<ul class=\"method-list\"><li>Produce an overall score, rating or BUY / DON'T BUY verdict.</li><li>Convert utility, family stability or permanence into money.</li><li>Let title or project uncertainty be offset by expected appreciation.</li><li>Apply a universal EMI, LTV, yield or concentration threshold — only the red lines you set.</li><li>Assume equities are your alternative.</li><li>Fill a missing fact with a generic market assumption.</li></ul>") +
-      mcard("Asset return vs equity return", "<p>The <b>unlevered return</b> is the IRR of the property's own cash flows: price, acquisition costs, fit-out, owner costs, rent (net of vacancy and letting costs) and net sale proceeds. The <b>equity return</b> is the IRR of your cash: down payment, costs, loan fees, every loan payment, owner costs, rent, and sale proceeds after repaying the loan.</p><div class=\"formula\">price CAGR = (exit ÷ price)^(1/years) − 1\nreal ≈ (1 + nominal) ÷ (1 + inflation) − 1\nEMI = L·r ÷ (1 − (1 + r)^−n)</div><p>Principal repaid is shown as equity built — never as profit and never as housing cost.</p>") +
-      mcard("Housing cost and rent v own", "<p>Cash cost of ownership = interest + owner costs + transaction costs spread over the hold. Principal is excluded. Opportunity cost is computed only from the rate you enter.</p><p>Rent v own compares dated cash flows: the owner's, ending in equity after sale, against a renter who invests the owner's capital — and the monthly differences only if you say you genuinely would.</p>") +
-      mcard("Appreciation dependency", "<p>For financial objectives, the X-Ray solves for the annual appreciation at which your equity return meets your hurdle (or nominal break-even if you set none). <b>Low</b> = met at 0%; <b>Moderate</b> = met within your base case; <b>High</b> = met only in your upside, or not at all.</p><p>For a primary home it uses your Zero-Appreciation answer and whether a flat market breaches your red lines — a home is never required to hit an investment hurdle.</p>") +
-      mcard("Stress engine", "<p>Each shock is applied to your post-purchase position: liquid assets after purchase, the net monthly property outflow, and your household surplus (income − living expenses − other debts − property outflow). Income interruption burns liquid assets at your full monthly outgoings; a rate rise recomputes the EMI on the year-two balance (the tenure-extension alternative is shown too). A price fall changes equity, not cash — no margin call is assumed.</p><p>Leverage sensitivity: <b>High</b> if the base case, a rate rise or an income interruption breaches a cash-flow red line; <b>Moderate</b> if only the combined stress does; <b>Low</b> otherwise.</p>") +
-      mcard("Under construction", "<p>Instalments are paid on your schedule — your own contribution first, then loan disbursements with pre-EMI interest until possession. Delay cost = housing while waiting + lost rent + extra interest + opportunity cost (if a rate is entered), each shown.</p><p>The Uncertainty Discount compares the two routes to a usable home on the promised date: your own capital at its payment dates (with your opportunity-cost rate, if entered), loan interest, owner costs, rent paid or earned, and principal still owed — valued at possession. Each delay scenario then erodes it by the gross delay cost: everything you pay or forgo while you cannot yet use the home. The delay at which it reaches zero is reported.</p>") +
-      mcard("Product heuristics (visible, not truths)", "<ul class=\"method-list\"><li>Price evidence: Strong = ≥3 transactions in 12 months, ≥2 highly similar, spread ≤20%. Mixed = ≥1 transaction among ≥2 observations. Weak = listings/estimates only or one record.</li><li>Asset character: appreciation &gt;70% of positive base-case gains = appreciation-led; &lt;40% = income-led.</li><li>FIRE impact: a change of under ±" + E.FI_NEUTRAL_YEARS + " years to your FI target is neutral.</li><li>Execution: resolved / partially resolved / unresolved / unknown from your checklist — never a risk score.</li></ul>") +
-      mcard("Fundamental gates and the comparative profile", "<p>Some factors are not compensatory. Excellent interiors, community or financial value cannot mathematically offset a serious title problem, insecure access, unsafe financing or severe water insecurity. So the X-Ray uses two layers:</p><ul class=\"method-list\"><li><b>Layer 1 — fundamental gates:</b> title &amp; approvals, legal &amp; physical access, water &amp; basic infrastructure, financial survivability. Each resolves as Acceptable, Concern or Potential disqualifier on its own visible rule (or Not assessed). Gates are never averaged.</li><li><b>Layer 2 — comparative profile:</b> home quality, floor/view, mobility, healthcare, daily conveniences, social access, lifestyle utility — ranked by the importance you give them, never summed. Financial attractiveness is derived from the economics, not rated.</li></ul>") +
-      mcard("Access, water and effective access", "<p><b>Access:</b> ownership rights and functional control are not identical. The X-Ray records legal access, route type, last-mile quality, year-round use and dependencies on third parties. It is a diligence layer, not legal advice.</p><p><b>Water:</b> summarised as source → reliability → quality → cost → fallback → dependency. Tanker, treatment and pumping costs are added to owner costs. Low water cost today does not prove long-term water security, and a deeper borewell does not automatically mean more secure water; groundwater security is never inferred.</p><p><b>Effective access:</b> travel time at normal and peak hours, last mile and alternate routes for the destinations you choose. " + esc(E.ACCESS_RULES.note) + "</p><p><b>Location-thesis scenarios:</b> A uses your upside appreciation; B (area develops, supply absorbs the upside) and C (thesis disappoints — prices correct, rents stop growing, selling costs more) use your own rates. No probabilities.</p>") +
-      mcard("What it does not model", "<ul class=\"method-list\"><li>Income tax on rent or capital gains (unless you enter a sale tax).</li><li>Loan prepayments, refinancing, or a rate path beyond the tested rise.</li><li>Investment return on cash held as liquid assets.</li><li>Exchange rates — every case is in one currency.</li><li>Any price forecast. Your scenarios are yours.</li></ul><p class=\"method-note\">Country context comes from the Real Estate Reframed Housing System Fingerprint v1.0 — qualitative bands, neutral endpoints. City context is only what you enter.</p>") +
+      mcard("What it will never do", "<ul class=\"method-list\"><li>Produce an overall score, rating or BUY / DON'T BUY verdict.</li><li>Convert utility, family stability or permanence into money.</li><li>Let title or project uncertainty be offset by expected appreciation.</li><li>Apply a universal EMI, LTV, yield or concentration threshold: only the red lines you set.</li><li>Assume equities are your alternative.</li><li>Fill a missing fact with a generic market assumption.</li></ul>") +
+      mcard("Asset return vs equity return", "<p>The <b>unlevered return</b> is the IRR of the property's own cash flows: price, acquisition costs, fit-out, owner costs, rent (net of vacancy and letting costs) and net sale proceeds. The <b>equity return</b> is the IRR of your cash: down payment, costs, loan fees, every loan payment, owner costs, rent, and sale proceeds after repaying the loan.</p><div class=\"formula\">price CAGR = (exit ÷ price)^(1/years) − 1\nreal ≈ (1 + nominal) ÷ (1 + inflation) − 1\nEMI = L·r ÷ (1 − (1 + r)^−n)</div><p>Principal repaid is shown as equity built, never as profit and never as housing cost.</p>") +
+      mcard("Housing cost and rent v own", "<p>Cash cost of ownership = interest + owner costs + transaction costs spread over the hold. Principal is excluded. Opportunity cost is computed only from the rate you enter.</p><p>Rent v own compares dated cash flows: the owner's, ending in equity after sale, against a renter who invests the owner's capital, and the monthly differences only if you say you genuinely would.</p>") +
+      mcard("Appreciation dependency", "<p>For financial objectives, the X-Ray solves for the annual appreciation at which your equity return meets your hurdle (or nominal break-even if you set none). <b>Low</b> = met at 0%; <b>Moderate</b> = met within your base case; <b>High</b> = met only in your upside, or not at all.</p><p>For a primary home it uses your Zero-Appreciation answer and whether a flat market breaches your red lines; a home is never required to hit an investment hurdle.</p>") +
+      mcard("Stress engine", "<p>Each shock is applied to your post-purchase position: liquid assets after purchase, the net monthly property outflow, and your household surplus (income − living expenses − other debts − property outflow). Income interruption burns liquid assets at your full monthly outgoings; a rate rise recomputes the EMI on the year-two balance (the tenure-extension alternative is shown too). A price fall changes equity, not cash: no margin call is assumed.</p><p>Leverage sensitivity: <b>High</b> if the base case, a rate rise or an income interruption breaches a cash-flow red line; <b>Moderate</b> if only the combined stress does; <b>Low</b> otherwise.</p>") +
+      mcard("Under construction", "<p>Instalments are paid on your schedule: your own contribution first, then loan disbursements with pre-EMI interest until possession. Delay cost = housing while waiting + lost rent + extra interest + opportunity cost (if a rate is entered), each shown.</p><p>The Uncertainty Discount compares the two routes to a usable home on the promised date: your own capital at its payment dates (with your opportunity-cost rate, if entered), loan interest, owner costs, rent paid or earned, and principal still owed: valued at possession. Each delay scenario then erodes it by the gross delay cost: everything you pay or forgo while you cannot yet use the home. The delay at which it reaches zero is reported.</p>") +
+      mcard("Product heuristics (visible, not truths)", "<ul class=\"method-list\"><li>Price evidence: Strong = ≥3 transactions in 12 months, ≥2 highly similar, spread ≤20%. Mixed = ≥1 transaction among ≥2 observations. Weak = listings/estimates only or one record.</li><li>Asset character: appreciation &gt;70% of positive base-case gains = appreciation-led; &lt;40% = income-led.</li><li>FIRE impact: a change of under ±" + E.FI_NEUTRAL_YEARS + " years to your FI target is neutral.</li><li>Execution: resolved / partially resolved / unresolved / unknown from your checklist, never a risk score.</li></ul>") +
+      mcard("Fundamental gates and the comparative profile", "<p>Some factors are not compensatory. Excellent interiors, community or financial value cannot mathematically offset a serious title problem, insecure access, unsafe financing or severe water insecurity. So the X-Ray uses two layers:</p><ul class=\"method-list\"><li><b>Layer 1, fundamental gates:</b> title &amp; approvals, legal &amp; physical access, water &amp; basic infrastructure, financial survivability. Each resolves as Acceptable, Concern or Potential disqualifier on its own visible rule (or Not assessed). Gates are never averaged.</li><li><b>Layer 2: comparative profile:</b> home quality, floor/view, mobility, healthcare, daily conveniences, social access, lifestyle utility; ranked by the importance you give them, never summed. Financial attractiveness is derived from the economics, not rated.</li></ul>") +
+      mcard("Access, water and effective access", "<p><b>Access:</b> ownership rights and functional control are not identical. The X-Ray records legal access, route type, last-mile quality, year-round use and dependencies on third parties. It is a diligence layer, not legal advice.</p><p><b>Water:</b> summarised as source → reliability → quality → cost → fallback → dependency. Tanker, treatment and pumping costs are added to owner costs. Low water cost today does not prove long-term water security, and a deeper borewell does not automatically mean more secure water; groundwater security is never inferred.</p><p><b>Effective access:</b> travel time at normal and peak hours, last mile and alternate routes for the destinations you choose. " + esc(E.ACCESS_RULES.note) + "</p><p><b>Location-thesis scenarios:</b> A uses your upside appreciation; B (area develops, supply absorbs the upside) and C (thesis disappoints: prices correct, rents stop growing, selling costs more) use your own rates. No probabilities.</p>") +
+      mcard("What it does not model", "<ul class=\"method-list\"><li>Income tax on rent or capital gains (unless you enter a sale tax).</li><li>Loan prepayments, refinancing, or a rate path beyond the tested rise.</li><li>Investment return on cash held as liquid assets.</li><li>Exchange rates: every case is in one currency.</li><li>Any price forecast. Your scenarios are yours.</li></ul><p class=\"method-note\">Country context comes from the Real Estate Reframed Housing System Fingerprint v1.0: qualitative bands, neutral endpoints. City context is only what you enter.</p>") +
       '</div><p><a class="read-article" href="#/">← Back to the X-Ray</a></p></section></main>';
   }
   const mcard = (t, b) => '<div class="card"><h3 class="method-h">' + t + "</h3>" + b + "</div>";
@@ -1301,7 +1301,7 @@
       const n = blankCase();
       ["market", "property", "diligence", "scenarios"].forEach((k) => (n[k] = clone(c[k])));
       n.decision.status = c.decision.status;
-      n.meta.name = (c.meta.name || "Case").replace(/ \(example\)$/, "").replace(/ — .*$/, "") + " — another household";
+      n.meta.name = (c.meta.name || "Case").replace(/ \(example\)$/, "").replace(/: .*$/, "") + ": another household";
       openCase(n); location.hash = "#/case/frame"; return;
     }
     if (t.dataset.act === "share") { shareLink(); return; }
@@ -1465,7 +1465,7 @@
     if (!c) {
       viewCase = null;
       app.innerHTML = '<div class="wrap workspace"><section class="card"><h3>This share link can\'t be opened</h3><p class="group-intro">' +
-        (canShare ? "It may have been cut off when it was copied — ask for the full link again." : "This browser is too old to open shared X-Ray links.") +
+        (canShare ? "It may have been cut off when it was copied: ask for the full link again." : "This browser is too old to open shared X-Ray links.") +
         '</p><a class="btn" href="#/">Start your own X-Ray</a></section></div>';
       return;
     }
@@ -1493,7 +1493,7 @@
     if (!t || !D.EXAMPLES[t.ex]) { viewCase = null; return renderHome(); }
     const c = normaliseCase(clone(D.EXAMPLES[t.ex]));
     paintReadOnly(c, '<span class="eyebrow-sm">Example from Article 14 · read-only</span>' +
-      "<p>An illustrative household, opened at " + esc(t.label) + ". Nothing here is saved, and it can't be edited — open the example as your own case to change it, or start from scratch.</p>" +
+      "<p>An illustrative household, opened at " + esc(t.label) + ". Nothing here is saved, and it can't be edited: open the example as your own case to change it, or start from scratch.</p>" +
       '<button type="button" class="btn-ghost small" data-act="example" data-ex="' + esc(t.ex) + '">Open this example as a case</button>' +
       '<a class="btn small" href="#/">Start your own X-Ray</a>');
     // After the hashchange handler's scroll-to-top, jump (not glide) to the module,

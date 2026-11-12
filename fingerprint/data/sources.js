@@ -31,7 +31,7 @@
       "Fundamental demand for new housing could fall roughly 35–55% over a decade as household formation slows; homeownership above 90% in cited research; housing a large share of household wealth; market, legacy and rental housing deeply segmented (“too much yet not enough”)."),
     S("oecd-housing", "OECD", "OECD research on housing-supply responsiveness and land-use regulation", "https://www.oecd.org/en/topics/housing.html", "2019–2026", "OECD countries", "Multi-decade", "Multilateral research",
       "Credits Japan’s flexible, nationally standardised zoning for historically responsive housing supply; associates restrictive land-use regulation with weaker supply responsiveness."),
-    S("oecd-us", "OECD", "OECD Economic Survey of the United States 2026 — housing recommendations", "https://www.oecd.org/en/countries/united-states.html", "2026", "United States", "2026", "Multilateral research",
+    S("oecd-us", "OECD", "OECD Economic Survey of the United States 2026: housing recommendations", "https://www.oecd.org/en/countries/united-states.html", "2026", "United States", "2026", "Multilateral research",
       "Recommends reforming local zoning to allow denser multifamily construction near transit because current rules constrain supply."),
 
     /* ---------- India ---------- */
@@ -46,14 +46,14 @@
     S("in-dolr", "Department of Land Resources, Ministry of Rural Development", "Digital India Land Records Modernisation Programme (DILRMP) and ULPIN", "https://dolr.gov.in/", "Ongoing", "India", "Current", "Official programme",
       "Digitised cadastral maps, registry integration, unique land parcel IDs and an explicit objective of moving toward conclusive titling."),
     S("in-rbi-eblr", "Reserve Bank of India", "Circular on external benchmark-based lending for new floating-rate retail loans", "https://www.rbi.org.in/", "2019", "India", "Effective October 2019", "Central bank regulation",
-      "New floating-rate retail loans, including home loans, linked to an external benchmark — rate changes pass through to borrowers."),
-    S("in-budget", "Ministry of Finance, Government of India", "Economic Survey — state tax revenues (stamp duty and registration)", "https://www.indiabudget.gov.in/economicsurvey/", "2025–2026", "India", "Recent fiscal years", "Official fiscal data",
+      "New floating-rate retail loans, including home loans, linked to an external benchmark: rate changes pass through to borrowers."),
+    S("in-budget", "Ministry of Finance, Government of India", "Economic Survey: state tax revenues (stamp duty and registration)", "https://www.indiabudget.gov.in/economicsurvey/", "2025–2026", "India", "Recent fiscal years", "Official fiscal data",
       "Stamp and registration fees are a meaningful state tax category. No national analogue to China’s land-sale/LGFV model found."),
 
     /* ---------- China ---------- */
     S("cn-nbs", "National Bureau of Statistics of China", "Statistical Communiqué on 2025 National Economic and Social Development; population data", "https://www.stats.gov.cn/english/", "2026-02", "China", "2025", "Official statistics",
       "Population fell ~3.39 million in 2025; 23% aged 60+. Real-estate investment −17.2%, residential starts −19.8%, residential sales value −13.0% in 2025."),
-    S("cn-reuters", "Reuters", "Reporting on China’s property sector (presale share, land-sale revenue, home prices)", "https://www.reuters.com/", "2025–2026", "China", "2024–2026", "Secondary (news) — context only",
+    S("cn-reuters", "Reuters", "Reporting on China’s property sector (presale share, land-sale revenue, home prices)", "https://www.reuters.com/", "2025–2026", "China", "2024–2026", "Secondary (news): context only",
       "Presales ~68% of new-home sales in 2025 (methodology differs from the IMF’s earlier ~90%); land-sale revenue down a further 16% in 2024. Context only; does not anchor a placement."),
 
     /* ---------- Japan ---------- */
@@ -65,15 +65,15 @@
       "Nationwide land prices surged into 1991, then declined for years; residential land began a sustained recovery around 2018; Tokyo residential land still rising in 2026. MLIT describes the collapse as destroying the old “land myth”."),
     S("jp-mlit-homes", "Ministry of Land, Infrastructure, Transport and Tourism (MLIT)", "Existing-home market policy and valuation reform; existing-home transaction index", "https://www.mlit.go.jp/en/", "2020s", "Japan", "Current", "Official policy",
       "Acknowledges a long-standing convention in which the value of an older detached house approached zero after roughly 20–25 years; existing homes historically a low share of transactions; reforms target inspection, valuation and renovation; monthly existing-home transaction index published."),
-    S("jp-boj-fsr", "Bank of Japan", "Financial System Report — housing loans", "https://www.boj.or.jp/en/research/brp/fsr/index.htm", "2025–2026", "Japan", "Current", "Central bank research",
+    S("jp-boj-fsr", "Bank of Japan", "Financial System Report: housing loans", "https://www.boj.or.jp/en/research/brp/fsr/index.htm", "2025–2026", "Japan", "Current", "Central bank research",
       "Variable-rate loans constitute the majority of housing loans."),
     S("jp-boj-fof", "Bank of Japan", "Flow of Funds Accounts", "https://www.boj.or.jp/en/statistics/sj/index.htm", "2026", "Japan", "Q1 2026", "Central bank statistics",
       "Household financial assets roughly ¥2,386 trillion, with deposits a major component."),
 
     /* ---------- United States ---------- */
-    S("us-fed-z1", "Board of Governors of the Federal Reserve System", "Financial Accounts of the United States (Z.1) — household balance sheet", "https://www.federalreserve.gov/releases/z1/", "2026", "United States", "Q2 2026", "Central bank statistics",
+    S("us-fed-z1", "Board of Governors of the Federal Reserve System", "Financial Accounts of the United States (Z.1): household balance sheet", "https://www.federalreserve.gov/releases/z1/", "2026", "United States", "Q2 2026", "Central bank statistics",
       "Owner-occupied real estate ~$49.8 trillion; financial assets ~$153.5 trillion. Aggregate national-account data; distribution across households differs."),
-    S("us-fed-fsr", "Board of Governors of the Federal Reserve System", "Financial Stability Report — household leverage analysis", "https://www.federalreserve.gov/publications/financial-stability-report.htm", "2025", "United States", "2025", "Central bank research",
+    S("us-fed-fsr", "Board of Governors of the Federal Reserve System", "Financial Stability Report: household leverage analysis", "https://www.federalreserve.gov/publications/financial-stability-report.htm", "2025", "United States", "2025", "Central bank research",
       "Mortgage balances relative to housing values well below pre-GFC peaks."),
     S("us-fed-supply", "Board of Governors of the Federal Reserve System", "Federal Reserve research and remarks on the housing shortfall and land-use constraints", "https://www.federalreserve.gov/", "2026", "United States", "2026", "Central bank research",
       "Estimates of a national housing shortfall of roughly 2 million to 5.5 million units; local zoning, permitting and land-use restrictions constrain where and how densely housing can be built."),
@@ -83,7 +83,7 @@
       "Mortgage balances ~$13.1 trillion; HELOC balances ~$459 billion."),
     S("us-freddie", "Freddie Mac", "Freddie Mac research: 30-year fixed share, rate lock-in, cash-out refinance volumes", "https://www.freddiemac.com/research", "2021–2025", "United States", "2021–2025", "Industry / GSE research",
       "More than 90% of home loans purchased in 2023 were 30-year fixed; lock-in worth tens of thousands of dollars per borrower and a factor suppressing existing-home inventory; ~$248 billion extracted through conventional cash-out refinancing in 2021."),
-    S("us-fhfa", "Federal Housing Finance Agency", "Fannie Mae and Freddie Mac — mortgage securitisation and the secondary market", "https://www.fhfa.gov/", "Ongoing", "United States", "Current", "Regulator",
+    S("us-fhfa", "Federal Housing Finance Agency", "Fannie Mae and Freddie Mac: mortgage securitisation and the secondary market", "https://www.fhfa.gov/", "Ongoing", "United States", "Current", "Regulator",
       "GSEs buy mortgages, package them into MBS and guarantee payments, letting lenders recycle capital; the 30-year fixed-rate mortgage has historically been the dominant product."),
     S("us-census-hvs", "U.S. Census Bureau", "Housing Vacancies and Homeownership (CPS/HVS)", "https://www.census.gov/housing/hvs/index.html", "2026-07", "United States", "Q2 2026", "Official statistics",
       "Homeowner vacancy 1.2%; rental vacancy 7.3%; homeownership 65.0%."),
@@ -91,13 +91,13 @@
       "Population growth slowed to about 0.5% in 2024–25, with net international migration the main contributor."),
     S("us-nber", "National Bureau of Economic Research", "NBER working paper on the slowdown in U.S. housing-stock growth", "https://www.nber.org/", "2025", "United States", "1980–2020", "Academic research",
       "Had the housing stock grown in 2000–2020 at its 1980–2000 rate, roughly 15 million more units would exist."),
-    S("us-urban", "Urban Institute", "State and local finance data — property taxes", "https://www.urban.org/", "2020s", "United States", "Recent fiscal years", "Independent policy research",
+    S("us-urban", "Urban Institute", "State and local finance data: property taxes", "https://www.urban.org/", "2020s", "United States", "Recent fiscal years", "Independent policy research",
       "Recurring property taxes are a major source of local-government revenue."),
 
     /* ---------- Real Estate Reframed synthesis ---------- */
-    S("rer-fingerprint", "Zenca — Real Estate Reframed", "Housing System Fingerprint v1.0", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
+    S("rer-fingerprint", "Zenca: Real Estate Reframed", "Housing System Fingerprint v1.0", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
       "Canonical 24 dimensions, endpoint semantics, launch placements and country labels. Used directly where a placement is a synthesis judgement."),
-    S("rer-crosscountry", "Zenca — Real Estate Reframed", "Cross-Country Housing Systems Comparison: India × China × Japan × United States", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
+    S("rer-crosscountry", "Zenca: Real Estate Reframed", "Cross-Country Housing Systems Comparison: India × China × Japan × United States", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
       "Country mechanisms, feedback loops, crisis archetypes and transmission channels; built on Dossiers B, G and H."),
   ];
 

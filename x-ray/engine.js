@@ -632,14 +632,14 @@
     const subject = useUnit ? m.P / m.area : m.P;
     const R = EVIDENCE_RULES;
     let label, reason;
-    if (!comps.length) { label = "Insufficient"; reason = "No comparable evidence entered — no price-confidence conclusion is possible."; }
+    if (!comps.length) { label = "Insufficient"; reason = "No comparable evidence entered: no price-confidence conclusion is possible."; }
     else if (recentTx.length >= R.strong.minRecentTransactions && recentTx.filter((x) => x.similarity === "high").length >= R.strong.minHighSimilarity && dispersion !== null && dispersion <= R.strong.maxDispersion) {
       label = "Strong"; reason = recentTx.length + " recent transactions, mostly highly similar, with a tight spread.";
     } else if (tx.length >= R.mixed.minTransactions && comps.length >= R.mixed.minTotal) {
       label = "Mixed"; reason = tx.length + " transaction" + (tx.length > 1 ? "s" : "") + " among " + comps.length + " observations" +
         (dispersion !== null ? "; spread " + pct(dispersion, 0) : "") + (recentTx.length < tx.length ? "; some evidence is over " + R.recentMonths + " months old" : "") + ".";
     } else {
-      label = "Weak"; reason = tx.length ? "Only one observation." : "Only listings, estimates or reference values — no completed transactions.";
+      label = "Weak"; reason = tx.length ? "Only one observation." : "Only listings, estimates or reference values; no completed transactions.";
     }
     const indicative = lo !== null ? { lo: useUnit ? lo * m.area : lo, hi: useUnit ? hi * m.area : hi } : null;
     let position = null;
@@ -744,7 +744,7 @@
   function fire(m, hh) {
     if (!m.fi) return { status: "Not assessed", reason: "You have not asked for the purchase to be tested against a financial-independence plan." };
     if (!m.fiTarget || m.fiReturn === null || m.fiInvest === null || hh.before === null)
-      return { status: "Not assessed", reason: "FI plan incomplete — needs a target, an expected return on usable assets and today's monthly investing." };
+      return { status: "Not assessed", reason: "FI plan incomplete: needs a target, an expected return on usable assets and today's monthly investing." };
     const usable0 = hh.before.liquid + hh.before.financial + hh.before.retirement;
     const usable1 = hh.after.liquid + hh.after.financial + hh.after.retirement;
     // Housing cash change shifts what can be invested each month.
@@ -935,7 +935,7 @@
         out.financial = {
           metric: "equity", target, hurdleGiven: m.k.minReturn !== null, required: req, label, atZero, atBase, atUp,
           objective: m.k.minReturn !== null ? "your " + m.k.minReturn + "% minimum return on your equity" : "nominal break-even on your equity (no hurdle supplied, so adequacy is not judged)",
-          reason: (atZero ? "The objective is met even with zero appreciation." : atBase ? "Some appreciation is needed — your base case (" + pct(m.base) + ") is enough." : atUp ? "Only your upside case (" + pct(m.upside) + ") meets the objective." : "Not met in any tested appreciation path, up to " + pct(m.upside) + ".") +
+          reason: (atZero ? "The objective is met even with zero appreciation." : atBase ? "Some appreciation is needed: your base case (" + pct(m.base) + ") is enough." : atUp ? "Only your upside case (" + pct(m.upside) + ") meets the objective." : "Not met in any tested appreciation path, up to " + pct(m.upside) + ".") +
             (req && req.bound === null ? " Required: about " + pct(req.value) + " a year." : ""),
         };
       } else if (R.rentVsOwn) {
@@ -952,10 +952,10 @@
     if (m.purpose === "home" || m.purpose === "mixed") {
       const flatBreach = R && R._flatBreach;
       let label, reason;
-      if (m.zat === "no") { label = "High"; reason = "You said you would not want this home without appreciation — the case rests on it."; }
-      else if (m.zat === "yes" && !flatBreach && m.thesisBHappy === "no") { label = "Moderate"; reason = "You'd want the home without real appreciation, yet said you wouldn't be happy if new supply caps the upside (Scenario B) — the case leans on appreciation more than the Zero-Appreciation answer suggests."; }
+      if (m.zat === "no") { label = "High"; reason = "You said you would not want this home without appreciation; the case rests on it."; }
+      else if (m.zat === "yes" && !flatBreach && m.thesisBHappy === "no") { label = "Moderate"; reason = "You'd want the home without real appreciation, yet said you wouldn't be happy if new supply caps the upside (Scenario B): the case leans on appreciation more than the Zero-Appreciation answer suggests."; }
       else if (m.zat === "yes" && !flatBreach) { label = "Low"; reason = "You would still want the home with zero real appreciation, and a flat market breaches none of your red lines."; }
-      else if (!m.zat) { label = null; reason = "Zero-Appreciation Test not answered — dependency cannot be judged against your own objective."; }
+      else if (!m.zat) { label = null; reason = "Zero-Appreciation Test not answered: dependency cannot be judged against your own objective."; }
       else { label = "Moderate"; reason = m.zat === "unsure" ? "You are unsure whether you would want the home without appreciation." : "You would want the home anyway, but a flat market breaches one of your red lines."; }
       out.home = { label, reason, rentBreakEven: R.rentVsOwn ? R.rentVsOwn.breakEven : null };
     }
@@ -1080,7 +1080,7 @@
       const liqAfter = L1 !== null ? L1 - draw : null;
       rows.push({
         id: "income", name: "Income interruption", desc: m.incomeMonths + " months without household income", illustrative: true,
-        cash: "Monthly burn " + $(burn) + (m.living === null ? " (property + debts only — living expenses not entered)" : ""),
+        cash: "Monthly burn " + $(burn) + (m.living === null ? " (property + debts only: living expenses not entered)" : ""),
         liquidity: L1 !== null ? "Draw " + $(draw) + "; liquid falls to " + $(liqAfter) + "; runway " + months(burn > 0 ? L1 / burn : Infinity) : "—",
         equity: "No direct change",
         tests: testCash(m, { liquid: liqAfter }), external: liqAfter !== null && liqAfter < 0 ? -liqAfter : 0, burn,
@@ -1115,10 +1115,10 @@
         if (m.k.maxDelay !== null && D <= m.k.maxDelay && cmp) tests.push({ id: "max_delay", breach: cmp.advantage < 0, detail: "inside your " + m.k.maxDelay + "-month tolerance, the advantage left is " + $(cmp.advantage) });
         if (m.k.minUcGap !== null && cmp) tests.push({ id: "min_uc_gap", breach: cmp.advantage < m.k.minUcGap, detail: "advantage " + $(cmp.advantage) });
         rows.push({
-          id: "delay" + i, name: "Construction delay", desc: "+" + D + " months to possession" + (m.k.maxDelay !== null && D > m.k.maxDelay ? " — beyond the " + m.k.maxDelay + " months you'd tolerate" : ""), illustrative: true,
+          id: "delay" + i, name: "Construction delay", desc: "+" + D + " months to possession" + (m.k.maxDelay !== null && D > m.k.maxDelay ? ": beyond the " + m.k.maxDelay + " months you'd tolerate" : ""), illustrative: true,
           cash: "Delay cost " + $(dc.total) + " (housing " + $(dc.overlap + dc.lostRent) + ", interest " + $(dc.financing) + (dc.opportunity !== null ? ", opportunity " + $(dc.opportunity) : "") + ")",
           liquidity: liq !== null ? "Liquid " + $(liq) + (hh.surplusConstruction === null ? " (assumes no spare income)" : "") : "—",
-          equity: cmp ? "Uncertainty Discount left: " + $(cmp.advantage) : "Ready comparable not entered — discount erosion not measurable",
+          equity: cmp ? "Uncertainty Discount left: " + $(cmp.advantage) : "Ready comparable not entered: discount erosion not measurable",
           tests,
         });
       });
@@ -1186,7 +1186,7 @@
 
   function leverageLabel(m, R) {
     if (!m.financed) return { label: "Not applicable", reason: "Bought without a loan." };
-    if (!cashRedLines(m)) return { label: null, reason: "No liquidity, outflow or debt-service red line set — financing stresses are described, not labelled." };
+    if (!cashRedLines(m)) return { label: null, reason: "No liquidity, outflow or debt-service red line set, financing stresses are described, not labelled." };
     const by = (id) => R.stress.find((r) => r.id === id);
     const single = ["base", "rate", "income"].map(by).filter((r) => r && r.breaches && r.breaches.some((t) => ["min_liquid", "max_outflow", "max_ds"].indexOf(t.id) >= 0));
     const comp = by("compound");
@@ -1198,7 +1198,7 @@
   const flat = (a) => [].concat.apply([], a);
 
   function utilityLabel(m) {
-    if (m.purpose === "investment" || m.purpose === "speculative") return { label: "Not the job of this purchase", reason: "Utility is not assessed for a financial purchase — and cannot be used to excuse weak economics." };
+    if (m.purpose === "investment" || m.purpose === "speculative") return { label: "Not the job of this purchase", reason: "Utility is not assessed for a financial purchase, and cannot be used to excuse weak economics." };
     if (!m.zat) return { label: null, reason: "Zero-Appreciation Test not answered." };
     const reasons = m.utility.map((u) => UTILITY[u]).filter(Boolean);
     if (m.zat === "yes" && reasons.length) return { label: "Strong", reason: "You would still choose this home without real appreciation, for " + list(reasons.slice(0, 3)) + "." };
@@ -1252,7 +1252,7 @@
     else if (a.year_round === "unknown") conc.push("year-round usability unknown");
     if (a.last_mile === "poor") conc.push("the last-mile road is poor");
     if (a.type === "via_other_land" && legal === "resolved") conc.push("access runs through another landowner's property (rights documented)");
-    if (a.type === "private_own" || a.type === "shared") notes.push("access is by " + ACCESS_TYPES[a.type] + " — its upkeep is not a public responsibility");
+    if (a.type === "private_own" || a.type === "shared") notes.push("access is by " + ACCESS_TYPES[a.type] + ": its upkeep is not a public responsibility");
     const flaggedDeps = deps.filter((d) => ACCESS_DEPS_FLAGGED.indexOf(d) >= 0);
     if (flaggedDeps.length) conc.push("functional use depends on " + list(flaggedDeps.map((d) => ACCESS_DEPS[d])));
     const otherDeps = deps.filter((d) => ACCESS_DEPS_FLAGGED.indexOf(d) < 0);
@@ -1285,7 +1285,7 @@
     if ((w.tanker_freq === "regular" || w.tanker_freq === "occasional") && !(onlyTanker || primary === "tanker")) conc.push(w.tanker_freq + " tanker dependence");
     if (w.borewell_status === "some_failed") conc.push("some borewells have failed");
     if (w.groundwater === "declining") conc.push("groundwater reported as declining");
-    if (w.potable === "after_treatment") conc.push("usable only after treatment — a dependence on treatment systems");
+    if (w.potable === "after_treatment") conc.push("usable only after treatment: a dependence on treatment systems");
     if (w.backup === "no" && w.dry_season !== "frequent") conc.push("no backup source");
     const unknowns = [["dry_season", "dry-season reliability"], ["potable", "water quality"], ["backup", "backup source"]].filter((x) => !w[x[0]] || w[x[0]] === "unknown").map((x) => x[1]);
     if (assessed && unknowns.length) conc.push("unknown " + list(unknowns));
@@ -1298,18 +1298,18 @@
         text: primary ? WATER_SOURCES[primary] + " primary" + (others.length ? "; also " + others.map((x) => WATER_SOURCES[x].toLowerCase()).join(", ") : "") : src.map((x) => WATER_SOURCES[x]).join(", ") },
       { step: "Reliability", status: w.dry_season === "none" && w.shortages !== "yes" ? "No interruptions reported" : w.dry_season === "frequent" ? "Frequent interruptions" : w.dry_season === "occasional" ? "Occasional interruptions" : "Unknown",
         text: [w.shortages ? "past shortages: " + yn(w.shortages) : "", w.tanker_freq ? "tankers: " + w.tanker_freq : "",
-          src.indexOf("borewell") >= 0 ? (num(w.borewells) ? w.borewells + " borewell" + (+w.borewells > 1 ? "s" : "") : "borewell") + (w.borewell_status ? " — " + bwStatus[w.borewell_status] : "") : "",
+          src.indexOf("borewell") >= 0 ? (num(w.borewells) ? w.borewells + " borewell" + (+w.borewells > 1 ? "s" : "") : "borewell") + (w.borewell_status ? ": " + bwStatus[w.borewell_status] : "") : "",
           w.groundwater && w.groundwater !== "unknown" ? "groundwater " + w.groundwater + (w.groundwater_note ? " (" + w.groundwater_note + ")" : "") : ""].filter(Boolean).join(" · ") },
       { step: "Quality", status: { direct: "Directly usable", after_treatment: "Needs treatment", not_usable: "Not usable", unknown: "Unknown" }[w.potable] || "Unknown",
         text: [w.treatment, w.quality_issues].filter(Boolean).join(" · ") },
       { step: "Cost", status: m.waterCostAnnual > 0 ? money(monthly, m.ccy) + "/mo" : "None entered",
-        text: (m.waterCostAnnual > 0 ? "Tanker, treatment and pumping — added to owner costs. " : "") + (pos(w.maintenance_share) ? money(pos(w.maintenance_share), m.ccy) + "/yr is already inside maintenance. " : "") + "Low water cost today does not prove long-term water security." },
+        text: (m.waterCostAnnual > 0 ? "Tanker, treatment and pumping: added to owner costs. " : "") + (pos(w.maintenance_share) ? money(pos(w.maintenance_share), m.ccy) + "/yr is already inside maintenance. " : "") + "Low water cost today does not prove long-term water security." },
       { step: "Fallback", status: w.backup === "yes" ? "Backup source" : w.backup === "no" ? "No backup" : "Unknown",
         text: [num(w.storage_days) !== null ? w.storage_days + " days of storage" : "storage not recorded", w.contingency].filter(Boolean).join(" · ") },
       { step: "Dependency", status: control.length ? control.filter((x) => x !== "self").length + " external" : "Not recorded",
         text: control.length ? "Supply depends on " + list(control.map((x) => WATER_CONTROL[x])) + "." : "" },
     ];
-    const borewellNote = src.indexOf("borewell") >= 0 ? "Deeper borewell does not automatically mean more secure water — depth alone says nothing reliable about recharge or the groundwater trend." : null;
+    const borewellNote = src.indexOf("borewell") >= 0 ? "Deeper borewell does not automatically mean more secure water: depth alone says nothing reliable about recharge or the groundwater trend." : null;
     const gate = gateOf("water", "Water & basic infrastructure", disq, conc, [], !assessed,
       "Potential disqualifier: tankers as the primary source, frequent dry-season failure with no backup, water unusable after treatment, or failed borewells as the only source. Concern: a single source, interruptions, shortages, tanker reliance, failed borewells, declining groundwater, treatment dependence, no backup, or unknowns.");
     return { assessed, sources: src, primary, chain, borewellNote, monthly, gate, groundwaterUnknown: src.indexOf("borewell") >= 0 && (!w.groundwater || w.groundwater === "unknown") };
@@ -1419,18 +1419,18 @@
     if (m.uc && (R.execution.label !== "Resolved" || (be !== null && isFinite(be)))) {
       const d0 = R.uc.delays[0].cmp;
       return { id: "uc", pair: ["Lower under-construction price", "unresolved execution and delay risk"],
-        text: "You are exchanging a lower price" + (d0 ? " (" + $(d0.sticker) + " below the ready comparable)" : "") + " for unresolved execution and delay risk" + (be !== null && isFinite(be) ? " — about " + months(be) + " of delay would consume the advantage." : ".") };
+        text: "You are exchanging a lower price" + (d0 ? " (" + $(d0.sticker) + " below the ready comparable)" : "") + " for unresolved execution and delay risk" + (be !== null && isFinite(be) ? ": about " + months(be) + " of delay would consume the advantage." : ".") };
     }
     // 2. survivability
     if (m.financed && (R.leverage.label === "High" || R.leverage.label === "Moderate")) {
       return { id: "leverage", pair: ["Higher leverage", "greater cash-flow fragility"],
-        text: "You are exchanging less capital upfront (a loan of " + pct(m.LTV, 0) + " of the price) for a thinner margin of error — " + R.leverage.reason.charAt(0).toLowerCase() + R.leverage.reason.slice(1) };
+        text: "You are exchanging less capital upfront (a loan of " + pct(m.LTV, 0) + " of the price) for a thinner margin of error: " + R.leverage.reason.charAt(0).toLowerCase() + R.leverage.reason.slice(1) };
     }
     // 3. appreciation dependency
     const fd = R.apprDep.financial;
     if (fd && (fd.label === "High" || fd.label === "Moderate") && m.purpose !== "home") {
       return { id: "yield", pair: ["Low current yield", "dependence on future appreciation"],
-        text: "You are accepting " + (R.rental ? "a " + pct(R.rental.netYield, 1) + " net yield today" : "little current income") + " in exchange for dependence on future appreciation — " + fd.reason.charAt(0).toLowerCase() + fd.reason.slice(1) };
+        text: "You are accepting " + (R.rental ? "a " + pct(R.rental.netYield, 1) + " net yield today" : "little current income") + " in exchange for dependence on future appreciation: " + fd.reason.charAt(0).toLowerCase() + fd.reason.slice(1) };
     }
     // 4. liquidity / concentration
     const hh = R.hh;
@@ -1440,16 +1440,16 @@
     }
     if (hh.before && hh.after && hh.after.equityShare !== null && (hh.before.equityShare === null || hh.after.equityShare > hh.before.equityShare + 0.05)) {
       return { id: "concentration", pair: ["Concentrated property wealth", "lower balance-sheet flexibility"],
-        text: "You are concentrating wealth in property — real-estate equity moves from " + pct(hh.before.equityShare || 0, 0) + " to " + pct(hh.after.equityShare, 0) + " of net worth — in exchange for less balance-sheet flexibility." };
+        text: "You are concentrating wealth in property: real-estate equity moves from " + pct(hh.before.equityShare || 0, 0) + " to " + pct(hh.after.equityShare, 0) + " of net worth: in exchange for less balance-sheet flexibility." };
     }
     // 5. utility / consumption
     if (m.enoughPrice && m.enoughPrice < m.P) {
       return { id: "more-house", pair: ["More house", "a larger Housing-Consumption Premium" + (m.fi ? " and later financial independence" : "")],
-        text: "You are choosing " + $(m.P - m.enoughPrice) + " more house than the home you said would be enough — buying " + (R.utility.label === "Strong" ? list(m.utility.map((u) => UTILITY[u]).slice(0, 2)) : "more space or location") + " with capital that would otherwise stay flexible." };
+        text: "You are choosing " + $(m.P - m.enoughPrice) + " more house than the home you said would be enough, buying " + (R.utility.label === "Strong" ? list(m.utility.map((u) => UTILITY[u]).slice(0, 2)) : "more space or location") + " with capital that would otherwise stay flexible." };
     }
     // 6. market context
-    if (m.cityStage === "mature") return { id: "mature", pair: ["Mature, certain location", "higher starting valuation"], text: "You are paying for an established, certain location — which usually means a higher starting valuation and less transformational upside." };
-    if (m.cityStage === "early") return { id: "early", pair: ["Early-stage location", "uncertain transformation"], text: "You are buying optionality in a location still being transformed — with more uncertainty about whether that transformation arrives, and when." };
+    if (m.cityStage === "mature") return { id: "mature", pair: ["Mature, certain location", "higher starting valuation"], text: "You are paying for an established, certain location, which usually means a higher starting valuation and less transformational upside." };
+    if (m.cityStage === "early") return { id: "early", pair: ["Early-stage location", "uncertain transformation"], text: "You are buying optionality in a location still being transformed: with more uncertainty about whether that transformation arrives, and when." };
     return { id: "none", pair: [], text: "No single dominant tension emerges from the inputs entered; the trade-offs below are spread across several dimensions." };
   }
 
@@ -1458,35 +1458,35 @@
     const c = [];
     const hh = R.hh, base = R.stress.find((r) => r.id === "base");
     if (m.uc && R.uc && R.uc.breakEven !== null && R.uc.breakEven > 0)
-      c.push({ pri: 1, text: "possession arrives within about " + (isFinite(R.uc.breakEven) ? months(R.uc.breakEven) : "ten years") + " of the promised date — the point at which delay costs consume the under-construction advantage." });
+      c.push({ pri: 1, text: "possession arrives within about " + (isFinite(R.uc.breakEven) ? months(R.uc.breakEven) : "ten years") + " of the promised date: the point at which delay costs consume the under-construction advantage." });
     if (R.execution.label !== "Resolved" && R.execution.total)
       c.push({ pri: 1, text: "the " + (R.execution.open + R.execution.unk) + " open or unknown legal/project checks come back clean before you commit." });
     if (hh.L1 !== null && m.reserve !== null && base && !base.breaches.some((t) => t.id === "min_liquid"))
-      c.push({ pri: 2, text: "liquid assets stay above the " + $(m.reserve) + " floor you set — they start at " + $(hh.L1) + " after purchase." });
+      c.push({ pri: 2, text: "liquid assets stay above the " + $(m.reserve) + " floor you set: they start at " + $(hh.L1) + " after purchase." });
     const rate = R.stress.find((r) => r.id === "rate");
     if (rate && !rate.na && rate.status === "within")
-      c.push({ pri: 2, text: "rates rise no more than the tested " + m.bump + " bps — even then the EMI of " + $(rate.E2) + " stays within your limits." });
+      c.push({ pri: 2, text: "rates rise no more than the tested " + m.bump + " bps; even then the EMI of " + $(rate.E2) + " stays within your limits." });
     const fd = R.apprDep.financial;
     if (fd && fd.required && fd.required.bound === null && fd.required.value > 0)
-      c.push({ pri: 3, text: "prices grow at least about " + pct(fd.required.value) + " a year — what " + fd.objective + " requires." });
+      c.push({ pri: 3, text: "prices grow at least about " + pct(fd.required.value) + " a year: what " + fd.objective + " requires." });
     if (R.rentVsOwn && m.purpose === "home" && R.rentVsOwn.base.ownerWealth >= R.rentVsOwn.base.renterWealth)
-      c.push({ pri: 3, text: "appreciation reaches roughly your base case — at that rate owning ends at least as wealthy as renting the equivalent home" + (R.rentVsOwn.breakEven && R.rentVsOwn.breakEven.bound === null ? " (break-even about " + pct(R.rentVsOwn.breakEven.value) + " a year)" : "") + "." });
+      c.push({ pri: 3, text: "appreciation reaches roughly your base case: at that rate owning ends at least as wealthy as renting the equivalent home" + (R.rentVsOwn.breakEven && R.rentVsOwn.breakEven.bound === null ? " (break-even about " + pct(R.rentVsOwn.breakEven.value) + " a year)" : "") + "." });
     if (R.rental && R.rental.afterDebt >= 0)
-      c.push({ pri: 3, text: "rent keeps covering costs and debt service — after-debt cash flow is " + $(R.rental.afterDebt) + " a year, so appreciation is not needed just to carry it." });
+      c.push({ pri: 3, text: "rent keeps covering costs and debt service: after-debt cash flow is " + $(R.rental.afterDebt) + " a year, so appreciation is not needed just to carry it." });
     if (isFinite(R.frictionYears) && m.H >= R.frictionYears)
-      c.push({ pri: 4, text: "you really do hold for " + years(m.H) + " — at your base appreciation it takes about " + years(R.frictionYears) + " for the sale price to absorb the " + pct(R.roundTripFriction, 0) + " round-trip transaction cost." });
+      c.push({ pri: 4, text: "you really do hold for " + years(m.H) + ": at your base appreciation it takes about " + years(R.frictionYears) + " for the sale price to absorb the " + pct(R.roundTripFriction, 0) + " round-trip transaction cost." });
     if (R.utility.label === "Strong")
-      c.push({ pri: 5, text: "you keep valuing " + list(m.utility.map((u) => UTILITY[u]).slice(0, 3)) + " even if the home only keeps pace with inflation — as you said in the Zero-Appreciation Test." });
+      c.push({ pri: 5, text: "you keep valuing " + list(m.utility.map((u) => UTILITY[u]).slice(0, 3)) + " even if the home only keeps pace with inflation: as you said in the Zero-Appreciation Test." });
     const gA = R.gates.find((x) => x.id === "access"), gW = R.gates.find((x) => x.id === "water");
     if (gA.label === "Acceptable" && gW.label === "Acceptable")
-      c.push({ pri: 4, text: "the access and water arrangements you've recorded keep holding — documented, year-round access and a water supply with a fallback." });
+      c.push({ pri: 4, text: "the access and water arrangements you've recorded keep holding: documented, year-round access and a water supply with a fallback." });
     const tc = R.thesis.rows.find((x) => x.id === "C");
     if (m.thesisCSurvive === "yes" && tc && tc.externalToExit === 0)
-      c.push({ pri: 3, text: "even if the location thesis disappoints (Scenario C, " + pct(m.thesisC) + " a year, weaker resale), you could exit without adding cash — and you've said your plans survive it." });
+      c.push({ pri: 3, text: "even if the location thesis disappoints (Scenario C, " + pct(m.thesisC) + " a year, weaker resale), you could exit without adding cash, and you've said your plans survive it." });
     if (m.thesisBHappy === "yes")
-      c.push({ pri: 5, text: "you stay content owning it even if the area develops but new supply caps appreciation (Scenario B, " + pct(m.thesisB) + " a year) — as you said." });
+      c.push({ pri: 5, text: "you stay content owning it even if the area develops but new supply caps appreciation (Scenario B, " + pct(m.thesisB) + " a year): as you said." });
     if (R.city && R.city.tailwind.length && (m.engines.indexOf("jobs") >= 0 || m.engines.indexOf("infrastructure") >= 0))
-      c.push({ pri: 6, text: "the local " + R.city.tailwind.slice(0, 2).join(" and ").toLowerCase() + " you see as tailwinds keep supporting this micro-market — and are not already fully in today's price." });
+      c.push({ pri: 6, text: "the local " + R.city.tailwind.slice(0, 2).join(" and ").toLowerCase() + " you see as tailwinds keep supporting this micro-market, and are not already fully in today's price." });
     return c.sort((a, b) => a.pri - b.pri).slice(0, 3);
   }
 
@@ -1494,78 +1494,78 @@
     const $ = (v) => money(v, m.ccy);
     const c = [];
     const ex = R.execution;
-    if (ex.open + ex.unk > 0) c.push({ pri: 1, text: "any of the " + (ex.open + ex.unk) + " unresolved legal/project checks turns out badly — they remain open or unknown today." });
+    if (ex.open + ex.unk > 0) c.push({ pri: 1, text: "any of the " + (ex.open + ex.unk) + " unresolved legal/project checks turns out badly; they remain open or unknown today." });
     if (m.uc && R.uc && R.uc.breakEven !== null && isFinite(R.uc.breakEven))
-      c.push({ pri: 1, text: (R.uc.breakEven === 0 ? "you value the price gap alone — even on time, waiting costs exceed the advantage over a ready comparable." : "possession slips beyond about " + months(R.uc.breakEven) + " — the delay costs then exceed the price advantage over a ready comparable" + (m.k.maxDelay !== null && R.uc.breakEven <= m.k.maxDelay ? ", inside the " + m.k.maxDelay + "-month delay you said you would tolerate" : "") + ".") });
+      c.push({ pri: 1, text: (R.uc.breakEven === 0 ? "you value the price gap alone; even on time, waiting costs exceed the advantage over a ready comparable." : "possession slips beyond about " + months(R.uc.breakEven) + ": the delay costs then exceed the price advantage over a ready comparable" + (m.k.maxDelay !== null && R.uc.breakEven <= m.k.maxDelay ? ", inside the " + m.k.maxDelay + "-month delay you said you would tolerate" : "") + ".") });
     const fdx = R.apprDep.financial;
     R.stress.filter((r) => r.status === "breach" && r.id !== "base" && !r.compound).forEach((r) => {
       const apprOnly = r.id === "flat" || r.id === "zeroReal";
       if (apprOnly && fdx && (fdx.label === "High" || fdx.label === "Moderate")) return; // covered by the appreciation condition
-      c.push({ pri: apprOnly ? 3 : 2, text: r.name.toLowerCase() + " (" + r.desc.toLowerCase() + ") — it breaches your " + uniq(r.breaches.map((t) => t.label)).join(" and ") + " (" + r.breaches[0].detail + ")." });
+      c.push({ pri: apprOnly ? 3 : 2, text: r.name.toLowerCase() + " (" + r.desc.toLowerCase() + "): it breaches your " + uniq(r.breaches.map((t) => t.label)).join(" and ") + " (" + r.breaches[0].detail + ")." });
     });
     const base = R.stress.find((r) => r.id === "base");
-    if (base && base.status === "breach" && base.breaches.some((t) => t.id !== "legal")) c.unshift({ pri: 2, text: "nothing changes at all — the base case already breaches your " + uniq(base.breaches.filter((t) => t.id !== "legal").map((t) => t.label)).join(" and ") + " (" + base.breaches.filter((t) => t.id !== "legal")[0].detail + ")." });
+    if (base && base.status === "breach" && base.breaches.some((t) => t.id !== "legal")) c.unshift({ pri: 2, text: "nothing changes at all: the base case already breaches your " + uniq(base.breaches.filter((t) => t.id !== "legal").map((t) => t.label)).join(" and ") + " (" + base.breaches.filter((t) => t.id !== "legal")[0].detail + ")." });
     const comp = R.stress.find((r) => r.compound);
     if (comp && comp.status === "breach" && !R.stress.some((r) => r.status === "breach" && !r.compound && r.id !== "base"))
-      c.push({ pri: 2, text: "ordinary disappointments arrive together (" + comp.desc + ") — combined, they breach your " + uniq(comp.breaches.map((t) => t.label)).join(" and ") + "." });
+      c.push({ pri: 2, text: "ordinary disappointments arrive together (" + comp.desc + "); combined, they breach your " + uniq(comp.breaches.map((t) => t.label)).join(" and ") + "." });
     const fd = R.apprDep.financial;
     if (fd && (fd.label === "High" || fd.label === "Moderate"))
-      c.push({ pri: 3, text: "appreciation disappoints — " + (fd.required && fd.required.bound === null ? "below about " + pct(fd.required.value) + " a year the case misses " + fd.objective : fd.reason.toLowerCase()) + "." });
+      c.push({ pri: 3, text: "appreciation disappoints: " + (fd.required && fd.required.bound === null ? "below about " + pct(fd.required.value) + " a year the case misses " + fd.objective : fd.reason.toLowerCase()) + "." });
     if (R.rentVsOwn && m.purpose === "home") {
       const rb = R.rentVsOwn.base, be = R.rentVsOwn.breakEven;
       if (rb.renterWealth > rb.ownerWealth)
-        c.push({ pri: 3, text: "you judge it purely financially — at your base appreciation, renting the equivalent home" + (m.altInvests ? " and investing the difference" : "") + " ends about " + $(rb.renterWealth - rb.ownerWealth) + " wealthier" + (be && be.bound === null ? "; owning catches up only at about " + pct(be.value) + " a year" : "") + ". That gap is what the utility is costing you." });
+        c.push({ pri: 3, text: "you judge it purely financially: at your base appreciation, renting the equivalent home" + (m.altInvests ? " and investing the difference" : "") + " ends about " + $(rb.renterWealth - rb.ownerWealth) + " wealthier" + (be && be.bound === null ? "; owning catches up only at about " + pct(be.value) + " a year" : "") + ". That gap is what the utility is costing you." });
     }
     if (R.rental && R.rental.afterDebt < 0)
-      c.push({ pri: 3, text: "rent alone has to carry the property — it doesn't: after-debt cash flow is " + $(R.rental.afterDebt) + " a year, funded from your income." });
+      c.push({ pri: 3, text: "rent alone has to carry the property, and it doesn't: after-debt cash flow is " + $(R.rental.afterDebt) + " a year, funded from your income." });
     if (isFinite(R.frictionYears) ? m.H < R.frictionYears : true)
-      c.push({ pri: 4, text: "you sell within " + (isFinite(R.frictionYears) ? "about " + years(R.frictionYears) : "your holding period") + " — before then, transaction friction of " + pct(R.roundTripFriction, 0) + " of the price dominates the outcome" + (m.moveRisk === "likely" || m.moveRisk === "plausible" ? ", and you rate a move as " + m.moveRisk : "") + "." });
+      c.push({ pri: 4, text: "you sell within " + (isFinite(R.frictionYears) ? "about " + years(R.frictionYears) : "your holding period") + ": before then, transaction friction of " + pct(R.roundTripFriction, 0) + " of the price dominates the outcome" + (m.moveRisk === "likely" || m.moveRisk === "plausible" ? ", and you rate a move as " + m.moveRisk : "") + "." });
     else if (m.moveRisk === "likely" || m.moveRisk === "plausible")
       c.push({ pri: 4, text: "the move you rate as " + m.moveRisk + " forces an early sale into whatever market exists then." });
     R.gates.filter((g) => g.id === "access" || g.id === "water").forEach((g) => {
-      if (g.label === "Potential disqualifier") c.push({ pri: 1, text: (g.id === "access" ? "access can't be relied on — " : "water can't be relied on — ") + list(g.disq) + ". No other strength in the profile offsets this." });
-      else if (g.label === "Concern") c.push({ pri: 4, text: (g.id === "access" ? "the access you depend on fails you — " : "the water supply fails you — ") + g.conc.slice(0, 2).join("; ") + "." });
+      if (g.label === "Potential disqualifier") c.push({ pri: 1, text: (g.id === "access" ? "access can't be relied on: " : "water can't be relied on: ") + list(g.disq) + ". No other strength in the profile offsets this." });
+      else if (g.label === "Concern") c.push({ pri: 4, text: (g.id === "access" ? "the access you depend on fails you: " : "the water supply fails you: ") + g.conc.slice(0, 2).join("; ") + "." });
     });
     const tC = R.thesis.rows.find((x) => x.id === "C");
     if (tC && (m.thesisCSurvive === "no" || m.thesisCSurvive === "unsure" || tC.externalToExit > 0))
-      c.push({ pri: m.thesisCSurvive === "no" ? 1 : 2, text: "the location thesis disappoints (Scenario C: " + pct(m.thesisC) + " a year, weaker resale) — equity at sale would be " + money(tC.eqSale, m.ccy) + (tC.externalToExit > 0 ? ", so exiting needs " + money(tC.externalToExit, m.ccy) + " of other cash" : "") + (m.thesisCSurvive ? "; you said you " + (m.thesisCSurvive === "no" ? "could not survive it" : "are unsure you'd survive it") : "") + "." });
+      c.push({ pri: m.thesisCSurvive === "no" ? 1 : 2, text: "the location thesis disappoints (Scenario C: " + pct(m.thesisC) + " a year, weaker resale): equity at sale would be " + money(tC.eqSale, m.ccy) + (tC.externalToExit > 0 ? ", so exiting needs " + money(tC.externalToExit, m.ccy) + " of other cash" : "") + (m.thesisCSurvive ? "; you said you " + (m.thesisCSurvive === "no" ? "could not survive it" : "are unsure you'd survive it") : "") + "." });
     if (m.thesisBHappy === "no")
-      c.push({ pri: 3, text: "the area develops but new supply absorbs the upside (Scenario B, " + pct(m.thesisB) + " a year) — you said you would not be happy owning it then." });
+      c.push({ pri: 3, text: "the area develops but new supply absorbs the upside (Scenario B, " + pct(m.thesisB) + " a year): you said you would not be happy owning it then." });
     const shock = R.stress.find((r) => r.id === "shock");
     if (shock && /^(Requires|Would)/.test(shock.source || ""))
-      c.push({ pri: 4, text: "you need " + $(m.shock) + " in year " + m.shockYear + " — " + shock.source.toLowerCase() + "." });
+      c.push({ pri: 4, text: "you need " + $(m.shock) + " in year " + m.shockYear + ": " + shock.source.toLowerCase() + "." });
     if (R.utility.label === "Weak" || R.utility.label === "Mixed")
-      c.push({ pri: 5, text: "the home's appeal fades without price gains — your Zero-Appreciation answer suggests the utility case alone may not hold it." });
+      c.push({ pri: 5, text: "the home's appeal fades without price gains: your Zero-Appreciation answer suggests the utility case alone may not hold it." });
     return dedupe(c.sort((a, b) => a.pri - b.pri)).slice(0, 3);
   }
   const dedupe = (a) => a.filter((x, i) => a.findIndex((y) => y.text === x.text) === i);
 
   function openQuestions(m, R) {
     const q = [];
-    R.execution.items.filter((x) => x.status !== "resolved").forEach((x) => q.push({ kind: "Diligence", text: x.label + " — " + (x.status === "problem" ? "problem found" : x.status === "open" ? "open" : "status unknown") }));
-    if (!R.water.assessed) q.push({ kind: "Water", text: "Water security not recorded — source, reliability, quality, fallback and dependency are unknown, not assumed." });
+    R.execution.items.filter((x) => x.status !== "resolved").forEach((x) => q.push({ kind: "Diligence", text: x.label + ": " + (x.status === "problem" ? "problem found" : x.status === "open" ? "open" : "status unknown") }));
+    if (!R.water.assessed) q.push({ kind: "Water", text: "Water security not recorded: source, reliability, quality, fallback and dependency are unknown, not assumed." });
     else {
       R.water.chain.filter((x) => x.status === "Unknown").forEach((x) => q.push({ kind: "Water", text: x.step + " unknown." }));
-      if (R.water.groundwaterUnknown) q.push({ kind: "Water", text: "Groundwater trend unknown — borewell depth alone cannot establish water security." });
+      if (R.water.groundwaterUnknown) q.push({ kind: "Water", text: "Groundwater trend unknown: borewell depth alone cannot establish water security." });
     }
-    if (!R.access.assessed) q.push({ kind: "Access", text: "Physical access not recorded — road type, last-mile quality and year-round use." });
-    if (!R.effective.assessed && m.selfUse) q.push({ kind: "Access", text: "Effective access not assessed — travel times to the places your household needs to reach." });
-    if (m.zat === "yes" && m.thesisBHappy === "no") q.push({ kind: "Objective", text: "You'd want the home without real appreciation, but not under Scenario B — worth reconciling which is true." });
-    if (R.thesis.relevant && !R.thesis.answered) q.push({ kind: "Scenario", text: "Location-thesis questions unanswered — would you be happy under Scenario B, and can you survive Scenario C?" });
-    if (R.evidence.label === "Insufficient" || R.evidence.label === "Weak") q.push({ kind: "Price", text: "Comparable evidence is " + R.evidence.label.toLowerCase() + " — add completed transactions to test the price." });
+    if (!R.access.assessed) q.push({ kind: "Access", text: "Physical access not recorded: road type, last-mile quality and year-round use." });
+    if (!R.effective.assessed && m.selfUse) q.push({ kind: "Access", text: "Effective access not assessed: travel times to the places your household needs to reach." });
+    if (m.zat === "yes" && m.thesisBHappy === "no") q.push({ kind: "Objective", text: "You'd want the home without real appreciation, but not under Scenario B: worth reconciling which is true." });
+    if (R.thesis.relevant && !R.thesis.answered) q.push({ kind: "Scenario", text: "Location-thesis questions unanswered: would you be happy under Scenario B, and can you survive Scenario C?" });
+    if (R.evidence.label === "Insufficient" || R.evidence.label === "Weak") q.push({ kind: "Price", text: "Comparable evidence is " + R.evidence.label.toLowerCase() + ": add completed transactions to test the price." });
     else if (R.evidence.oldest > EVIDENCE_RULES.recentMonths) q.push({ kind: "Price", text: "Some comparables are over " + EVIDENCE_RULES.recentMonths + " months old (Time Spread)." });
-    if (!m.acqKnown) q.push({ kind: "Costs", text: "Acquisition costs not entered — returns and housing cost are incomplete." });
-    if (!m.ownerKnown) q.push({ kind: "Costs", text: "Annual owner costs not entered — returns and housing cost are incomplete." });
-    if (!m.exitKnown) q.push({ kind: "Costs", text: "Exit / selling costs not entered — sale proceeds overstated." });
-    if (m.selfUse && !m.Req) q.push({ kind: "Rent", text: "Equivalent market rent not entered — rent-v-own and imputed-housing comparisons withheld." });
-    if (m.letting && !m.R) q.push({ kind: "Rent", text: "Expected rent not entered — rental P&L withheld." });
-    if (m.living === null) q.push({ kind: "Household", text: "Monthly living expenses not entered — household surplus and income-interruption burn are incomplete." });
+    if (!m.acqKnown) q.push({ kind: "Costs", text: "Acquisition costs not entered: returns and housing cost are incomplete." });
+    if (!m.ownerKnown) q.push({ kind: "Costs", text: "Annual owner costs not entered: returns and housing cost are incomplete." });
+    if (!m.exitKnown) q.push({ kind: "Costs", text: "Exit / selling costs not entered: sale proceeds overstated." });
+    if (m.selfUse && !m.Req) q.push({ kind: "Rent", text: "Equivalent market rent not entered: rent-v-own and imputed-housing comparisons withheld." });
+    if (m.letting && !m.R) q.push({ kind: "Rent", text: "Expected rent not entered: rental P&L withheld." });
+    if (m.living === null) q.push({ kind: "Household", text: "Monthly living expenses not entered: household surplus and income-interruption burn are incomplete." });
     if (m.liquid0 === null || m.fin0 === null) q.push({ kind: "Household", text: "Liquid and financial assets needed for the balance sheet." });
-    if (R.city.insufficient) q.push({ kind: "City", text: "No city signals entered — the City layer is shown as insufficient data, not inferred." });
-    if (m.infl === null) q.push({ kind: "Scenario", text: "No inflation scenario — real returns and the zero-real test withheld." });
-    if (m.uc && !m.Rp) q.push({ kind: "Under construction", text: "No ready comparable price — the Uncertainty Discount cannot be measured." });
-    if (m.uc && !m.scheduleEntered) q.push({ kind: "Under construction", text: "Payment schedule not entered — an illustrative construction-linked plan is used." });
-    if (m.uc && !m.developer) q.push({ kind: "Under construction", text: "Developer not named — delivery record cannot be reviewed." });
+    if (R.city.insufficient) q.push({ kind: "City", text: "No city signals entered: the City layer is shown as insufficient data, not inferred." });
+    if (m.infl === null) q.push({ kind: "Scenario", text: "No inflation scenario: real returns and the zero-real test withheld." });
+    if (m.uc && !m.Rp) q.push({ kind: "Under construction", text: "No ready comparable price: the Uncertainty Discount cannot be measured." });
+    if (m.uc && !m.scheduleEntered) q.push({ kind: "Under construction", text: "Payment schedule not entered: an illustrative construction-linked plan is used." });
+    if (m.uc && !m.developer) q.push({ kind: "Under construction", text: "Developer not named: delivery record cannot be reviewed." });
     if (R.fire.status === "Not assessed" && m.fi) q.push({ kind: "FI", text: R.fire.reason });
     q.push({ kind: "Tax", text: "Taxes on rent and capital gains are not modelled unless you entered them as exit tax." });
     return q;
@@ -1579,14 +1579,14 @@
       what = R.utility.label === "Strong" ? "primarily a high-utility housing purchase" : R.utility.label === "Weak" ? "a home purchase in which, by your own Zero-Appreciation answer, the financial case is doing much of the work" : "primarily a housing purchase whose utility case is still " + (R.utility.label ? R.utility.label.toLowerCase() : "unstated");
     } else if (m.purpose === "investment") {
       what = (R.assetCharacter === "Income-led" ? "an income-led" : R.assetCharacter === "Appreciation-led" ? "an appreciation-led" : "a rent-plus-appreciation") + " investment property";
-    } else if (m.purpose === "mixed") what = "a mixed purchase — a home with a material investment objective";
+    } else if (m.purpose === "mixed") what = "a mixed purchase: a home with a material investment objective";
     else what = "an appreciation-led, resale-oriented purchase";
     let s1 = "This is " + what + (m.uc ? ", bought under construction" : "") + ", " + (m.financed ? "financed with a loan of " + pct(m.LTV, 0) + " of the price" : "bought without a loan");
     if (R.rental) s1 += ", with a net rental yield of " + pct(R.rental.netYield, 1) + " at today's price";
     parts.push(s1 + ".");
 
     const gd = R.gates.filter((g) => g.label === "Potential disqualifier"), gc = R.gates.filter((g) => g.label === "Concern");
-    if (gd.length) parts.push("Fundamental gate" + (gd.length > 1 ? "s" : "") + ": " + list(gd.map((g) => g.name.toLowerCase())) + (gd.length > 1 ? " are potential disqualifiers" : " is a potential disqualifier") + " (" + gd[0].disq[0] + ") — nothing else in this profile offsets " + (gd.length > 1 ? "them" : "it") + ".");
+    if (gd.length) parts.push("Fundamental gate" + (gd.length > 1 ? "s" : "") + ": " + list(gd.map((g) => g.name.toLowerCase())) + (gd.length > 1 ? " are potential disqualifiers" : " is a potential disqualifier") + " (" + gd[0].disq[0] + "): nothing else in this profile offsets " + (gd.length > 1 ? "them" : "it") + ".");
     else if (gc.length === R.gates.length) parts.push("No fundamental gate is a potential disqualifier, but all four carry concerns.");
     else if (gc.length) parts.push("No fundamental gate is a potential disqualifier; " + list(gc.map((g) => g.name.toLowerCase())) + (gc.length > 1 ? " carry concerns" : " carries a concern") + ".");
 
@@ -1604,7 +1604,7 @@
 
     const dep = R.apprDep.primary;
     if (dep && dep.label) parts.push("Appreciation dependency is " + dep.label.toLowerCase() + ": " + dep.reason.charAt(0).toLowerCase() + dep.reason.slice(1));
-    if (m.purpose === "mixed" && R.apprDep.home && R.apprDep.financial && R.apprDep.home.label) parts.push("Separately, the utility case is " + (R.utility.label || "unstated").toLowerCase() + " — the two are not netted against each other.");
+    if (m.purpose === "mixed" && R.apprDep.home && R.apprDep.financial && R.apprDep.home.label) parts.push("Separately, the utility case is " + (R.utility.label || "unstated").toLowerCase() + ": the two are not netted against each other.");
     if (R.tradeoff && R.tradeoff.id !== "none") parts.push("The main trade-off: " + R.tradeoff.text.charAt(0).toLowerCase() + R.tradeoff.text.slice(1));
     const unresolved = [];
     if (R.execution.open + R.execution.unk) unresolved.push((R.execution.open + R.execution.unk) + " legal/project check" + (R.execution.open + R.execution.unk > 1 ? "s" : ""));

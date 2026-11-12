@@ -249,7 +249,9 @@ textarea.lined::placeholder, .txt::placeholder, .input-wrap input::placeholder {
 .seg-btn:hover { color: var(--ink); }
 .seg-btn.is-on { background: var(--gold-dim); color: var(--gold); }
 .seg-btn.warnish.is-on { background: var(--bad-dim); color: var(--bad); }
-.seg-lab { display: none; }
+.seg-lab { display: inline-flex; align-items: center; padding: 6px 12px; font-size: 0.78rem; color: var(--ink-soft); border-right: 1px solid var(--line); white-space: nowrap; }
+.gate-key { margin: 0 0 14px; color: var(--ink-soft); font-size: 0.9rem; }
+.gate-key b { color: var(--ink); }
 
 /* Country context */
 .context { border-left: 3px solid var(--gold-soft); padding: 2px 0 2px 18px; margin-bottom: 4px; }

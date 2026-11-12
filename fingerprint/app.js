@@ -73,9 +73,9 @@
   }
   function seriesLinksHTML() {
     const items = [
-      ["article3", "Article 3 — Your house’s last five years won’t predict the next twenty", "The underlying framework: describe the machine before forecasting its output"],
-      ["article13", "Article 13 — Can housing be affordable and a great investment?", "Why demand, supply and affordability behave differently across systems"],
-      ["article14", "Article 14 — So, should you buy this property?", "The country is the first layer: Country → City → Property → Person"],
+      ["article3", "Article 3: Your house’s last five years won’t predict the next twenty", "The underlying framework: describe the machine before forecasting its output"],
+      ["article13", "Article 13: Can housing be affordable and a great investment?", "Why demand, supply and affordability behave differently across systems"],
+      ["article14", "Article 14, So, should you buy this property?", "The country is the first layer: Country → City → Property → Person"],
       ["xray", "Property Decision X-Ray", "The next layers: this property, for this person, at this price"],
     ].filter(([k]) => siteLink(k));
     if (!items.length) return "";
@@ -98,7 +98,7 @@
   const slot = (tok) => (H.POSITIONS[tok] ? H.POSITIONS[tok].slot : null);
   function placement(cid, did) {
     const c = C[cid], p = (c.placements && c.placements[did]) || { pos: "NA", conf: "interpretive", src: [], short: H.copy.uncertainty, long: "" };
-    return Object.assign({ as_of: c.profile_as_of, reviewer_status: "Launch placement — Fingerprint v1.0" }, p);
+    return Object.assign({ as_of: c.profile_as_of, reviewer_status: "Launch placement: Fingerprint v1.0" }, p);
   }
   function posPhrase(d, tok) {
     switch (tok) {
@@ -173,7 +173,7 @@
       const here = ids.filter((id) => slot(placement(id, d.id).pos) === i);
       const mks = here.map((id) => {
         const c = C[id], p = placement(id, d.id);
-        return `<button class="mk" type="button" data-ev="${id}|${d.id}" aria-label="${esc(markerLabel(c, d, p.pos))}" title="${esc(c.name)} — ${esc(H.copy.evidenceCta)}">${shape(c, opts.compact ? 15 : 17)}<span class="mk-code" aria-hidden="true">${id}</span></button>`;
+        return `<button class="mk" type="button" data-ev="${id}|${d.id}" aria-label="${esc(markerLabel(c, d, p.pos))}" title="${esc(c.name)}: ${esc(H.copy.evidenceCta)}">${shape(c, opts.compact ? 15 : 17)}<span class="mk-code" aria-hidden="true">${id}</span></button>`;
       }).join("");
       return `<div class="cell">${mks}</div>`;
     }).join("");
@@ -205,7 +205,7 @@
   function servicingHTML(d) {
     if (!d.sub_factors) return "";
     return `<div class="subf"><span class="k">What this dimension covers</span>
-      <ul>${d.sub_factors.map((f) => `<li><b>${esc(f.label)}</b> — ${esc(f.note)}</li>`).join("")}</ul>
+      <ul>${d.sub_factors.map((f) => `<li><b>${esc(f.label)}</b>: ${esc(f.note)}</li>`).join("")}</ul>
       ${d.servicing_note ? `<p>${esc(d.servicing_note)}</p>` : ""}
       ${d.scale_guard ? `<p class="subf-guard">${esc(d.scale_guard)}</p>` : ""}</div>`;
   }
@@ -279,7 +279,7 @@
       </div>
       <div class="apts">${apts}</div>
       <div class="machines">${cards}</div>
-      <p class="note">These are concise system summaries, not permanent national identities. Fingerprints change over time — each profile is a current snapshot.</p>
+      <p class="note">These are concise system summaries, not permanent national identities. Fingerprints change over time: each profile is a current snapshot.</p>
     </div></section>`;
   }
 
@@ -312,7 +312,7 @@
     if (!S.diff || S.c.length < 2) return "";
     const big = dimIds.filter((id) => isLargeDifference(id, S.c));
     if (!big.length) return `<div class="diffsum">No dimension in this view has ${esc(cnames(S.c))} ${gapPhrase()}. Try “3+ positions apart”, or a different set of countries.</div>`;
-    return `<div class="diffsum"><b>Largest structural differences</b> — ${big.length} ${big.length === 1 ? "dimension" : "dimensions"} where ${esc(cnames(S.c))} sit ${gapPhrase()}. These are differences in kind, not advantages or disadvantages.
+    return `<div class="diffsum"><b>Largest structural differences</b>: ${big.length} ${big.length === 1 ? "dimension" : "dimensions"} where ${esc(cnames(S.c))} sit ${gapPhrase()}. These are differences in kind, not advantages or disadvantages.
       <ul>${big.map((id) => `<li><button type="button" data-goto="${id}">${DIM[id].n}. ${esc(DIM[id].name)}</button></li>`).join("")}</ul></div>`;
   }
 
@@ -397,7 +397,7 @@
     return `<section class="part" id="mechanisms"><div class="wrap">
       <div class="part-head"><span class="part-num">Mechanisms</span>
         <h2>Same outcome, different machine</h2>
-        <p class="part-sub">A price chart records the combined result of the system. It does not tell you which forces produced it — or how a shock would travel. These stylised chains come from the cross-country comparison; each is dated, and none is a forecast.</p>
+        <p class="part-sub">A price chart records the combined result of the system. It does not tell you which forces produced it, or how a shock would travel. These stylised chains come from the cross-country comparison; each is dated, and none is a forecast.</p>
       </div>
       <div class="seg mech-tabs" role="group" aria-label="Scenario">${H.mechanisms.map((m) => `<button type="button" data-mech="${m.id}" aria-pressed="${S.m === m.id}" data-fk="m-${m.id}">${esc(m.tab)}</button>`).join("")}</div>
       <div id="mech-body">${mechChainsHTML()}</div>
@@ -421,7 +421,7 @@
       <div class="card method-teaser">
         <div><h3>How to read the Fingerprint</h3><p class="cue" style="font-size:1.1rem">${esc(H.copy.method)}</p></div>
         <div><ul class="checks">
-          <li>Every dimension is qualitative: five positions on a spectrum between two named system states — never a measured score.</li>
+          <li>Every dimension is qualitative: five positions on a spectrum between two named system states, never a measured score.</li>
           <li>The framework is descriptive, not normative. Nothing is added up, ranked or turned into a “best market”.</li>
           <li>Each country profile is a current snapshot, dated, with confidence and sources on every placement.</li>
           <li>National profiles do not determine city or property outcomes. Every country has large internal variation.</li>
@@ -447,7 +447,7 @@
           return `<article class="dim" id="dim-${d.id}"><div class="dim-head"><span class="dim-toggle" style="cursor:default"><span class="dim-n">${d.n}</span><span class="dim-name">${esc(d.name)}</span></span>
               <span>${p.conf === "interpretive" ? '<span class="tag tag-interp">Interpretive</span> ' : ""}${p.variation ? '<span class="tag tag-var">Large internal variation</span>' : ""}</span></div>
             ${laneSpectrum(d, [c.id], { noBadge: true })}
-            <div class="single-rat"><p><span class="rat-pos muted" style="font-size:.78rem">${esc(H.POSITIONS[p.pos].label)} — ${esc(posPhrase(d, p.pos))}</span><br>${esc(p.short)}</p>
+            <div class="single-rat"><p><span class="rat-pos muted" style="font-size:.78rem">${esc(H.POSITIONS[p.pos].label)}: ${esc(posPhrase(d, p.pos))}</span><br>${esc(p.short)}</p>
               <button class="linkbtn" type="button" data-ev="${c.id}|${d.id}">${esc(H.copy.evidenceCta)}</button></div></article>`;
         }).join("")}</div></section>`).join("");
     $app.innerHTML = `<section class="hero-sm"><div class="wrap">
@@ -503,7 +503,7 @@
       <a class="back" href="${exploreHref({})}">← Back to the explorer</a>
       <p class="eyebrow">Methodology</p>
       <h1 style="font-size:clamp(2rem,4.5vw,3rem);margin:0 0 14px">How the Fingerprint is built</h1>
-      <p class="lede">Qualitative placements, explicit evidence, visible uncertainty — and a hard rule against turning any of it into a score.</p>
+      <p class="lede">Qualitative placements, explicit evidence, visible uncertainty, and a hard rule against turning any of it into a score.</p>
       ${seriesMethodHref() ? `<p class="hero-a3">This page explains how this tool places countries. Definitions shared across the whole series are on the <a href="${esc(seriesMethodHref())}">Real Estate Reframed Methodology &amp; Concepts page</a>.</p>` : ""}
     </div></section>
     <div class="wrap"><div class="m-grid">
@@ -520,7 +520,7 @@
           <p>Each of the 24 dimensions is a spectrum between two explicitly named endpoints. Every country is placed in one of five qualitative positions:</p>
           ${demo}
           <ul>
-            <li>Positions are discrete anchors, not a continuous slider — this avoids false precision.</li>
+            <li>Positions are discrete anchors, not a continuous slider; this avoids false precision.</li>
             <li>Placement is comparative and evidence-led, but deliberately not presented as a measured index value. No number is displayed, summed, averaged, converted to a percentile or used to rank countries.</li>
             <li>Where comparable data are strong, the rationale cites them. Where a dimension is institutional or behavioural, the placement is labelled as a synthesis judgement.</li>
             <li>If evidence is materially insufficient, the product shows “${esc(H.copy.uncertainty)}” instead of forcing a marker.</li>
@@ -528,7 +528,7 @@
           </ul>
         </section>
         <section class="m-sec" id="m-conf"><h2>Confidence labels</h2>
-          <p>Confidence describes the evidence behind a placement — not whether the housing system is “safe”.</p>
+          <p>Confidence describes the evidence behind a placement, not whether the housing system is “safe”.</p>
           <div class="tbl-wrap"><table><thead><tr><th>Label</th><th>Used when</th><th>Shown as</th></tr></thead><tbody>${confRows}</tbody></table></div>
           <p>Across the ${COUNTRIES.length * H.dimensions.length} launch placements: ${confCounts.high || 0} high, ${confCounts.medium || 0} medium, ${confCounts.interpretive || 0} interpretive. Cultural expectation of property appreciation is always interpretive. The India and China mortgage-rate-structure placements carry the comparability flag from Fingerprint v1.0.</p>
         </section>
@@ -553,13 +553,13 @@
         </section>
         <section class="m-sec" id="m-design"><h2>Framework decisions</h2>
           <h3>Six families</h3><p>Fingerprint v1.0 refers to “five families” but enumerates six (A–F). The Explorer uses the six enumerated families as canonical.</p>
-          <h3>Causes, not every consequence</h3><p>Vacancy and affordability are not separate country-level axes. Vacancy is partly an outcome of stock balance, mismatch and demographics; affordability is partly an outcome of income, prices, rates, supply and geography — and national averages hide large city differences. Both belong at the city layer. Keeping them out avoids double-counting.</p>
+          <h3>Causes, not every consequence</h3><p>Vacancy and affordability are not separate country-level axes. Vacancy is partly an outcome of stock balance, mismatch and demographics; affordability is partly an outcome of income, prices, rates, supply and geography, and national averages hide large city differences. Both belong at the city layer. Keeping them out avoids double-counting.</p>
           <h3>One developer-fragility dimension</h3><p>Dimension 16 deliberately combines presale dependence and developer leverage. Separating them would count essentially the same systemic vulnerability twice.</p>
           <h3>Water and basic urban servicing sit inside Infrastructure maturity</h3><p>Housing stock is not the same thing as sustainably serviced housing capacity. Dimension 10 therefore covers reliable water supply, sustainable groundwater use, sewage and wastewater, drainage and power alongside transport, and reads maturity as the reliability and scalability of those systems rather than their mere existence. Water is deliberately not a 25th dimension and carries no separate score: it shares causes with the rest of the infrastructure system, and comparable country-level servicing evidence has not yet been assembled. National placements never describe the water security of a particular city or project.</p>
           <h3>Why there is no radar chart</h3><p>Radar area behaves visually like an overall magnitude even though the axes are unlike and non-normative; changing axis order changes the silhouette without changing the data; a larger area reads as “stronger”. Aligned spectra let each dimension be read on its own terms.</p>
         </section>
         <section class="m-sec" id="m-update"><h2>Update policy</h2>
-          <p>The framework is relatively stable; placements and evidence are not. Updates are dimension-driven rather than one annual rewrite. Placement changes need reviewer sign-off and are recorded in the change log, so history is never overwritten silently. Normal cyclical moves — for example in interest rates — do not shift structural placements.</p>
+          <p>The framework is relatively stable; placements and evidence are not. Updates are dimension-driven rather than one annual rewrite. Placement changes need reviewer sign-off and are recorded in the change log, so history is never overwritten silently. Normal cyclical moves (for example in interest rates) do not shift structural placements.</p>
           <div class="tbl-wrap"><table><thead><tr><th>Dimension</th><th>Review cadence</th><th>Evidence type</th></tr></thead><tbody>${cadRows}</tbody></table></div>
           <h3>Adding a country</h3><p>A new country extends the same 24-dimension model; the framework does not grow because a country is added. It publishes only when it has a four-part profile (label, mechanism, friction, what not to infer), a placement or an explicit “not enough comparable evidence” on all 24 dimensions, sources, dates and confidence for each, and has passed anti-ranking and cross-country consistency checks. Another country’s placement is never reused as a proxy.</p>
         </section>
@@ -568,7 +568,7 @@
             <li>No composite, quality, investment or risk score, and no ranking or league table.</li>
             <li>No “best housing market”, “best country to buy property”, or country-versus-country contest.</li>
             <li>No house-price forecasts, expected returns or portfolio recommendations.</li>
-            <li>No city-level data, property due diligence or personal suitability — those belong to other Real Estate Reframed tools, such as the ${maybeLink("xray", "Property Decision X-Ray")}${opensNote("xray") ? ` (${esc(opensNote("xray").replace(/^Opens/, "opens"))})` : ""}.</li>
+            <li>No city-level data, property due diligence or personal suitability; those belong to other Real Estate Reframed tools, such as the ${maybeLink("xray", "Property Decision X-Ray")}${opensNote("xray") ? ` (${esc(opensNote("xray").replace(/^Opens/, "opens"))})` : ""}.</li>
             <li>No buy, rent, sell or invest recommendation.</li>
             <li>No historical animation of fingerprints, user weights, or crowd ratings.</li>
           </ul>
@@ -588,14 +588,14 @@
   function drawerHTML(cid, did) {
     const c = C[cid], d = DIM[did], p = placement(cid, did), conf = H.CONFIDENCE[p.conf];
     const showNote = p.conf !== "high" ? (p.note || d.comparability) : p.note;
-    const srcs = p.src.map((id) => SRC[id]).filter(Boolean).map((s) => `<li><span class="src-pub">${esc(s.publisher)}</span> — ${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}
+    const srcs = p.src.map((id) => SRC[id]).filter(Boolean).map((s) => `<li><span class="src-pub">${esc(s.publisher)}</span>: ${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}
         <span class="src-meta">${esc(s.source_type)} · ${esc(s.geography)} · ${esc(s.data_period)}</span></li>`).join("");
     const tabs = COUNTRIES.map((o) => `<button class="chip" type="button" style="--c:${o.color}" data-drc="${o.id}" aria-pressed="${o.id === cid}">${shape(o, 13)}${esc(o.name)}</button>`).join("");
     return `<div class="dr-head"><div><p class="eyebrow" style="margin:0">${esc(FAM[d.family].name)} · Dimension ${d.n}</p><h2 id="dr-title">${esc(d.name)}</h2></div>
         <button class="dr-close" type="button" data-close aria-label="Close evidence panel">×</button></div>
       <div class="dr-body">
         <div class="dr-tabs" role="group" aria-label="Country">${tabs}</div>
-        <div>${laneSpectrum(d, [cid])}<p class="dr-pos"><b>${esc(c.name)}: ${esc(H.POSITIONS[p.pos].label)}</b> — ${esc(posPhrase(d, p.pos))}.</p></div>
+        <div>${laneSpectrum(d, [cid])}<p class="dr-pos"><b>${esc(c.name)}: ${esc(H.POSITIONS[p.pos].label)}</b>: ${esc(posPhrase(d, p.pos))}.</p></div>
         <div><p class="dr-q">${esc(H.copy.evidenceCta)}</p><p class="dr-short">${esc(p.short)}</p>${p.long ? `<p class="dr-long">${esc(p.long)}</p>` : ""}</div>
         <div class="conf"><span class="conf-label ${p.conf}">${esc(conf.label)}</span><p>${esc(conf.means)}</p>${showNote ? `<p><b>Comparability:</b> ${esc(showNote)}</p>` : ""}</div>
         ${p.variation ? `<p class="var-note" style="margin:0">${esc(c.variation_note)}</p>` : ""}
@@ -737,9 +737,9 @@
   function render(fromNav) {
     parseHash();
     closeDrawer();
-    if (S.route === "country") { renderCountry(); document.title = `${C[S.country].name} — Housing System Fingerprint Explorer`; }
-    else if (S.route === "method") { renderMethod(); document.title = "Methodology — Housing System Fingerprint Explorer"; }
-    else { renderHome(); document.title = "Housing System Fingerprint Explorer — Real Estate Reframed"; }
+    if (S.route === "country") { renderCountry(); document.title = `${C[S.country].name} | Housing System Fingerprint Explorer`; }
+    else if (S.route === "method") { renderMethod(); document.title = "Methodology | Housing System Fingerprint Explorer"; }
+    else { renderHome(); document.title = "Housing System Fingerprint Explorer | Real Estate Reframed"; }
     if (S.route === "explore" || (S.route === "home" && S.d)) {
       // Deep links (e.g. from Articles 3, 13 and 14) land on the explorer. Jump
       // instantly (CSS smooth scrolling would otherwise animate from the top) and

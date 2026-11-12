@@ -150,7 +150,7 @@
 
   function fieldLabel(f, c) {
     const lab = val(f.label, c);
-    const unk = f.unk ? '<button type="button" class="unk' + ((c.unknown || {})[f.k] ? " is-on" : "") + '" data-unk="' + f.k + '" aria-pressed="' + !!(c.unknown || {})[f.k] + '" title="Mark as not known yet — it will appear in your unresolved questions">' + ((c.unknown || {})[f.k] ? "Marked unknown" : "Not sure yet") + "</button>" : "";
+    const unk = f.unk ? '<button type="button" class="unk' + ((c.unknown || {})[f.k] ? " is-on" : "") + '" data-unk="' + f.k + '" aria-pressed="' + !!(c.unknown || {})[f.k] + '" title="Mark as not known yet: it will appear in your unresolved questions">' + ((c.unknown || {})[f.k] ? "Marked unknown" : "Not sure yet") + "</button>" : "";
     return '<div class="f-label"><label for="f-' + f.k + '">' + esc(lab) + "</label>" + unk + "</div>";
   }
 
@@ -202,7 +202,7 @@
       const h = K.priceEvidenceHint(c);
       const chosen = c.property.price_evidence;
       if (chosen === h.label) return "";
-      return '<p class="suggest">Your comparables suggest <b>' + esc(optLabel(W.O.evidence, h.label)) + "</b> — " + esc(h.why) + ' <button type="button" class="link-btn" data-sethint="property.price_evidence" data-v="' + h.label + '">Use this</button></p>';
+      return '<p class="suggest">Your comparables suggest <b>' + esc(optLabel(W.O.evidence, h.label)) + "</b>: " + esc(h.why) + ' <button type="button" class="link-btn" data-sethint="property.price_evidence" data-v="' + h.label + '">Use this</button></p>';
     }
     return "";
   }
@@ -241,7 +241,7 @@
         const cur = sig[s.id] || {};
         return '<div class="signal"><span class="signal-name">' + esc(s.label) + '</span><span class="seg" role="group" aria-label="' + esc(s.label) + '">' + s.opts.map((o) =>
           '<button type="button" class="seg-btn' + (cur.status === o[0] ? " is-on" : "") + (s.warn.indexOf(o[0]) >= 0 ? " warnish" : "") + '" data-sig="' + s.id + '" data-v="' + o[0] + '" aria-pressed="' + (cur.status === o[0]) + '">' + esc(o[1]) + "</button>").join("") +
-          '</span><input class="signal-note" data-signote="' + s.id + '" value="' + esc(cur.note || "") + '" placeholder="What I know" aria-label="' + esc(s.label) + ' — note" /></div>';
+          '</span><input class="signal-note" data-signote="' + s.id + '" value="' + esc(cur.note || "") + '" placeholder="What I know" aria-label="' + esc(s.label) + ': note" /></div>';
       }).join("") + "</div>";
     },
     comps(c) {
@@ -267,7 +267,7 @@
           '<span class="seg seg-sm" role="group" aria-label="Does anything break?"><span class="seg-lab">Does anything break?</span>' + W.O.breaks.map((o) =>
             '<button type="button" class="seg-btn' + (st.breaks === o[0] ? " is-on" : "") + '" data-stress="' + s.id + '" data-v="' + o[0] + '" aria-pressed="' + (st.breaks === o[0]) + '">' + o[1] + "</button>").join("") + "</span></div>" +
           (facts ? '<p class="st-facts" data-calc="st-' + s.id + '">' + facts + "</p>" : '<p class="st-facts" data-calc="st-' + s.id + '"></p>') +
-          '<textarea class="lined" rows="1" data-k="stress.' + s.id + '.note" data-t="area" placeholder="What happens to cash flow and liquidity?" aria-label="' + esc(s.label) + ' — what happens">' + esc(st.note || "") + "</textarea></div>";
+          '<textarea class="lined" rows="1" data-k="stress.' + s.id + '.note" data-t="area" placeholder="What happens to cash flow and liquidity?" aria-label="' + esc(s.label) + ': what happens">' + esc(st.note || "") + "</textarea></div>";
       }).join("") + "</div>";
     },
     walkaway(c) {
@@ -317,7 +317,8 @@
       const g = c.close.gates || {};
       const rows = gateRows(c);
       const failing = rows.filter((r) => g[r.id] === "fails");
-      return (failing.length ? '<p class="gate-alert"><b>Failing: ' + esc(failing.map((r) => r.label).join("; ")) + ".</b> Under your own rules, strengths elsewhere don't offset this. It has to be resolved — or it is a reason to walk away.</p>" : "") +
+      return (failing.length ? '<p class="gate-alert"><b>Failing: ' + esc(failing.map((r) => r.label).join("; ")) + ".</b> Under your own rules, strengths elsewhere don't offset this. It has to be resolved, or it is a reason to walk away.</p>" : "") +
+        '<p class="gate-key">Where does each one stand today? <b>Clear</b>: checked, no problem found. <b>Still open</b>: not checked or not yet resolved. <b>Fails</b>: a serious problem, which under your own rules is a reason to walk away. <b>Preference only</b>: for you this is not a deal-breaker, so it is weighed like any other preference.</p>' +
         '<div class="gates">' + rows.map((r) =>
           '<div class="gate' + (g[r.id] === "fails" ? " is-fail" : "") + '"><div class="gate-name">' + esc(r.label) + (r.household ? ' <span class="s-tag">Walk-away condition</span>' : "") + (r.facts ? "<small>" + esc(r.facts) + "</small>" : "") + "</div>" +
           '<span class="seg" role="group" aria-label="' + esc(r.label) + '">' + W.O.gate.map((o) =>
@@ -371,7 +372,7 @@
     if (id === "fall") {
       if (d.price === null) return "";
       if (!d.isLoan) return "Value falls to ≈ " + m(d.valueAfterFall) + ". With no loan, nothing has to be refinanced or sold.";
-      return "Value ≈ " + m(d.valueAfterFall) + " against a loan of " + m(d.loan) + ": your equity goes from " + m(d.equityAtStart) + " to " + m(d.equityAfterFall) + (d.equityAfterFall < 0 ? " — less than the loan." : ".");
+      return "Value ≈ " + m(d.valueAfterFall) + " against a loan of " + m(d.loan) + ": your equity goes from " + m(d.equityAtStart) + " to " + m(d.equityAfterFall) + (d.equityAfterFall < 0 ? ": less than the loan." : ".");
     }
     if (id === "rate") {
       if (!d.rateShockApplies) return "Fixed rate: the reset only matters at the end of the fixed period. Note when that is.";
@@ -392,7 +393,7 @@
       if (pts.housing) parts.push("rent " + m(pts.housing));
       if (pts.interest) parts.push("interest " + m(pts.interest));
       if (pts.lostRent) parts.push("lost rent " + m(pts.lostRent));
-      return "Rough 24-month carry ≈ " + m(d.delayCarry24) + " (" + parts.join(" + ") + "; interest assumes full disbursement — an upper bound).";
+      return "Rough 24-month carry ≈ " + m(d.delayCarry24) + " (" + parts.join(" + ") + "; interest assumes full disbursement: an upper bound).";
     }
     return "";
   }
@@ -558,7 +559,7 @@
     const xrList = xr ? Object.keys(xr).filter((k) => !(xr[k].meta || {}).example) : [];
     return '<main><section class="wrap hero"><p class="eyebrow">Real Estate Reframed · Companion to Article ' + W.ARTICLE.n + '</p>' +
       '<h1>Should this property fit into <em>your</em> financial life?</h1>' +
-      '<p class="lede">A guided conversation to have before you emotionally commit — on your own, with a partner, or with an adviser. Eight short chapters, from the housing system down to your household, ending in a one-page summary you can print and keep.</p>' +
+      '<p class="lede">A guided conversation to have before you emotionally commit, on your own, with a partner, or with an adviser. Eight short chapters, from the housing system down to your household, ending in a one-page summary you can print and keep.</p>' +
       journeyHTML() +
       '<div class="start-grid"><button class="start-card start-primary" data-act="new"><span class="start-k">Start</span><strong>A new worksheet</strong><span>About 30–40 minutes. Save as you go; come back any time.</span></button>' +
       '<button class="start-card" data-act="example" data-v="A"><span class="start-k">Example · Article 14</span><strong>Household A</strong><span>The long-stay family: ₹3 Cr apartment, 30% loan, twenty-year horizon.</span></button>' +
@@ -568,9 +569,9 @@
         const o = overall(c);
         return '<div class="saved-row"><a href="#/open/' + id + '"><strong>' + esc(titleOf(c)) + "</strong><span>" + esc([c.market.city, c.property.purchase_price ? money(c.property.purchase_price, c) : ""].filter(Boolean).join(" · ")) + (c.meta.updated ? " · edited " + new Date(c.meta.updated).toLocaleDateString() : "") + '</span></a><span class="saved-p"><span class="meter"><i style="width:' + (o.total ? Math.round((100 * o.done) / o.total) : 0) + '%"></i></span>' + o.done + "/" + o.total + '</span><span class="saved-act"><a class="btn-ghost small" href="#/summary/' + id + '">Summary</a><button class="btn-ghost small" data-act="del" data-v="' + id + '" aria-label="Delete ' + esc(titleOf(c)) + '">Delete</button></span></div>';
       }).join("") + "</div></section>" : "") +
-      '<section class="wrap part"><div class="part-head"><span class="part-num">The tests</span><h2>Fourteen questions worth answering before you sign</h2><p class="part-sub">Grouped along the series’ hierarchy — <b>Country → City → Property → Financing → Person</b> — so each question is asked where the evidence for it lives.</p></div>' +
+      '<section class="wrap part"><div class="part-head"><span class="part-num">The tests</span><h2>Fourteen questions worth answering before you sign</h2><p class="part-sub">Grouped along the series’ hierarchy: <b>Country → City → Property → Financing → Person</b>, so each question is asked where the evidence for it lives.</p></div>' +
       '<ol class="tests">' + W.TESTS.map((t, i) => '<li><span class="tests-n">' + String(i + 1).padStart(2, "0") + "</span>" + esc(t[0]) + "</li>").join("") + "</ol></section>" +
-      '<section class="wrap part"><div class="two"><div class="card soft"><h3>How to use it</h3><ul class="plain-list"><li><b>Short answers are enough.</b> A sentence beats a paragraph.</li><li><b>Unknown is an answer.</b> Mark anything you can’t answer yet — it becomes your diligence list.</li><li><b>Set walk-away conditions early</b>, before the emotional case gets stronger.</li><li><b>Do it together.</b> The disagreements are usually the most useful part.</li></ul></div>' +
+      '<section class="wrap part"><div class="two"><div class="card soft"><h3>How to use it</h3><ul class="plain-list"><li><b>Short answers are enough.</b> A sentence beats a paragraph.</li><li><b>Unknown is an answer.</b> Mark anything you can’t answer yet: it becomes your diligence list.</li><li><b>Set walk-away conditions early</b>, before the emotional case gets stronger.</li><li><b>Do it together.</b> The disagreements are usually the most useful part.</li></ul></div>' +
       '<div class="card soft"><h3>The worksheet and the X-Ray</h3><p class="muted-p">The worksheet is the human decision conversation. The ' + (toolUrl("xray") ? '<a href="' + toolUrl("xray") + '">Property Decision X-Ray</a>' : "Property Decision X-Ray") + ' is the deeper diagnostic: full return reconstruction, rent-versus-own, mortgage schedules, combined stresses and FIRE-usable wealth. They share the same vocabulary, so a case can move between them: start here, go deeper there, and bring the answers back.</p>' +
       (xrList.length ? '<p class="muted-p"><b>Bring in an X-Ray case</b> from this browser:</p><div class="chips">' + xrList.map((k) => '<button class="chip" data-act="fromxray" data-v="' + esc(k) + '">' + esc((xr[k].meta || {}).name || "X-Ray case") + "</button>").join("") + "</div>" : "") +
       '<p class="muted-p"><a href="#/blank">Print a blank worksheet</a> to work through on paper · <button class="link-btn" data-act="import">Open a saved worksheet file…</button><input type="file" id="importFile" accept="application/json,.json" hidden /></p></div></div></section></main>';
@@ -610,7 +611,7 @@
     W.STRESSES.forEach((s) => {
       const st = (c.stress || {})[s.id] || {};
       if (s.na && s.na(c)) return;
-      if (st.breaks === "yes") out.push({ t: s.short + " — something breaks", auto: "Stress test" });
+      if (st.breaks === "yes") out.push({ t: s.short + ": something breaks", auto: "Stress test" });
     });
     const maybes = W.STRESSES.filter((s) => !(s.na && s.na(c)) && ((c.stress || {})[s.id] || {}).breaks === "maybe").map((s) => s.short.toLowerCase());
     if (maybes.length) out.push({ t: "Might break under: " + maybes.join(", "), auto: "Stress test" });
@@ -636,13 +637,13 @@
     const out = (c.close.open || []).filter((q) => !isBlank(q.q)).map((q) => ({ q: q.q, who: q.who }));
     const ev = c.property.price_evidence;
     if (ev === "weak" || ev === "insufficient") out.push({ q: "Find two recent, genuinely comparable registered transactions", who: "Registration records, lender valuation, local brokers", auto: true });
-    if (["partly", "unresolved", "unknown"].indexOf(c.property.title_status) >= 0 && !(c.close.open || []).some((q) => /title|noc|encumbr|approval/i.test(q.q || ""))) out.push({ q: "Resolve title, documentation and approvals" + (c.property.title_note ? " — " + sentence(c.property.title_note) : ""), who: "A property lawyer, before any payment", auto: true });
+    if (["partly", "unresolved", "unknown"].indexOf(c.property.title_status) >= 0 && !(c.close.open || []).some((q) => /title|noc|encumbr|approval/i.test(q.q || ""))) out.push({ q: "Resolve title, documentation and approvals" + (c.property.title_note ? ": " + sentence(c.property.title_note) : ""), who: "A property lawyer, before any payment", auto: true });
     if (W.helpers.isUC(c) && ["partly", "unresolved", "unknown"].indexOf(c.uc.registration) >= 0) out.push({ q: "Confirm project registration, land title and approvals", who: "Regulator's project page; your lawyer", auto: true });
     const w = c.water || {}, a = c.access || {}, u = c.unknown || {};
-    if (["partly", "unclear", "unknown"].indexOf(a.legal) >= 0 || u["access.legal"]) out.push({ q: "Confirm documented, legal access to the property", who: "Your property lawyer — title deed, layout plan and any easement", auto: true });
+    if (["partly", "unclear", "unknown"].indexOf(a.legal) >= 0 || u["access.legal"]) out.push({ q: "Confirm documented, legal access to the property", who: "Your property lawyer: title deed, layout plan and any easement", auto: true });
     if (["shared", "dependent"].indexOf(a.road) >= 0 || ["some", "material", "unknown"].indexOf(a.third_party) >= 0) out.push({ q: "Get the shared arrangements (road, water, services) in writing", who: "Your lawyer; the other owners or association", auto: true });
     if (w.reliability === "unknown" || u["water.reliability"] || u["water.tanker"] || u["water.failure"]) out.push({ q: "Ask how supply held up in the last two dry seasons, and what water deliveries cost", who: "Neighbours, the society or association, local tanker suppliers", auto: true });
-    if (w.future_connection === "yes" || w.future_connection === "unsure") out.push({ q: "Confirm whether a piped connection is sanctioned, funded and scheduled", who: "The water utility — in writing", auto: true });
+    if (w.future_connection === "yes" || w.future_connection === "unsure") out.push({ q: "Confirm whether a piped connection is sanctioned, funded and scheduled", who: "The water utility: in writing", auto: true });
     if (w.treatment === "unknown" || w.treatment === "significant" || !isBlank(w.quality) || u["water.quality"]) out.push({ q: "Get a water-quality test done", who: "An accredited water-testing laboratory", auto: true });
     return out;
   }
@@ -680,7 +681,7 @@
     const engines = (c.property.return_engine || []).map((e) => optLabel(O.engines, e)).filter(Boolean);
     const thesis = sumRows([
       ["The job it has to do", c.decision.job],
-      ["What creates the return", engines.join(" · ") + (c.dependency.engine_note ? (engines.length ? " — " : "") + c.dependency.engine_note : "")],
+      ["What creates the return", engines.join(" · ") + (c.dependency.engine_note ? (engines.length ? ": " : "") + c.dependency.engine_note : "")],
       ["Works if", c.close.works_if], ["Struggles if", c.close.struggles_if],
     ]);
 
@@ -728,7 +729,7 @@
       ["Water cost now", isBlank(w.monthly_cost) ? "" : m(w.monthly_cost) + " a month"],
       ["If the primary source fails", w.failure],
       row("Assuming a future connection?", O.futureConn, w.future_connection),
-      B || w.treatment || !isBlank(w.quality) ? ["Treatment / quality", [w.treatment ? esc(optLabel(O.treatment, w.treatment)) : "", esc(w.quality || "")].filter(Boolean).join(" — ") || (B ? boxes(O.treatment) : BL), 1] : null,
+      B || w.treatment || !isBlank(w.quality) ? ["Treatment / quality", [w.treatment ? esc(optLabel(O.treatment, w.treatment)) : "", esc(w.quality || "")].filter(Boolean).join(": ") || (B ? boxes(O.treatment) : BL), 1] : null,
     ]);
     const accessRows = sumRows([
       row("Legal access", O.legalAccess, a.legal),
@@ -744,7 +745,7 @@
 
     // Scenario vulnerability: the location thesis first, then the stress tests.
     const th = c.thesis;
-    const scen = '<ul class="s-scen">' + W.SCENARIOS.map((x) => "<li><b>" + x.id + "</b> " + esc(x.title) + ' <span class="muted">— ' + esc(x.text) + "</span></li>").join("") + "</ul>" +
+    const scen = '<ul class="s-scen">' + W.SCENARIOS.map((x) => "<li><b>" + x.id + "</b> " + esc(x.title) + ' <span class="muted">: ' + esc(x.text) + "</span></li>").join("") + "</ul>" +
       sumRows([
         row(W.helpers.homeish(c) || B ? "Happy owning this home under Scenario B?" : "Happy owning this property under Scenario B?", O.scenario, th.happy_b),
         row("Finances and life plans survive Scenario C?", O.scenario, th.survive_c),
@@ -752,7 +753,7 @@
       ]);
 
     // Financing
-    const fin = c.financing.mode === "cash" ? sumRows([["Funding", "Cash — no loan"], ["Cash needed now", d.cashNeeded !== null ? m(d.cashNeeded) : ""]]) : sumRows([
+    const fin = c.financing.mode === "cash" ? sumRows([["Funding", "Cash: no loan"], ["Cash needed now", d.cashNeeded !== null ? m(d.cashNeeded) : ""]]) : sumRows([
       ["Funding", c.financing.mode ? "Loan " + (d.loan ? m(d.loan) : "") + (d.ltv !== null ? " · " + pct(d.ltv, 0) + " of price" : "") : ""],
       ["Rate", c.financing.rate ? c.financing.rate + "% · " + (optLabel(O.rateType, c.financing.rate_type) || "type not stated") + (c.financing.tenure_years ? " · " + c.financing.tenure_years + " years" : "") : ""],
       ["EMI", d.emi ? m(d.emi) + " a month" + (d.debtServiceRatio !== null ? " · all debt payments " + pct(d.debtServiceRatio, 0) + " of income" : "") : ""],
@@ -764,12 +765,12 @@
     const optsLost = (c.household.options_lost || []).map((x) => (x === "other" ? c.household.options_other || "Other" : optLabel(O.optionsLost, x))).filter(Boolean);
     const liq = sumRows([
       ["Cash needed at acquisition", d.cashNeeded !== null ? m(d.cashNeeded) : ""],
-      ["Liquid assets after purchase", d.postLiquid !== null ? m(d.postLiquid) + (d.minLiquid !== null ? (d.belowFloor ? " — below my floor of " + m(d.minLiquid) : " · my floor is " + m(d.minLiquid)) : "") : ""],
+      ["Liquid assets after purchase", d.postLiquid !== null ? m(d.postLiquid) + (d.minLiquid !== null ? (d.belowFloor ? ": below my floor of " + m(d.minLiquid) : " · my floor is " + m(d.minLiquid)) : "") : ""],
       d.monthsCovered !== null ? ["If income stopped", "≈ " + tidy(d.monthsCovered, 1) + " months of outgoings covered"] : null,
       ["Net worth in real estate", d.reShareNet !== null ? "≈ " + pct(d.reShareNet, 0) : ""],
       ["Dependence on one city", c.household.city_exposure],
       ["Options that disappear", optsLost.join(" · ")],
-      ["Could we need this capital?", optLabel(O.likelihood, c.household.need_capital) + (c.household.need_capital_why ? " — " + c.household.need_capital_why : "")],
+      ["Could we need this capital?", optLabel(O.likelihood, c.household.need_capital) + (c.household.need_capital_why ? ": " + c.household.need_capital_why : "")],
     ]);
 
     // Zero-Appreciation
@@ -782,7 +783,7 @@
         B || W.helpers.homeish(c) ? ["The life problem it solves", c.life.life_problem] : null,
         c.dependency.zero_ok ? ["At zero appreciation, the job is done", optLabel(O.yesPartlyNo, c.dependency.zero_ok)] : ["At zero appreciation, the job is done", boxes(O.yesPartlyNo), 1],
         d.premium !== null ? ["Housing-Consumption Premium", m(d.premium) + " over the least expensive home that would satisfy us (" + pct(d.premiumShare, 0) + " of price)"] : null,
-        ["The realistic alternative", [optLabel(O.alt, c.life.alt_type), c.life.alt_note].filter((x) => !isBlank(x)).join(" — ")],
+        ["The realistic alternative", [optLabel(O.alt, c.life.alt_type), c.life.alt_note].filter((x) => !isBlank(x)).join(": ")],
       ]);
 
     // Stress table
@@ -829,15 +830,15 @@
       '<div class="s-two">' + sumSection("Financing exposure", fin) + sumSection("Liquidity and concentration", liq) + "</div>" +
       sumSection("Zero-Appreciation response", zat) +
       sumSection("Scenario vulnerability", '<h3 class="s-sub">The location thesis</h3>' + scen + '<h3 class="s-sub">Stress tests</h3>' + stress, "s-break") +
-      sumSection("Decision profile — no score, no verdict", prof) +
+      sumSection("Decision profile: no score, no verdict", prof) +
       '<div class="s-two">' + sumSection("Unresolved questions", list(unresolved, "Nothing marked unresolved.")) + sumSection("Walk-away conditions", list(walks)) + "</div>" +
       sumSection("Next diligence actions", list(actions, "Add open questions with an owner in Chapter 8."), "s-actions") +
-      '<footer class="s-foot"><p>The point is not to make uncertainty disappear. It is to make the uncertainty visible before you choose it.</p><p class="s-fine">A good property is not automatically a good purchase. The asset is only half the decision; the buyer is the other half. Educational content — not financial, investment, tax or legal advice. Hand checks are rough and exclude tax.</p>' +
-      '<p class="s-fine s-cite">Companion to ' + esc(W.ARTICLE.series) + ', Article ' + W.ARTICLE.n + ': “' + esc(W.ARTICLE.title) + '” — the full framework behind every question on this sheet.</p></footer>' +
+      '<footer class="s-foot"><p>The point is not to make uncertainty disappear. It is to make the uncertainty visible before you choose it.</p><p class="s-fine">A good property is not automatically a good purchase. The asset is only half the decision; the buyer is the other half. Educational content, not financial, investment, tax or legal advice. Hand checks are rough and exclude tax.</p>' +
+      '<p class="s-fine s-cite">Companion to ' + esc(W.ARTICLE.series) + ', Article ' + W.ARTICLE.n + ': “' + esc(W.ARTICLE.title) + '”, the full framework behind every question on this sheet.</p></footer>' +
       "</article>" +
       '<div class="sum-onward">' +
       '<div class="sum-next card soft"><div><h3>The framework behind it</h3><p class="muted-p">Every question here comes from Article ' + W.ARTICLE.n + ', <i>' + esc(W.ARTICLE.title) + '</i>, which explains why the asset is only half the decision and the buyer is the other half.</p></div>' + articleLinkHTML("btn-ghost", "Read Article " + W.ARTICLE.n + " →") + "</div>" +
-      '<div class="sum-next card soft"><div><h3>Want the deeper diagnostic?</h3><p class="muted-p">The <b>Property Decision X-Ray</b> reconstructs the return, separates asset and equity returns, runs combined stresses and shows the balance sheet path year by year — using the same Country → City → Property → Person structure.' + (toolUrl("xray") ? " Your answers here travel with you." : TOOLS.xray ? xrayOpensNote() : "") + '</p></div>' + (toolUrl("xray") && !transient ? '<button class="btn" data-act="toxray">Open this in the X-Ray →</button>' : "") + "</div>" +
+      '<div class="sum-next card soft"><div><h3>Want the deeper diagnostic?</h3><p class="muted-p">The <b>Property Decision X-Ray</b> reconstructs the return, separates asset and equity returns, runs combined stresses and shows the balance sheet path year by year, using the same Country → City → Property → Person structure.' + (toolUrl("xray") ? " Your answers here travel with you." : TOOLS.xray ? xrayOpensNote() : "") + '</p></div>' + (toolUrl("xray") && !transient ? '<button class="btn" data-act="toxray">Open this in the X-Ray →</button>' : "") + "</div>" +
       "</div></main>";
   }
 
@@ -878,7 +879,7 @@
   function xrayOpensNote() {
     const d = site() && typeof site().opensAt === "function" ? site().opensAt("xray") : null;
     const when = d && typeof d.getTime === "function" && !isNaN(d.getTime()) ? " on " + d.toLocaleDateString(undefined, { day: "numeric", month: "long", year: "numeric" }) : " soon";
-    return " It opens" + when + " — this worksheet will be ready to send across when it does.";
+    return " It opens" + when + ": this worksheet will be ready to send across when it does.";
   }
   function discoverTools() {
     const links = (site() && site().links) || {};
@@ -964,7 +965,7 @@
     try {
       if (site() && typeof site().track === "function") return site().track(path, !!isEvent);
       const gc = window.goatcounter;
-      if (gc && typeof gc.count === "function") return gc.count({ path: ANALYTICS_PREFIX + "/" + path, title: isEvent ? path : document.title.split(" — ")[0], event: !!isEvent });
+      if (gc && typeof gc.count === "function") return gc.count({ path: ANALYTICS_PREFIX + "/" + path, title: isEvent ? path : document.title.split(" | ")[0], event: !!isEvent });
       if (!document.querySelector || !document.querySelector("script[data-goatcounter]")) return; // no analytics on this page
       if ((attempt || 0) < 20) setTimeout(() => track(path, isEvent, (attempt || 0) + 1), 500);
     } catch (e) { /* analytics never breaks the worksheet */ }
@@ -993,7 +994,7 @@
     app.innerHTML = html;
     app.querySelectorAll("textarea.lined").forEach(grow);
     const c = cur();
-    document.title = (parts[0] === "w" || parts[0] === "summary") && c ? titleOf(c) + " — Property Decision Worksheet" : "Property Decision Worksheet — Real Estate Reframed";
+    document.title = (parts[0] === "w" || parts[0] === "summary") && c ? titleOf(c) + " | Property Decision Worksheet" : "Property Decision Worksheet | Real Estate Reframed";
   }
 
   // Lined notes grow with what is written, so an answer is never hidden.

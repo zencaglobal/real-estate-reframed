@@ -17,7 +17,7 @@
 
   const FINGERPRINT_SOURCE = {
     source_type: "Curated framework (qualitative)",
-    source_name: "Real Estate Reframed — Housing System Fingerprint v1.0",
+    source_name: "Real Estate Reframed: Housing System Fingerprint v1.0",
     as_of_date: "October 2026",
     geography: "Country",
     confidence_note: "Directional placements on qualitative bands, not measurements. India and China mortgage-rate-structure placements carry a confidence flag.",
@@ -34,33 +34,33 @@
     { n: 1, fam: "A", name: "Urbanisation stage", left: "Earlier transition", right: "Mature / fully urbanised", pos: { IN: 1, CN: 3, JP: 4, US: 4 }, tags: ["always"],
       why: "Where the country sits in its move to cities shapes how much structural demand is still ahead." },
     { n: 2, fam: "A", name: "Population trajectory", left: "Sustained growth", right: "Sustained decline", pos: { IN: 0, CN: 4, JP: 4, US: 1 }, tags: [],
-      why: "Long-run household numbers set the floor under demand — but not where that demand lands." },
+      why: "Long-run household numbers set the floor under demand, but not where that demand lands." },
     { n: 3, fam: "A", name: "Structural new-housing demand", left: "Strong expansionary tailwind", right: "Structural contraction", pos: { IN: 0, CN: 4, JP: 4, US: 1 }, tags: ["always"],
       why: "A national tailwind creates possibility; it does not guarantee every micro-market captures it." },
     { n: 4, fam: "A", name: "Geographic concentration of demand", left: "Broadly distributed", right: "Highly concentrated", pos: { IN: 3, CN: 3, JP: 4, US: 2 }, tags: [],
       why: "Concentrated demand means location inside the country matters more than the national average." },
     { n: 5, fam: "B", name: "Housing-stock balance", left: "Shortage / tight stock", right: "Excess / overhang", pos: { IN: 1, CN: 4, JP: 4, US: 1 }, tags: [],
-      why: "A country can have too many houses and not enough houses at the same time — stock is not fungible across places." },
+      why: "A country can have too many houses and not enough houses at the same time: stock is not fungible across places." },
     { n: 6, fam: "B", name: "Geographic match of stock", left: "Stock broadly where demand is", right: "Large stock-location mismatch", pos: { IN: 3, CN: 4, JP: 4, US: 2 }, tags: [],
       why: "Mismatch means national supply figures say little about this city." },
     { n: 7, fam: "B", name: "Supply responsiveness", left: "Responsive / elastic", right: "Constrained / inelastic", pos: { IN: 3, CN: 1, JP: 0, US: 3 }, tags: ["always"],
       why: "How easily new usable housing appears decides whether demand shows up as price or as new homes." },
     { n: 8, fam: "B", name: "Useful-land availability", left: "Ample / expandable", right: "Physically constrained", pos: { IN: 2, CN: 2, JP: 4, US: 0 }, tags: [],
-      why: "Useful land is legally buildable, connected and near demand — not just raw land." },
+      why: "Useful land is legally buildable, connected and near demand, not just raw land." },
     { n: 9, fam: "B", name: "Planning / zoning flexibility", left: "Flexible", right: "Restrictive / fragmented", pos: { IN: 4, CN: 2, JP: 0, US: 3 }, tags: [],
       why: "Planning rules shape both future competing supply and redevelopment options." },
     { n: 10, fam: "B", name: "Infrastructure maturity", left: "Catching up / expanding", right: "Mature network", pos: { IN: 0, CN: 3, JP: 4, US: 4 }, tags: ["infra"],
-      why: "Where networks are still expanding, infrastructure theses are common — and so is uncertainty about timing." },
+      why: "Where networks are still expanding, infrastructure theses are common, and so is uncertainty about timing." },
     { n: 11, fam: "C", name: "Mortgage-market depth", left: "Shallow / cash-heavy", right: "Deeply mortgage-financed", pos: { IN: 1, CN: 3, JP: 4, US: 4 }, tags: ["financed"],
-      why: "Shallow mortgage markets mean more buyers pay with savings — affecting who the next buyer is and what they can pay." },
+      why: "Shallow mortgage markets mean more buyers pay with savings, affecting who the next buyer is and what they can pay." },
     { n: 12, fam: "C", name: "Mortgage interest-rate structure", left: "Floating / resetting", right: "Long-term fixed", pos: { IN: 0, CN: 1, JP: 0, US: 4 }, flag: { IN: true, CN: true }, tags: ["financed"],
-      why: "Floating systems pass rate changes straight into household cash flow — the rate-rise stress matters more." },
+      why: "Floating systems pass rate changes straight into household cash flow; the rate-rise stress matters more." },
     { n: 13, fam: "C", name: "Household housing leverage", left: "Low", right: "High", pos: { IN: 0, CN: 2, JP: 2, US: 3 }, tags: ["financed"],
       why: "System-wide leverage affects how forced selling can spread in a downturn." },
     { n: 14, fam: "C", name: "Home-equity monetisability", left: "Difficult / uncommon", right: "Easy / institutionalised", pos: { IN: 1, CN: 1, JP: 1, US: 4 }, tags: ["fi"],
       why: "Where home equity is hard to borrow against, it is hard to use as retirement capital without selling." },
     { n: 15, fam: "C", name: "Household wealth concentration in housing", left: "Diversified balance sheet", right: "Property-dominated", pos: { IN: 4, CN: 4, JP: 1, US: 1 }, tags: ["concentration"],
-      why: "In property-dominated systems, concentration is the norm — which is different from it being safe for you." },
+      why: "In property-dominated systems, concentration is the norm, which is different from it being safe for you." },
     { n: 16, fam: "D", name: "Developer-financing fragility", left: "Completion-insulated / diversified finance", right: "Presale / debt dependent", pos: { IN: 3, CN: 4, JP: 0, US: 0 }, tags: ["uc"],
       why: "Where buyers' payments fund construction, project viability is not the same as project liquidity." },
     { n: 17, fam: "D", name: "Buyer execution / counterparty risk", left: "Low", right: "High", pos: { IN: 3, CN: 4, JP: 0, US: 0 }, tags: ["uc"],
@@ -72,13 +72,13 @@
       why: "Where the buyer bears more of the verification burden, legal diligence is part of the investment, not paperwork around it.",
       note: { IN: "India's property system is becoming more formal; it has not yet become uniformly frictionless." } },
     { n: 20, fam: "E", name: "Secondary / resale-market depth", left: "Thin / frictional", right: "Deep / transparent", pos: { IN: 1, CN: 2, JP: 3, US: 4 }, tags: ["exit"],
-      why: "Thin resale markets make exit slower and prices less observable — important if you may sell early." },
+      why: "Thin resale markets make exit slower and prices less observable: important if you may sell early." },
     { n: 21, fam: "E", name: "Rental-market institutionalisation", left: "Informal / fragmented", right: "Professional / institutional", pos: { IN: 0, CN: 1, JP: 4, US: 4 }, tags: ["rental"],
       why: "Informal rental markets mean more landlord work, more variance in vacancy and tenant quality." },
     { n: 22, fam: "E", name: "Building-value persistence", left: "Structure depreciates rapidly", right: "Structure retains value strongly", pos: { IN: 2, CN: 2, JP: 0, US: 3 }, tags: ["age"],
       why: "Land and structure age differently; an older building's value leans more on the land under it." },
     { n: 23, fam: "F", name: "Cultural expectation of property appreciation", left: "Conditional / weak", right: "Deeply entrenched", pos: { IN: 4, CN: 3, JP: 0, US: 3 }, tags: ["always"],
-      why: "A behavioural inference, not a statistic: strong expectations can sustain demand — until they change." },
+      why: "A behavioural inference, not a statistic: strong expectations can sustain demand, until they change." },
     { n: 24, fam: "F", name: "Systemic sensitivity to a property downturn", left: "Limited", right: "High", pos: { IN: 3, CN: 4, JP: 1, US: 3 }, tags: ["spec"],
       why: "In sensitive systems a downturn can feed back into jobs, credit and other assets at once." },
   ];
@@ -175,7 +175,7 @@
 
   const EXAMPLES = {
     A: {
-      meta: { name: "Household A — the long-stay family", example: "A" },
+      meta: { name: "Household A: the long-stay family", example: "A" },
       decision: { purpose: "home", status: "ready", occupancy: "self", holding_years: 20, move_risk: "low", move_note: "" },
       market: sharedMarket(),
       property: Object.assign(sharedProperty(), { return_engine: ["land", "jobs", "inflation"] }),
@@ -206,7 +206,7 @@
       scenarios: sharedScenarios(),
     },
     B: {
-      meta: { name: "Household B — the leveraged bet", example: "B" },
+      meta: { name: "Household B: the leveraged bet", example: "B" },
       decision: { purpose: "speculative", status: "ready", occupancy: "rent", holding_years: 4, move_risk: "plausible", move_note: "A job move within three years is plausible." },
       market: sharedMarket(),
       property: Object.assign(sharedProperty(), { letting_costs_annual: 30000, initial_work: 300000, return_engine: ["infrastructure", "belief"] }),
@@ -230,7 +230,7 @@
   EXAMPLES.C = (function () {
     const c = JSON.parse(JSON.stringify(EXAMPLES.A));
     const P = 26000000, r = P / c.property.purchase_price;
-    c.meta = { name: "Household A — bought under construction (illustrative)", example: "C" };
+    c.meta = { name: "Household A: bought under construction (illustrative)", example: "C" };
     c.decision.status = "uc";
     c.property.purchase_price = P;
     Object.keys(c.property.acq).forEach((k) => { if (c.property.acq[k] !== "") c.property.acq[k] = Math.round(c.property.acq[k] * r); });
@@ -247,7 +247,7 @@
       schedule: [{ month: 0, pct: 10 }, { month: 6, pct: 15 }, { month: 12, pct: 20 }, { month: 18, pct: 20 }, { month: 24, pct: 20 }, { month: 30, pct: 15 }],
     };
     c.financing.loan_amount = 7800000;
-    c.life.zat_note = "We'd live here for the children's schooling regardless of prices — the discount is a bonus, not the reason.";
+    c.life.zat_note = "We'd live here for the children's schooling regardless of prices: the discount is a bonus, not the reason.";
     c.life.alt_type = "ready";
     c.constraints.max_delay_months = 18;
     c.constraints.legal_required = ["title_chain", "project_registration", "land_title"];
@@ -257,7 +257,7 @@
   // Deep links from earlier articles (X-17). Route: #/explore/<topic>. Names are
   // fixed in URL-REGISTRY.md: rename one there and here together, or not at all.
   const EXPLORE = {
-    return: { ex: "A", anchor: "x-ledger", article: 4, label: "the return ledger — asset return versus equity return" },
+    return: { ex: "A", anchor: "x-ledger", article: 4, label: "the return ledger: asset return versus equity return" },
     "housing-cost": { ex: "A", anchor: "x-housing", article: 5, label: "the true cost of housing, and owning versus renting" },
     leverage: { ex: "B", anchor: "x-stress", article: 6, label: "what leverage does under stress" },
     rental: { ex: "B", anchor: "x-rental", article: 7, label: "the rental P&L" },

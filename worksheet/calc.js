@@ -140,7 +140,7 @@
       return !isNaN(d) && (now - d) / (1000 * 60 * 60 * 24 * 30.44) <= 12;
     };
     const tx = comps.filter((x) => x.kind !== "listing");
-    if (!tx.length) return { label: "weak", why: "Only listings or estimates — asking prices are not evidence of what buyers pay." };
+    if (!tx.length) return { label: "weak", why: "Only listings or estimates: asking prices are not evidence of what buyers pay." };
     const prices = tx.map((x) => +x.price);
     const spread = (Math.max.apply(null, prices) - Math.min.apply(null, prices)) / Math.min.apply(null, prices);
     if (tx.length >= 2 && tx.every(recent) && tx.every((x) => x.similarity === "high") && spread <= 0.2)
