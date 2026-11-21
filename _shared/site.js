@@ -62,7 +62,7 @@
   var PAGES = {
     hub:         { name: "Real Estate Reframed", line: "Fourteen ways to separate the house, the investment, the financing, the lifestyle and the system around them, before putting them back together.", article: 1 },
     methodology: { name: "Methodology & Concepts", line: "A reference guide to the language, frameworks and evidence standards behind Real Estate Reframed.", article: 1 },
-    fingerprint: { name: "Housing System Fingerprint Explorer", line: "What kind of housing machine are you looking at? Compare the housing systems of India, China, Japan and the United States.", article: 3 },
+    fingerprint: { name: "Housing System Fingerprint", line: "What kind of housing machine are you looking at? Compare the housing systems of India, China, Japan and the United States.", article: 3 },
     xray:        { name: "Property Decision X‑Ray", line: "X-ray this property, for this person, at this price. A diagnostic, not an oracle.", article: 14 },
     worksheet:   { name: "Property Decision Worksheet", line: "Should this property fit into your financial life? A guided worksheet to work through before you commit.", article: 14 }
   };

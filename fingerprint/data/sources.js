@@ -96,7 +96,7 @@
 
     /* ---------- Real Estate Reframed synthesis ---------- */
     S("rer-fingerprint", "Zenca: Real Estate Reframed", "Housing System Fingerprint v1.0", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
-      "Canonical 24 dimensions, endpoint semantics, launch placements and country labels. Used directly where a placement is a synthesis judgement."),
+      "Canonical 24 features, endpoint semantics, launch placements and country labels. Used directly where a placement is a synthesis judgement."),
     S("rer-crosscountry", "Zenca: Real Estate Reframed", "Cross-Country Housing Systems Comparison: India × China × Japan × United States", "", "2026", "India, China, Japan, United States", "Synthesis as of 2026", "Editorial synthesis",
       "Country mechanisms, feedback loops, crisis archetypes and transmission channels; built on Dossiers B, G and H."),
   ];

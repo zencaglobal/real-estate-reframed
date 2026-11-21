@@ -16,7 +16,7 @@ None of these tools produce a score or a buy/sell verdict. They are educational 
 |---|---|---|---|
 | `/` | **Hub**: series overview, tools, all 14 articles | 7 Dec 2026, 11:30 | Series launch |
 | `/methodology/` | **Methodology & Concepts**: the series' reference vocabulary, 16 named concepts, evidence standards | 7 Dec 2026, 11:30 | The whole series |
-| `/fingerprint/` | **Housing System Fingerprint Explorer**: compare the housing systems of India, China, Japan and the US across 24 qualitative dimensions | 21 Dec 2026, 11:30 | Article 3 |
+| `/fingerprint/` | **Housing System Fingerprint**: compare the housing systems of India, China, Japan and the US across 24 features in 6 groups | 21 Dec 2026, 11:30 | Article 3 |
 | `/x-ray/` | **Property Decision X-Ray**: one property, one household, a full decision profile with stress tests and scenarios | 8 Mar 2027, 11:30 | Article 14 |
 | `/worksheet/` | **Property Decision Worksheet**: a guided worksheet to work through before you commit | 8 Mar 2027, 11:30 | Article 14 |
 

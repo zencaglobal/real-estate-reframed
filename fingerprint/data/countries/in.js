@@ -1,32 +1,49 @@
-/* India — Housing System Fingerprint, launch profile (v1.0) */
+/* India: Housing System Fingerprint, launch profile (v1.0) */
 (function (root) {
   "use strict";
   root.HSF.registerCountry({
     id: "IN", iso: "IND", name: "India", order: 1,
     shape: "circle", color: "#d95926",
+    /* Guide page (v2.0): why this country is in the launch set, in one line. */
+    why_included: "Your market. Still urbanising, with strong demand that turns slowly into usable, legally clean homes.",
     fingerprint_label: "Expansionary demand, constrained conversion",
     mechanism: "Population, urbanisation, incomes, infrastructure and mortgage access still create genuine housing demand.",
     friction: "The harder question is how efficiently that demand becomes useful formal housing: land assembly, infrastructure, planning, title systems, affordability and execution all shape the conversion. Household wealth is already highly property-concentrated, while mortgage and home-equity financialisation remain less deep than in the United States.",
-    do_not_infer: "Do not read this as “India property must rise.” Strong structural demand can become more construction, more density, new corridors, different locations, or higher prices — and the starting valuation still matters.",
+    do_not_infer: "Do not read this as “India property must rise.” Strong structural demand can become more construction, more density, new corridors, different locations, or higher prices, and the starting valuation still matters.",
     variation_note: "Large internal variation: land, planning rules, title systems and demand differ sharply by state, city and corridor. The national profile is a system prior.",
     profile_as_of: "October 2026",
-    profile_review_status: "Launch profile — Fingerprint v1.0",
+    profile_review_status: "Launch profile: Fingerprint v1.0",
     lens_summaries: {
       L1: "Long runway: population growth, urbanisation and household formation are still adding demand, concentrated in metros and growth corridors.",
-      L2: "Tight in the formal, affordable segments where demand is growing — alongside vacant stock that is not automatically usable supply.",
-      L3: "Conversion is the constraint: land, approvals, infrastructure and title shape how much demand becomes housing rather than price.",
-      L4: "Mortgage finance is deepening and mostly floating-rate, but still shallow relative to the economy.",
-      L5: "Property dominates household assets, but the equity is hard to use without selling.",
-      L6: "Presale and developer risk is material but mitigated by RERA; the state’s property revenue is transaction-based.",
-      L7: "Formalising but still frictional: presumptive title, verification-heavy resale, a largely informal rental market.",
-      L8: "A strong belief in appreciation and meaningful exposure — but no modern national episode of a property shock travelling through the financial or fiscal system.",
+      L2: "Formal, affordable homes are tight where demand is growing, and land, approvals, infrastructure and title slow new supply, so more demand becomes price.",
+      L3: "Mortgages are deepening but still shallow and mostly floating; property dominates household wealth, and that equity is hard to use without selling.",
+      L4: "Presale and developer risk is material but mitigated by RERA; the state’s property revenue is transaction-based.",
+      L5: "Formalising but still frictional: presumptive title, verification-heavy resale, a largely informal rental market.",
+      L6: "A strong belief in appreciation and meaningful exposure, but no modern national episode of a property shock travelling through the financial or fiscal system.",
     },
     machine: {
       period: "Today",
       steps: ["Urbanisation", "Incomes", "Mortgage access", "Demand", "Prices", "Development"],
       constraint: "Main constraint: usable supply.",
     },
-    leverage: { site: "Mixed and deepening", text: "Some developer financialisation and some homeowner financialisation, without either taken to the systemic extreme." },
+    leverage: { site: "Shared between buyers and builders, and growing", text: "Home buyers carry home loans, and builders rely partly on buyers’ advance payments, but neither on the scale seen in the US or China." },
+    /* Default home (v2.0). buyer_lines: one line per home dimension on what it means for a buyer.
+       checks and dont_assume feed the "Your takeaway" box. Descriptive: checks and cautions, never buy/sell advice. */
+    buyer_lines: {
+      d03: "Growing demand supports well-located homes, but not every city shares in it.",
+      d07: "New supply arrives slowly, so scarcity in well-connected areas can last for years.",
+      d12: "Your EMI moves with interest rates; a rise lifts payments or lengthens the loan.",
+      d17: "If you buy before completion, you carry part of the builder's risk.",
+      d21: "Renting out a flat brings low yields and informal tenancies.",
+      d24: "With most savings in property, a price fall would hit your wealth and spending.",
+    },
+    checks: [
+      "RERA registration, approvals and the builder's finished projects.",
+      "What else is approved or being built nearby.",
+      "Your EMI at a higher interest rate, before you commit.",
+      "Clear title: the ownership chain, encumbrances and land records.",
+    ],
+    dont_assume: "Strong national demand does not mean every property will rise.",
     placements: {
       d01: { pos: "ML", conf: "high", src: ["wb-urban", "un-wup"],
         short: "Early-to-mid way through the urban transition: about 36% urban on a comparable 2025 series.",
@@ -42,8 +59,8 @@
         short: "Demand concentrates in large metros and fast-growing corridors rather than spreading evenly.",
         long: "Jobs and incomes cluster in a limited set of metros and corridors, so the national demand story says little about any particular city. Urban growth is nevertheless spread across many cities, which keeps the placement short of the extreme." },
       d05: { pos: "ML", conf: "medium", src: ["in-niti"],
-        short: "Formal housing is tight relative to need, especially at mass-market incomes — though the size of the deficit is genuinely uncertain.",
-        long: "There is no single reliable current official urban-shortage number. Vacant urban housing also exists — the widely cited figure of about one crore is rooted in older census data — so the placement sits mid-left rather than at the extreme.",
+        short: "Formal housing is tight relative to need, especially at mass-market incomes, though the size of the deficit is genuinely uncertain.",
+        long: "There is no single reliable current official urban-shortage number. Vacant urban housing also exists (the widely cited figure of about one crore is rooted in older census data), so the placement sits mid-left rather than at the extreme.",
         note: "Shortage definitions vary, and the national vacancy count is not a fresh measurement." },
       d06: { pos: "MR", conf: "medium", src: ["in-niti"],
         short: "A meaningful share of stock is in the wrong place, segment or legal condition for where demand is growing.",
@@ -59,7 +76,7 @@
         long: "Development regulation and land-conversion delays are among the supply barriers NITI Aayog identifies. Rules vary by state and city, so the national placement is a prior, not a description of any one city." },
       d10: { pos: "L", conf: "medium", src: ["wb-india-urban", "in-niti", "rer-crosscountry"], variation: true,
         short: "Transport and urban-service networks are still expanding quickly, repeatedly changing which locations are useful.",
-        long: "Expanding infrastructure is a genuine source of new useful locations — and of property narratives. It also brings uncertainty about timing and delivery, and creates new competing supply. NITI Aayog lists constrained serviced urban land and infrastructure shortages among supply barriers: housing units can be added faster than the water, wastewater, drainage and power systems that fully service them.",
+        long: "Expanding infrastructure creates new useful locations, and new property narratives. It also brings uncertainty about timing and delivery, and creates new competing supply. NITI Aayog lists constrained serviced urban land and infrastructure shortages among supply barriers: housing units can be added faster than the water, wastewater, drainage and power systems that fully service them.",
         note: "Servicing conditions vary widely by city and locality; this national placement does not describe the water security of any city or project." },
       d11: { pos: "ML", conf: "interpretive", src: ["rer-crosscountry"],
         short: "Mortgage finance is deepening quickly but remains far shallower relative to the economy than in Japan or the United States.",
@@ -79,7 +96,7 @@
         long: "That is a household-survey composition figure. It is not directly comparable with the national-account balance sheets used for other countries, so the contrast is structural rather than precise." },
       d16: { pos: "MR", conf: "medium", src: ["in-rera", "rer-crosscountry"],
         short: "Under-construction purchasing and buyer advances matter, but RERA ring-fences 70% of buyer collections into project accounts.",
-        long: "India has meaningful presale exposure, and developer failures and stalled projects have occurred. RERA reduces this risk; it does not abolish project risk — so the placement is mid-right, inside China’s extreme." },
+        long: "India has meaningful presale exposure, and developer failures and stalled projects have occurred. RERA reduces this risk; it does not abolish project risk, so the placement is mid-right, inside China’s extreme." },
       d17: { pos: "MR", conf: "medium", src: ["in-rera"],
         short: "Buying off-plan carries material delivery and counterparty risk, partly mitigated by RERA registration and disclosure.",
         long: "RERA requires covered projects to be registered before marketing or sale, and applies to ongoing projects without completion certificates. Delays and stalled projects remain a known risk." },
@@ -99,11 +116,11 @@
         short: "No established national convention of rapid structure depreciation; value narratives usually bundle land and building together.",
         long: "Evidence on how Indian structures hold value as they age is thin and uneven. The middle placement reflects the absence of a strong national convention in either direction, not a measurement." },
       d23: { pos: "R", conf: "interpretive", src: ["rer-fingerprint"],
-        short: "A deeply held expectation that property — especially land — appreciates over time.",
+        short: "A deeply held expectation that property, especially land, appreciates over time.",
         long: "Shaped by decades of urban transformation and family experience. This is a behavioural inference, not a measured statistic." },
       d24: { pos: "MR", conf: "interpretive", src: ["rer-crosscountry"],
         short: "Property-heavy household balance sheets and developer exposure create meaningful sensitivity, but no national price shock has yet travelled through the financial or fiscal system at scale.",
-        long: "Limited equity extraction and RERA-protected presales may weaken some transmission channels. The absence of a modern national episode is a fact — not a prediction that one cannot happen." },
+        long: "Limited equity extraction and RERA-protected presales may weaken some transmission channels. The absence of a modern national episode is a fact, not a prediction that one cannot happen." },
     },
   });
 })(typeof self !== "undefined" ? self : globalThis);

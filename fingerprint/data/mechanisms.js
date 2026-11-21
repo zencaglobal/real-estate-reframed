@@ -14,7 +14,7 @@
     {
       id: "rise", tab: "Prices rise 10%",
       title: "Four countries report house prices up 10%.",
-      intro: "The number is identical. What produces it is not, so neither is what it implies about the next twenty years.",
+      intro: "Each rise has a different cause, so each points to a different next twenty years.",
       caption: "Same number. Different cause.",
       chains: {
         IN: { period: "Today", steps: ["Urbanisation", "Rising incomes", "Constrained useful supply", "Price"], dims: ["d01", "d03", "d07", "d09"] },
@@ -39,10 +39,10 @@
       },
     },
     {
-      id: "leverage", tab: "Where the leverage sits",
-      title: "“Financialised housing” means different things in different systems.",
-      intro: "The question is not whether housing is financialised, but whose balance sheet carries the risk.",
-      caption: "Housing financialisation depends on whose balance sheet carries the risk.",
+      id: "leverage", tab: "Who carries the debt",
+      title: "Who carries the housing debt?",
+      intro: "The money borrowed to build and buy homes sits with different people in each country: home buyers, developers, banks or local governments. That decides who gets hurt first when prices fall.",
+      caption: "Who carries the debt decides who gets hurt first.",
       chains: null, // drawn from each country's `leverage` field
       dims: ["d11", "d14", "d16", "d18"],
     },
